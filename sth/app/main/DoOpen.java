@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import pt.tecnico.po.ui.Command;
+import pt.tecnico.po.ui.DialogException;
 import pt.tecnico.po.ui.Input;
 import sth.core.SchoolManager;
 
@@ -26,7 +27,7 @@ public class DoOpen extends Command<SchoolManager> {
 
   /** @see pt.tecnico.po.ui.Command#execute() */
   @Override
-  public final void execute() {
+  public final void execute() throws DialogException {
     try {
       //FIXME implement command
     } catch (FileNotFoundException fnfe) {
