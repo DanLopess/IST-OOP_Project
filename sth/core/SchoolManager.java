@@ -4,8 +4,8 @@ import sth.core.exception.BadEntryException;
 import sth.core.exception.ImportFileException;
 import sth.core.exception.NoSuchPersonIdException;
 
-import java.io.EIOxception;
-import java.io.FileNotFoundOxception;
+import java.io.IOException;
+import java.io.FileNotFoundException;
 
 
 //FIXME import other classes if needed
@@ -14,11 +14,14 @@ import java.io.FileNotFoundOxception;
  * The façade class.
  */
 public class SchoolManager {
+	private School _school;
 
   //FIXME add object attributes if needed
 
   //FIXME implement constructors if needed
-  
+	public SchoolManager() {
+		_school = new School();
+	}
   /**
    * @param datafile
    * @throws ImportFileException
@@ -71,5 +74,5 @@ public class SchoolManager {
   }
 
   //FIXME implement other methods (in general, one for each command in sth-app)
-  
+
 }
