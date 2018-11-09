@@ -1,0 +1,42 @@
+Notas projeto PO:
+
+1º - por a funcionar com pessoas, aluno, delegado, docentes..., sem pensar em mais nada (por o parsing a funcionar)
+2º - fazer a funcionalidade do portal de pessoa
+3º - fazer coisas relacionadas com o portal do docente (adicionar nocao de disciplina e de curso, ir a parte do portal pessoa e ver se as coisas estao certas ou nao)
+
+material de apoio explica como deve ser feito, como se usa o framework de interacao com o utilizador 
+
+ha comandos q n precisam de input
+procurar pessoa precisa... etc
+
+ler como se usa a biblioteca de interacao
+
+uma disciplina n pode ter mais do q 6 delegados, etc fazer cconfirmacoes, codigo feito na aula teorica n tem isso em conta
+
+core: fazer 7 classes e n tem de ter as funcionalidades todas
+
+public void processar( int meses) - tem problema pois n conseguimos confirmar quando recebemos
+
+public enum Mes {
+	JAN; FEV; MAR; ... ; DEZ
+	private int dias;
+	
+	private Mes(int dia){
+		dias = dia;
+	}
+
+	assim, neste caso: JAN(31), FEV(28)........ etc (se usar o construtor neste caso)
+	public int obtemDias(){
+		return dias;
+	}
+
+} tipo em que as unicas variaveis que pode aceitar sao essas
+
+assim: public void processar (Mes mes) recebe apenas JAN....DEZ
+
+public void processar (Mes mes) {
+	switch(mes){
+		case Mes.JAN
+		case Mes.DEZ...
+	}
+}
