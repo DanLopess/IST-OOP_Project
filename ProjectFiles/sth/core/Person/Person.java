@@ -5,12 +5,14 @@ public abstract class Person {
 	private String _name;
 	private int _phoneNumber;
 
-	public Person (int id, String name, int _phoneNumber) throws BadEntryException{
-			if (id >= 100000 && id <= 999999 && _phoneNumber) {
-
+	public Person (int id, String name, int phoneNumber) throws BadEntryException {
+			if (id >= 100000 && id <= 999999 && phoneNumber) {
+				_id = id;
+				_name = name;
+				_phoneNumber = phoneNumber
 			} else {
 				if (id >= 100000 && id <= 999999) {
-					throw new BadEntryException("Invalid id \n");
+					throw new BadEntryException("Invalid id " + id);
 				}
 				if () {
 
@@ -18,21 +20,32 @@ public abstract class Person {
 			}
 	}
 
+	/* setPhoneNumber - changes Person's phone number */
 	public void setPhoneNumber(int phoneNumber) throws BadEntryException{
-			if()
-	}
+			if () {
 
+			}
+	}
+	/* Returns person's name */
 	public String getName() {
-		private String tempName = new String(_name); /* Auxiliary variable */
+		String tempName = new String(_name); /* Auxiliary variable */
 		return tempName;
 	}
 
+	/* getId - Returns person's id */
 	public int getId() {
-		private int tempId; /* Auxiliary variable */
+		int tempId; /* Auxiliary variable */
 		tempId = _id;
 		return tempId;
 	}
-	
+
+	/* getPhoneNumber - Returns person's phone number */
+	public int getPhoneNumber() {
+		int tempPhone = new int(_phoneNumber); /* Auxiliary variable */
+		return tempPhone;
+	}
+
+	/* toString - 'Compiles' person's info into a String */
 	public String toString() {
 
 	}
