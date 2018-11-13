@@ -1,4 +1,4 @@
-package sth.core.Person;
+package sth.core;
 
 public abstract class Person {
 	private int _id;
