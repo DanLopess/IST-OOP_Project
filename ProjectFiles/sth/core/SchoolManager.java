@@ -20,7 +20,7 @@ public class SchoolManager {
 
   //FIXME implement constructors if needed
 	public SchoolManager() {
-		_school = new School();
+		private School _school = new School();
 	}
   /**
    * @param datafile
@@ -74,5 +74,6 @@ public class SchoolManager {
   }
 
   //FIXME implement other methods (in general, one for each command in sth-app)
+
 
 }

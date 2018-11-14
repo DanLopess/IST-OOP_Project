@@ -71,7 +71,7 @@ public class Parser {
     _school.addPerson(person);
   }
 
-  private void parseContext(String line) {
+  private void parseContext(String line) throws BadEntryException {
     String lineContex = line.substring(2);
 
     _person.parseContext(lineContext, school);

@@ -18,7 +18,10 @@ public class School implements java.io.Serializable {
   //FIXME define object fields (attributes and, possibly, associations)
 
   //FIXME implement constructors if needed
-  
+	public School () {
+
+	}
+
   /**
    * @param filename
    * @throws BadEntryException
@@ -27,7 +30,7 @@ public class School implements java.io.Serializable {
   void importFile(String filename) throws IOException, BadEntryException {
     //FIXME implement text file reader
   }
-  
+
   //FIXME implement other methods
 
 }

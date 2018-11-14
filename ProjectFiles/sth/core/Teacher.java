@@ -1,9 +1,15 @@
 package sth.core;
 
-public class Teacher extends Person {
+import sth.core.exception.BadEntryException;
 
+public class Teacher extends Person {
+	
 
 @Override
+	String toString () {
+
+	}
+
   void parseContext(String lineContext, School school) throws BadEntryException {
     String components[] =  lineContext.split("\\|");
 

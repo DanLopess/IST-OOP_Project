@@ -1,11 +1,36 @@
 package sth.core;
 
+import sth.core.exception.BadEntryException;
+
 public class Student extends Person {
-	private isRepresentative;
-	
+	private boolean isRepresentative;
+
+	public Student (int id, String name, int phoneNumber, boolean isR) throws BadEntryException {
+		if (isR) {
+			isRepresentative = true;
+		}
+		super(id, name, phoneNumber);
+	}
+
+	Course getCourse() {
+
+	}
+
+	void addDiscipline(Discipline d) {
+
+	}
+
+	void setRepresentative(boolean rep) {
+		
+	}
+
 
 
 @Override
+	String toString () {
+
+	}
+
   void parseContext(String lineContext, School school) throws BadEntryException {
     String components[] =  lineContext.split("\\|");
 

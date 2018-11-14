@@ -1,5 +1,7 @@
 package sth.core;
 
+import sth.core.exception.BadEntryException;
+
 public abstract class Person {
 	private int _id;
 	private String _name;
@@ -46,8 +48,8 @@ public abstract class Person {
 	}
 
 	/* toString - 'Compiles' person's info into a String */
-	public String toString() {
-
+	public abstract String toString() {
+		
 	}
 
 	/**
