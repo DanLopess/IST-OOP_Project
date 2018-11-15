@@ -18,8 +18,8 @@ public class Course {
 
 	public Course (String name) {
 		_name = name;
-		_disciplines = new ArrayList<Student>();
-		_students = new HashMap<Integer, Discipline>();
+		_disciplines = new ArrayList<Discipline>();
+		_students = new HashMap<Integer, Student>(); // in the integer we will use students id
 		_representatives = new ArrayList<Student>();
 	}
 

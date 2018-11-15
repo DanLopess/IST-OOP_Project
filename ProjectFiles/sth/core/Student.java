@@ -1,7 +1,9 @@
 package sth.core;
 
 import sth.core.exception.BadEntryException;
-
+import sth.core.Course;
+import sth.core.Discipline;
+import sth.core.School;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.iterator;
@@ -9,15 +11,15 @@ import java.util.iterator;
 public class Student extends Person {
 	private boolean _isRepresentative;
 	private List<Discipline> _disciplines;
-	private Course course;
+	private Course _course;
 
-	public Student (int id, String name, int phoneNumber) throws BadEntryException {
-		_isRepresentative = false;
+	public Student (int id, String name, int phoneNumber, boolean rep) throws BadEntryException {
+		_isRepresentative = rep;
 		super(id, name, phoneNumber);
 	}
 
 	Course getCourse () {
-		return course;
+		return _course;
 	}
 
 	void addDiscipline (Discipline d)  throws BadEntryException {
