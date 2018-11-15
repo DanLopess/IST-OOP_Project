@@ -3,11 +3,17 @@ package sth.core;
 import sth.core.exception.BadEntryException;
 
 public class Teacher extends Person {
-	
+
+	public Teacher (int id, String name, int phoneNumber) throws BadEntryException {
+		isRepresentative = false;
+		super(id, name, phoneNumber);
+	}
+
+
 
 @Override
-	String toString () {
-
+	public String toString () {
+		return "DOCENTE|"+ super._id + "|" + super._name;
 	}
 
   void parseContext(String lineContext, School school) throws BadEntryException {

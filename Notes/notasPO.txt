@@ -40,3 +40,8 @@ public void processar (Mes mes) {
 		case Mes.DEZ...
 	}
 }
+
+
+quando se faz open substitui-se o objeto (utilizador) mas tem de ver se o objeto (utilizador ) a tentar aceder existe, se nao o open falha
+
+classes a implementar: tudo exceto, notificacoes, submissoes, answer e survey

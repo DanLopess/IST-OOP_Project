@@ -1,7 +1,7 @@
 package sth.core;
 
 //FIXME import other classes if needed
-
+import java.util.iterator;
 import sth.core.exception.BadEntryException;
 import sth.core.exception.NoSuchPersonIdException;
 
@@ -32,5 +32,10 @@ public class School implements java.io.Serializable {
   }
 
   //FIXME implement other methods
+	Course parseCourse(String name) {
+		
+	}
+
+
 
 }
