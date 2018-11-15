@@ -92,7 +92,7 @@ public class Discipline {
 		_students.add(s);
 	}
 
-	void createProject(String name) {
+	void createProject(String name, String description) {
 		Project p = new Project(name);
 		_projects.add(p);
 	}

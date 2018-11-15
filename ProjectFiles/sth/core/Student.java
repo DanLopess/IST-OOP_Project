@@ -8,20 +8,37 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.iterator;
 
+/**
+ * The Student class.
+ */
 public class Student extends Person {
 	private boolean _isRepresentative;
 	private List<Discipline> _disciplines;
 	private Course _course;
 
+	/**
+	 * Student's class constructor
+	 * @param id student's id
+	 * @param name student's name
+	 * @param phoneNumber student's phoneNumber
+	 * @param rep boolean to indicate if student is a representative or not
+	 *
+	 */
 	public Student (int id, String name, int phoneNumber, boolean rep) throws BadEntryException {
 		_isRepresentative = rep;
 		super(id, name, phoneNumber);
 	}
 
+	/**
+	 * @return student's course
+	 */
 	Course getCourse () {
 		return _course;
 	}
 
+	/**
+	 * @param d adds a discipline to student's discipline List
+	 */
 	void addDiscipline (Discipline d)  throws BadEntryException {
 		if (_disciplines.length < 6){
 			_disciplines.add(d);
@@ -30,6 +47,9 @@ public class Student extends Person {
 		}
 	}
 
+	/**
+	 * @param rep boolean that indicates if student is or is not a representative
+	 */
 	void setRepresentative (boolean rep)  throws BadEntryException {
 		if (rep){
 			if (_course.addRepresentative(this)) {
@@ -41,16 +61,19 @@ public class Student extends Person {
 		}
 	}
 
+	/**
+	 * @return boolean of whether student is a representative
+	 */
 	boolean isRepresentative () {
 		return _isRepresentative;
 	}
 
 	void submitAnswerToSurvey () {
-	// NOT TO COMPLETE
+		// TODO in final version
 	}
 
 	void submitProject () {
- 	// NOT TO COMPLETE
+		// TODO in final version
 	}
 
 @Override

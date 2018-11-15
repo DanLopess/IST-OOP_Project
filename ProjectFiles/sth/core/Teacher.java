@@ -3,14 +3,24 @@ package sth.core;
 import sth.core.exception.BadEntryException;
 import sth.core.Course;
 import sth.core.Discipline;
+import sth.core.Project;
 import sth.core.School;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.iterator;
 
+/**
+ * The Teacher Class
+ */
 public class Teacher extends Person {
 	private List<Discipline> _disciplines;
 
+	/**
+	* Teacher's class constructor
+	* @param id Teacher's id
+	* @param name Teacher's name
+	* @param phoneNumber Teacher's phoneNumber
+	 */
 	public Teacher (int id, String name, int phoneNumber) throws BadEntryException {
 		isRepresentative = false;
 		super(id, name, phoneNumber);
@@ -25,9 +35,20 @@ public class Teacher extends Person {
 	 *
    */
 	void createProject(String dName, String pName, String description) {
+		Iterator<Discipline> iterator = _disciplines.iterator;
+		Discipline d;
 
+		while(iterator.hasNext()) {
+			d = iterator.next();
+			if (d.getName.equals(dname)) {
+				d.createProject(pName, description);
+			}
+		}
 	}
 
+	/**
+	 * @param d is the discipline being added to teacher's _disciplines
+	 */
 	void addDiscipline(Discipline d) {
 		_disciplines.add(d);
 		d.addTeacher(this);
