@@ -11,9 +11,7 @@ import java.util.HashMap;
  * 4.2.4. Search person.
  */
 public class DoSearchPerson extends Command<SchoolManager> {
-	private Map<Integer, String> _persons;
 	private Input<String> _string;
-	private String line;
   /**
    * @param receiver
    */
@@ -25,9 +23,18 @@ public class DoSearchPerson extends Command<SchoolManager> {
   @Override
   public final void execute() {
 		_form.parse();
+
+		List<String> _persons;
 		try {
-			line = _receiver.DoSearchPerson(_string.value());
-			
+			_persons = _receiver.DoSearchPerson(_string.value());
+			Collections.sort(_persons);
+			Iterator<String> iterator = _persons.iterator();
+
+			while (iterator.hasNext()) {
+				_display.addLine(iterator.next());
+			}
+			_display.display();
+
 	} catch (NoSuchPersonException nspe) {
 			_display.popup(Message.fileNotFound());
 		}

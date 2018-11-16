@@ -81,7 +81,7 @@ public class SchoolManager {
    * @return true when the currently logged in person is a representative
    */
   public boolean isLoggedUserRepresentative() {
-		if (_loggedUser instanceof Student /*&& _loggedUser.isRepresentative()*/)
+		if (_loggedUser instanceof Student )
 			return true;
 		return false;
 
@@ -92,7 +92,7 @@ public class SchoolManager {
 	}
 
 	public List<Person> getAllUsers() {
-		return (_school.getAllUsers()); // sort
+		return (_school.getAllUsers());
 	}
 
 	public String DoChangePhoneNumber(int phoneNumber) {
@@ -100,24 +100,31 @@ public class SchoolManager {
 		return (_loggedUser.toString());
 	}
 
-	public String DoSearchPerson(String name) throws NoSuchPersonException {
-		/*Iterator<Map.Entry<Integer, Person>> entries = _school.getAllUsers().entrySet().iterator();
-		Map<Integer, Person> _persons = new HashMap<Integer, Person>();
+	public List<String> DoSearchPerson(String name) throws NoSuchPersonException {
+		Iterator<Person> iterator = _school.getAllUsers().iterator();
+		ArrayList<String> _persons = new ArrayList<String>();
 		Person p;
 
-		while (entries.hasNext()) {
-		    Map.Entry<Integer, Person> entry = entries.next();
-				p = entry.getValue();
-		    if(p.getName().contains(name)) {
-					_persons.put(p.getId(), p);
-				}
-		}*/
-		return null; //also sort and return a list of strings (description of each person)
+		while (iterator.hasNext()) {
+			p = iterator.next();
+	    if(p.getName().contains(name)) {
+				_persons.add(p.toString());
+			}
+		}
+		return _persons;
 	}
 
 
 	public List<String> DoShowAllPersons() {
-		return null;
+		Iterator<Person> iterator = _school.getAllUsers().iterator();
+		ArrayList<String> _persons = new ArrayList<String>();
+		Person p;
+
+		while (iterator.hasNext()) {
+			p = iterator.next();
+			_persons.add(p.toString());
+		}
+		return _persons;
 	}
 
 	public String DoShowPerson() {
@@ -130,7 +137,7 @@ public class SchoolManager {
 	 				NoSuchProjectException {
 		Teacher teacher;
 		if(isLoggedUserProfessor()) {
-			_loggedUser.createProject()
+			_loggedUser.createProject();
 		}
 
 	}
@@ -140,7 +147,7 @@ public class SchoolManager {
 
 	}
 
-	public String DoShowDisciplineStudents(String name) throws NoSuchDisciplineException {
+	public List<String> DoShowDisciplineStudents(String name) throws NoSuchDisciplineException {
 		if(isLoggedUserProfessor()) {
 			// search for discipline and show students
 			//parse discipline and get discipline then parse students
