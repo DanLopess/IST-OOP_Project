@@ -5,8 +5,6 @@ import pt.tecnico.po.ui.Display;
 import pt.tecnico.po.ui.Input;
 import sth.core.SchoolManager;
 
-//FIXME import other classes if needed
-
 /**
  * 4.2.2. Change phone number.
  */
@@ -24,7 +22,8 @@ public class DoChangePhoneNumber extends Command<SchoolManager> {
   /** @see pt.tecnico.po.ui.Command#execute() */
   @Override
   public final void execute() {
-    //FIXME implement command changephone number with _phone input
+		_form.parse();
+		receiver.DoChangePhoneNumber(_phone.value());
   }
 
 }

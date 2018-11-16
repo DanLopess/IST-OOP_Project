@@ -21,8 +21,10 @@ public class School implements java.io.Serializable {
 	private Map<Integer, Person> _users;
 	private List<Course> _courses;
 	private Parser _parser;
+	private String _name;
 
 	public School () {
+		_name = "Instituto Superior Tecnico";
 		_users = new HashMap<Integer, Person>();
 		_courses = new ArrayList<Course>();
 		_parser = new Parser(this);

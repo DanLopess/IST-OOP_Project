@@ -6,8 +6,6 @@ import sth.core.SchoolManager;
 import java.util.Map;
 import java.util.HashMap;
 
-//FIXME import other classes if needed
-
 /**
  * 4.2.4. Search person.
  */
@@ -26,7 +24,8 @@ public class DoSearchPerson extends Command<SchoolManager> {
   @Override
   public final void execute() {
 		_persons = receiver.DoSearchPerson(_string);
-		
-  }
+		Iterator<Map.Entry<Integer, String>> entries = _persons.entrySet().iterator();
+		while()
+	}
 
 }

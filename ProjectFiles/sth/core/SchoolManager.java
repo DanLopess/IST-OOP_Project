@@ -88,8 +88,8 @@ public class SchoolManager {
 		return (_school.getAllPersons());
 	}
 
-	public void DoChangePhoneNumber(int phoneNumber) throws BadEntryException {
-
+	public void DoChangePhoneNumber(int phoneNumber) {
+		_loggedUser.setPhoneNumber(phoneNumber);
 	}
 
 	public String DoSearchPerson(String name) {
@@ -107,5 +107,7 @@ public class SchoolManager {
 		}
 		return _persons;
 	}
+
+
 
 }
