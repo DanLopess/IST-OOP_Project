@@ -3,8 +3,6 @@ package sth.core;
 import java.util.Iterator;
 import sth.core.exception.BadEntryException;
 import sth.core.exception.NoSuchPersonIdException;
-import java.util.Map;
-import java.util.HashMap;
 import sth.core.Person;
 import java.io.IOException;
 import java.util.List;
@@ -18,14 +16,15 @@ public class School implements java.io.Serializable {
   /** Serial number for serialization. */
   private static final long serialVersionUID = 201810051538L;
 
-	private Map<Integer, Person> _users;
+	private List<Person> _users;
 	private List<Course> _courses;
 	private Parser _parser;
 	private String _name;
+	private int _nextPersonId;
 
 	public School () {
 		_name = "Instituto Superior Tecnico";
-		_users = new HashMap<Integer, Person>();
+		_users = new ArrayList<Person>();
 		_courses = new ArrayList<Course>();
 		_parser = new Parser(this);
 	}
@@ -52,34 +51,35 @@ public class School implements java.io.Serializable {
 	}
 
 	Person parsePerson(String name) {
-		Iterator<Map.Entry<Integer, Person>> entries = _users.entrySet().iterator();
-
-		while (entries.hasNext()) {
-		    Map.Entry<Integer, Person> entry = entries.next();
-		    if(entry.getValue().getName().equals(name)) {
-					return entry.getValue();
+		Iterator<Person> iterator = _users.iterator();
+		Person p;
+		while (iterator.hasNext()) {
+				p = iterator.next();
+				if(p.getName().equals(name)) {
+					return p;
 				}
 		}
 		return null;
 	}
 
 	Person parsePersonById(int id) {
-		Iterator<Map.Entry<Integer, Person>> entries = _users.entrySet().iterator();
-
-		while (entries.hasNext()) {
-				Map.Entry<Integer, Person> entry = entries.next();
-				if(entry.getValue().getId() == id) {
-					return entry.getValue();
+		Iterator<Person> iterator = _users.iterator();
+		Person p;
+		while (iterator.hasNext()) {
+				p = iterator.next();
+				if(p.getValue().getId() == id) {
+					return p;
 				}
 		}
 		return null;
 	}
 
 	void addPerson(Person p) {
-		_users.put(p.getId(), p);
+		_nextPersonId++;
+		_users.put(_nextPersonId, p);
 	}
 
-	public Map<Integer, Person> getAllUsers() {
+	public List<Person> getAllUsers() {
 		return _users;
 	}
 }

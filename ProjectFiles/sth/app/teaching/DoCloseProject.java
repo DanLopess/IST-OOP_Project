@@ -11,18 +11,22 @@ import sth.core.exception.NoSuchDisciplineIdException;
  * 4.4.2. Close project.
  */
 public class DoCloseProject extends sth.app.common.ProjectCommand {
+	private Input<String> _discipline;
+	private Input<String> _projectName;
 
   /**
    * @param receiver
    */
   public DoCloseProject(SchoolManager receiver) {
     super(Label.CLOSE_PROJECT, receiver);
+		_discipline = _form.addStringInput(Message.requestDisciplineName());
+		_projectName = _form.addStringInput(Message.requestProjectName());
   }
 
-  /** @see sth.app.common.ProjectCommand#myExecute() */
   @Override
   public final void myExecute() throws DialogException, NoSuchDisciplineIdException, NoSuchProjectIdException {
-    //FIXME implement command
+		_form.parse();
+		_receiver.DoCloseProject(_discipline.value(), _projectName.value());
   }
 
 }

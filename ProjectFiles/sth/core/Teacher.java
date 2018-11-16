@@ -50,7 +50,7 @@ public class Teacher extends Person {
 	 * @param description description of the project
 	 *
    */
-	void createProject(String dName, String pName, String description) {
+	void createProject(String dName, String pName) {
 		Iterator<Discipline> iterator = _disciplines.iterator();
 		Discipline d;
 

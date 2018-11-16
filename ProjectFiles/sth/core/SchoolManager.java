@@ -91,7 +91,7 @@ public class SchoolManager {
 		return _loggedUser;
 	}
 
-	public Map<Integer,Person> getAllUsers() {
+	public List<Person> getAllUsers() {
 		return (_school.getAllUsers()); // sort
 	}
 
@@ -101,7 +101,7 @@ public class SchoolManager {
 	}
 
 	public String DoSearchPerson(String name) throws NoSuchPersonException {
-		Iterator<Map.Entry<Integer, Person>> entries = _school.getAllUsers().entrySet().iterator();
+		/*Iterator<Map.Entry<Integer, Person>> entries = _school.getAllUsers().entrySet().iterator();
 		Map<Integer, Person> _persons = new HashMap<Integer, Person>();
 		Person p;
 
@@ -111,13 +111,13 @@ public class SchoolManager {
 		    if(p.getName().contains(name)) {
 					_persons.put(p.getId(), p);
 				}
-		}
+		}*/
 		return null; //also sort and return a list of strings (description of each person)
 	}
 
 
 	public List<String> DoShowAllPersons() {
-
+		return null;
 	}
 
 	public String DoShowPerson() {
@@ -126,8 +126,12 @@ public class SchoolManager {
 
 
 
-	public void DoCloseProject() throws NoSuchDisciplineException,
+	public void DoCloseProject(String discipline, String pName) throws NoSuchDisciplineException,
 	 				NoSuchProjectException {
+		Teacher teacher;
+		if(isLoggedUserProfessor()) {
+			_loggedUser.createProject()
+		}
 
 	}
 
@@ -140,11 +144,12 @@ public class SchoolManager {
 		if(isLoggedUserProfessor()) {
 			// search for discipline and show students
 			//parse discipline and get discipline then parse students
-			Discipline _discipline;// = _loggedUser.getDiscipline(name);
-			Map<Integer,Student> _students = _discipline.getAllStudents();
-			String _students1;
+			//Discipline _discipline;// = _loggedUser.getDiscipline(name);
+			//Map<Integer,Student> _students = _discipline.getAllStudents();
+			String _students1 = new String();
 			return _students1;//add students to List<String> by order
 		}
+		return null;
 	}
 
 	public String DoShowProjectSubmissions() throws NoSuchDisciplineException,

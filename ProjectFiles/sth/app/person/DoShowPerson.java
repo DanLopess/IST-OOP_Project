@@ -9,18 +9,16 @@ import sth.core.Person;
  * 4.2.1. Show person.
  */
 public class DoShowPerson extends Command<SchoolManager> {
-  private Display _display;
   /**
    * @param receiver
    */
   public DoShowPerson(SchoolManager receiver) {
     super(Label.SHOW_PERSON, receiver);
-		_display = new Display();
   }
 
   @Override
   public final void execute() {
-		_display.add(_receiver.DoShowPerson());
+		_display.addLine(_receiver.DoShowPerson());
 		_display.display();
   }
 
