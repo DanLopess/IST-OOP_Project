@@ -45,10 +45,7 @@ public abstract class Person {
 	}
 
 	/* toString - 'Compiles' person's info into a String */
-	abstract String toString() {
-		/* Abstract version of the method */
-	}
-
+	public abstract String toString();
 	/**
    * Parses the context information for a person from the import file.
    * This method defines the default behavior: no extra information is needed

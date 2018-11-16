@@ -27,52 +27,56 @@ public class Course {
 		return _name;
 	}
 
-	void addDiscipline (Discipline d) throws BadEntryException {
+	void addDiscipline (Discipline d) {
 		if(_disciplines.size() < 6) {
 			_disciplines.add(d);
-		} else{
-			throw new BadEntryException("Too many disciplines");
 		}
 	}
 
-	void addStudent (Student s) throws BadEntryException {
-		if(_students.size() <= 200) {
+	void addStudent (Student s) {
+		if(_students.size() < 200) {
 			_students.put(s.getId(), s);
-		} else{
-			throw new BadEntryException("Too many students");
 		}
 	}
 
 	boolean addRepresentative (Student s) {
 		if(_representatives.size() < 7) {
-			try {
 				_representatives.add(s);
 				return true;
-			} catch (BadEntryException bde) {
-				System.err.println("Invalid entry");
-			}
 		}
 		return false;
 	}
 
-	boolean removeRepresentative (Student s) {
-		_representatives.remove(s); // FIXME this doesnt work
-		return false;
+	void removeRepresentative (Student s) {
+		_representatives.remove(s.getId());
 	}
 
 
 	Discipline parseDiscipline (String name) {
 		Iterator<Discipline> iterator = _disciplines.iterator();
-
+		Discipline d;
+		while(iterator.hasNext()) {
+			d = iterator.next();
+			if(d.getName().equals(name)) {
+				return d;
+			}
+		}
+		return null;
 	}
 
 	Student parseRepresentative (String name) {
 		Iterator<Student> iterator = _representatives.iterator();
-
+		Student s;
+		while(iterator.hasNext()) {
+			s = iterator.next();
+			if(s.getName().equals(name)) {
+				return s;
+			}
+		}
+		return null;
 	}
 
 	Student parseStudent (String name) {
-		// cant use iterator like this Iterator<Student> iterator = _students.iterator();
 		Iterator<Map.Entry<Integer, Student>> entries = _students.entrySet().iterator();
 		while (entries.hasNext()) {
 		    Map.Entry<Integer, Student> entry = entries.next();

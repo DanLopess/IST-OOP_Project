@@ -26,12 +26,12 @@ public class Project {
 
 	List<Submission> getSubmissions() {
 		// TODO in final version
-
+		return null;
 	}
 
 	Survey getSurvey() {
 		// TODO in final version
-
+		return null;
 	}
 
 	public String getName() {

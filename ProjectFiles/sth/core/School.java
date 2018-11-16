@@ -7,6 +7,8 @@ import java.util.Map;
 import java.util.HashMap;
 import sth.core.Person;
 import java.io.IOException;
+import java.util.List;
+import java.util.ArrayList;
 
 /**
  * School implementation.

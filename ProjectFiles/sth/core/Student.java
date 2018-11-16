@@ -40,18 +40,16 @@ public class Student extends Person {
 	/**
 	 * @param d adds a discipline to student's discipline List
 	 */
-	void addDiscipline (Discipline d)  throws BadEntryException {
-		if (_disciplines.size < 6){
+	void addDiscipline (Discipline d) {
+		if (_disciplines.size() < 6){
 			_disciplines.add(d);
-		} else {
-			throw new BadEntryException("Impossible to add another discipline");
 		}
 	}
 
 	/**
 	 * @param rep boolean that indicates if student is or is not a representative
 	 */
-	void setRepresentative (boolean rep)  throws BadEntryException {
+	void setRepresentative (boolean rep) {
 		if (rep){
 			if (_course.addRepresentative(this)) {
 				_isRepresentative = true;

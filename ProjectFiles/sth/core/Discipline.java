@@ -41,7 +41,7 @@ public class Discipline {
 		return _course;
 	}
 
-	Project getProject(String name) throws NoSuchProjectIdException {
+	Project getProject(String name) {
 		Iterator<Project> iterator = _projects.iterator();
 		Project p;
 
@@ -51,46 +51,43 @@ public class Discipline {
 				return p;
 			}
 		}
-		/*if it didnt return, throw exception */
-		throw new NoSuchProjectIdException("No such project name ");
+		return null;
+	}
+
+	Teacher getTeacher(String name)  {
+		Iterator<Map.Entry<Integer, Teacher>> entries = _teachers.entrySet().iterator();
+
+		while (entries.hasNext()) {
+		    Map.Entry<Integer, Teacher> entry = entries.next();
+		    if(entry.getValue().getName().equals(name)) {
+					return entry.getValue();
+				}
+		}
+		return null;
 
 	}
 
-	Teacher getTeacher(String name) throws NoSuchPersonIdException {
-		Iterator<Teacher> iterator = _teachers.iterator();
-		Teacher t;
+	Student getStudent (String name) {
+		Iterator<Map.Entry<Integer, Student>> entries = _students.entrySet().iterator();
 
-		while(iterator.hasNext()) {
-			t = iterator.next();
-			if (t.getName().equals(name)) {
-				return t;
-			}
+		while (entries.hasNext()) {
+		    Map.Entry<Integer, Student> entry = entries.next();
+		    if(entry.getValue().getName().equals(name)) {
+					return entry.getValue();
+				}
 		}
-		/*if it didnt return, throw exception */
-		throw new NoSuchPersonIdException("No such person name ");
-	}
+		return null;
 
-	Student getStudent (String name) throws NoSuchPersonIdException {
-		Iterator<Student> iterator = _students.iterator();
-		Student s;
-
-		while(iterator.hasNext()) {
-			s = iterator.next();
-			if (s.getName().equals(name)) {
-				return s;
-			}
-		}
-
-		/*if it didnt return, throw exception */
-		throw new NoSuchPersonIdException("No such person name " );
 	}
 
 	void addTeacher (Teacher t) {
-		_teachers.add(t);
+		_teachers.put(t.getId(), t);
 	}
 
 	void enrollStudent (Student s) {
-		_students.add(s);
+		if (_students.size() < _capacity) {
+			_students.put(s.getId(), s);
+		}
 	}
 
 	void createProject(String name, String description) {

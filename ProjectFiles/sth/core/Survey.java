@@ -25,6 +25,7 @@ public class Survey {
 
 	String getResults() {
 		// TODO in final version
+		return null;
 	}
 
 }
