@@ -18,13 +18,14 @@ public class School implements java.io.Serializable {
   /** Serial number for serialization. */
   private static final long serialVersionUID = 201810051538L;
 
-  //FIXME define object fields (attributes and, possibly, associations)
 	private Map<Integer, Person> _users;
 	private List<Course> _courses;
+	private Parser _parser;
 
-  //FIXME implement constructors if needed
 	public School () {
 		_users = new HashMap<Integer, Person>();
+		_courses = new ArrayList<Course>();
+		_parser = new Parser(this);
 	}
 
   /**
@@ -33,20 +34,39 @@ public class School implements java.io.Serializable {
    * @throws IOException
    */
   void importFile(String filename) throws IOException, BadEntryException {
-    //FIXME implement text file reader
+    _parser.parseFile(filename);
   }
 
-  //FIXME implement other methods
 	Course parseCourse(String name) {
-		return null; //FIXME
+		Iterator<Course> iterator = _courses.iterator();
+		Course c;
+		while(iterator.hasNext()) {
+			c = iterator.next();
+			if (c.getName().equals(name)) {
+				return c;
+			}
+		}
+		return null;
 	}
 
 	Person parsePerson(String name) {
-		return null; //FIXME
+		Iterator<Map.Entry<Integer, Person>> entries = _users.entrySet().iterator();
+
+		while (entries.hasNext()) {
+		    Map.Entry<Integer, Person> entry = entries.next();
+		    if(entry.getValue().getName().equals(name)) {
+					return entry.getValue();
+				}
+		}
+		return null;
 	}
 
 	public void addPerson(Person p) {
 		_users.put(p.getId(), p);
+	}
+
+	public Map<Integer, Person> getAllPersons() {
+		return _users;
 	}
 
 

@@ -3,12 +3,12 @@ package sth.core;
 import sth.core.exception.BadEntryException;
 import sth.core.exception.ImportFileException;
 import sth.core.exception.NoSuchPersonIdException;
-
 import java.io.IOException;
 import java.io.FileNotFoundException;
-
-
-//FIXME import other classes if needed
+import sth.core.School;
+import sth.core.Person;
+import java.util.Map;
+import java.util.HashMap;
 
 /**
  * The façade class.
@@ -17,9 +17,6 @@ public class SchoolManager {
 	private School _school;
 	private Person _loggedUser;
 
-  //FIXME add object attributes if needed
-
-  //FIXME implement constructors if needed
 	public SchoolManager() {
 		_school = new School();
 	}
@@ -58,16 +55,17 @@ public class SchoolManager {
    * @return true when the currently logged in person is a professor
    */
   public boolean isLoggedUserProfessor() {
-    //FIXME implement predicate
+    if (_loggedUser instanceof Teacher)
+			return true;
 		return false;
-
   }
 
   /**
    * @return true when the currently logged in person is a student
    */
   public boolean isLoggedUserStudent() {
-    //FIXME implement predicate
+		if (_loggedUser instanceof Student)
+			return true;
 		return false;
 
   }
@@ -76,12 +74,22 @@ public class SchoolManager {
    * @return true when the currently logged in person is a representative
    */
   public boolean isLoggedUserRepresentative() {
-    //FIXME implement predicate
+		if (_loggedUser instanceof Student) && _loggedUser.isRepresentative());
+			return true;
 		return false;
 
   }
 
-  //FIXME implement other methods (in general, one for each command in sth-app)
+	public Person getLoggedUser() {
+		return _loggedUser;
+	}
 
+	public Map<Integer, Person> getAllUsers() {
+		return (_school.getAllPersons());
+	}
+
+	public void DoChangePhoneNumber() throws BadEntryException {
+		
+	}
 
 }

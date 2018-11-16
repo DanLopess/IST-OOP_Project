@@ -7,13 +7,13 @@ import java.io.BufferedReader;
 import java.io.Reader;
 import java.util.Collection;
 import java.util.ArrayList;
-
+import sth.core.School;
 import sth.core.exception.BadEntryException;
+import sth.core.Person;
 
 public class Parser {
 
   private School _school;
-  private Person _person;
 
   Parser(School s) {
     _school = s;
@@ -39,6 +39,7 @@ public class Parser {
     String[] components = header.split("\\|");
     int id;
     int phone;
+		Person person;
 
     if (components.length != 4)
       throw new BadEntryException("Invalid line " + header);
