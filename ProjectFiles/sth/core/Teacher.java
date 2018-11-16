@@ -26,6 +26,22 @@ public class Teacher extends Person {
 		_disciplines = new ArrayList<Discipline>();
 	}
 
+	Discipline getDiscipline(String name) throws NoSuchDisciplineException {
+		Iterator<Discipline> iterator = _disciplines.iterator();
+		Discipline d;
+		while(iterator.hasNext()) {
+			d = iterator.next();
+			if(d.getName().equals(name)) {
+				return n;
+			}
+		}
+		throw new NoSuchDisciplineException("No such discipline: " + name);
+	}
+
+	List<Discipline> getAllDisciplines() {
+		return _disciplines;
+	}
+
 	/**
    * creates a project to a certain discipline
    * @param dName name of the discipline

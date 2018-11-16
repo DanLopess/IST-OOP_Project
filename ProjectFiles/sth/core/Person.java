@@ -2,7 +2,7 @@ package sth.core;
 
 import sth.core.exception.BadEntryException;
 
-public abstract class Person {
+public abstract class Person implements Comparator {
 	private int _id;
 	private String _name;
 	private int _phoneNumber;

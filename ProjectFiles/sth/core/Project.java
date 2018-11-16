@@ -10,11 +10,17 @@ public class Project {
 	private boolean _closed;
 	private Survey _survey; 		// TODO in final version
 
+	public Project(String name) {
+		_name = name;
+		_closed = false;
+	}
+
 	public Project(String name, String description) {
 		_name = name;
 		_description = description;
 		_closed = false;
 	}
+
 
 	void close() {
 		_closed = true;

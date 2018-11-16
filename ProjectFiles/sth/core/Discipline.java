@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class Discipline {
+public class Discipline implements Comparator {
 	private String _name;
 	private int _capacity;
 	private Course _course;
@@ -80,6 +80,10 @@ public class Discipline {
 
 	}
 
+	Map<Integer, Student> getAllStudents() {
+		return _students;
+	}
+
 	void addTeacher (Teacher t) {
 		_teachers.put(t.getId(), t);
 	}
@@ -96,7 +100,6 @@ public class Discipline {
 	}
 
 	public String toString() {
-		return (_course.toString() + "|" + _name);
+		return ("* " + _course.getName() + "" + "- " + _name);
 	}
-
 }

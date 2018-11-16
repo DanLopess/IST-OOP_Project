@@ -23,9 +23,9 @@ public class DoSearchPerson extends Command<SchoolManager> {
   /** @see pt.tecnico.po.ui.Command#execute() */
   @Override
   public final void execute() {
-		_persons = receiver.DoSearchPerson(_string);
-		Iterator<Map.Entry<Integer, String>> entries = _persons.entrySet().iterator();
-		while()
+		_form.parse();
+		_persons = _receiver.DoSearchPerson(_string.value());
+		// display persons
 	}
 
 }

@@ -63,14 +63,23 @@ public class School implements java.io.Serializable {
 		return null;
 	}
 
-	public void addPerson(Person p) {
+	Person parsePersonById(int id) {
+		Iterator<Map.Entry<Integer, Person>> entries = _users.entrySet().iterator();
+
+		while (entries.hasNext()) {
+				Map.Entry<Integer, Person> entry = entries.next();
+				if(entry.getValue().getId() == id) {
+					return entry.getValue();
+				}
+		}
+		return null;
+	}
+
+	void addPerson(Person p) {
 		_users.put(p.getId(), p);
 	}
 
-	public Map<Integer, Person> getAllPersons() {
+	public Map<Integer, Person> getAllUsers() {
 		return _users;
 	}
-
-
-
 }

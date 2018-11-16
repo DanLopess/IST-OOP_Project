@@ -4,6 +4,8 @@ import pt.tecnico.po.ui.Command;
 import pt.tecnico.po.ui.DialogException;
 import pt.tecnico.po.ui.Input;
 import sth.core.SchoolManager;
+import sth.core.Person;
+
 
 //FIXME import other classes if needed
 
@@ -11,21 +13,25 @@ import sth.core.SchoolManager;
  * 4.4.4. Show course students.
  */
 public class DoShowDisciplineStudents extends Command<SchoolManager> {
-
-  //FIXME add input fields if needed
+  private Person _teacher;
+	private Display _display;
+	private Input<String> _disciplineName;
 
   /**
    * @param receiver
    */
-  public DoShowDisciplineStudents(SchoolManager receiver) {
+  public DoShowDisciplineStudents(SchoolManager receiver) throws  {
     super(Label.SHOW_COURSE_STUDENTS, receiver);
-    //FIXME initialize input fields if needed
+		_disciplineName = _form.addStringInput(Message.requestDisciplineName());
+		_display = new Display();
   }
 
   /** @see pt.tecnico.po.ui.Command#execute() */
   @Override
   public final void execute() throws DialogException {
-    //FIXME implement command
+		_form.parse();
+		_display.add(DoShowDisciplineStudents(_disciplineName));
+		_display.display();
   }
 
 }

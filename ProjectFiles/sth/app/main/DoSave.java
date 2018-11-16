@@ -25,6 +25,7 @@ public class DoSave extends Command<SchoolManager> {
   /** @see pt.tecnico.po.ui.Command#execute() */
   @Override
   public final void execute() {
+		/*
 		public void saveObject(String outputFilename, Object anObject) throws IOException {
 			ObjectOutputStream obOut = null;
 			try {
@@ -35,7 +36,7 @@ public class DoSave extends Command<SchoolManager> {
 			if (obOut != null)
 			obOut.close();
 			}
-			}
+		}*/
     //FIXME implement command if file not found... SaveAs
   }
 
