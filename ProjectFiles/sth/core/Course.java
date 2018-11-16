@@ -5,14 +5,14 @@ import sth.core.Discipline;
 import sth.core.exception.BadEntryException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.iterator;
+import java.util.Iterator;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Course {
 	private String _name;
 	private List<Discipline> _disciplines;
-	private Map<Student> _students;
+	private Map<Integer, Student> _students;
 	private List<Student> _representatives;
 
 
@@ -29,7 +29,7 @@ public class Course {
 
 	void addDiscipline (Discipline d) throws BadEntryException {
 		if(_disciplines.size() < 6) {
-			_disciplines.add(s);
+			_disciplines.add(d);
 		} else{
 			throw new BadEntryException("Too many disciplines");
 		}
@@ -37,7 +37,7 @@ public class Course {
 
 	void addStudent (Student s) throws BadEntryException {
 		if(_students.size() <= 200) {
-			_students.add(s);
+			_students.put(s.getId(), s);
 		} else{
 			throw new BadEntryException("Too many students");
 		}
@@ -48,7 +48,7 @@ public class Course {
 			try {
 				_representatives.add(s);
 				return true;
-			} catch (BadEntryException) {
+			} catch (BadEntryException bde) {
 				System.err.println("Invalid entry");
 			}
 		}
@@ -57,25 +57,29 @@ public class Course {
 
 	boolean removeRepresentative (Student s) {
 		_representatives.remove(s); // FIXME this doesnt work
+		return false;
 	}
 
 
 	Discipline parseDiscipline (String name) {
-		Iterator<Discipline> iterator = new Iterator<Discipline>();
+		Iterator<Discipline> iterator = _disciplines.iterator();
 
 	}
 
 	Student parseRepresentative (String name) {
-		Iterator<Student> iterator = new Iterator<Student>();
+		Iterator<Student> iterator = _representatives.iterator();
 
 	}
 
 	Student parseStudent (String name) {
-		Iterator<Student> iterator = new Iterator<Student>();
-
-	}
-
-	public String toString() {
-		return _course.toString() + "|" + _name;
+		// cant use iterator like this Iterator<Student> iterator = _students.iterator();
+		Iterator<Map.Entry<Integer, Student>> entries = _students.entrySet().iterator();
+		while (entries.hasNext()) {
+		    Map.Entry<Integer, Student> entry = entries.next();
+		    if(entry.getValue().getName().equals(name)) {
+					return entry.getValue();
+				}
+		}
+		return null;
 	}
 }

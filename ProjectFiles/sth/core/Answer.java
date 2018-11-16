@@ -1,7 +1,7 @@
 package sth.core;
 
 public class Answer {
-	private String _message,
+	private String _message;
 	private int _hours;
 
 	public Answer(String message, int hours) {
@@ -9,11 +9,11 @@ public class Answer {
 		_hours = hours;
 	}
 
-	public getMessage() {
+	public String getMessage() {
 		return _message;
 	}
 
-	public getHours() {
+	public int getHours() {
 		return _hours;
 	}
 

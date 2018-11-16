@@ -1,10 +1,11 @@
 package sth.core;
 
-//FIXME import other classes if needed
-import java.util.iterator;
+import java.util.Iterator;
 import sth.core.exception.BadEntryException;
 import sth.core.exception.NoSuchPersonIdException;
-
+import java.util.Map;
+import java.util.HashMap;
+import sth.core.Person;
 import java.io.IOException;
 
 /**
@@ -16,10 +17,12 @@ public class School implements java.io.Serializable {
   private static final long serialVersionUID = 201810051538L;
 
   //FIXME define object fields (attributes and, possibly, associations)
+	private Map<Integer, Person> _users;
+	private List<Course> _courses;
 
   //FIXME implement constructors if needed
 	public School () {
-
+		_users = new HashMap<Integer, Person>();
 	}
 
   /**
@@ -33,7 +36,15 @@ public class School implements java.io.Serializable {
 
   //FIXME implement other methods
 	Course parseCourse(String name) {
-		
+		return null; //FIXME
+	}
+
+	Person parsePerson(String name) {
+		return null; //FIXME
+	}
+
+	public void addPerson(Person p) {
+		_users.put(p.getId(), p);
 	}
 
 

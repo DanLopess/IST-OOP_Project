@@ -41,38 +41,38 @@ public class Parser {
     int phone;
 
     if (components.length != 4)
-      throw new BadEntryException("Invalid line " + line);
+      throw new BadEntryException("Invalid line " + header);
 
     id = Integer.parseInt(components[1]);
     phone = Integer.parseInt(components[2]);
 
     switch (components[0]) {
       case "FUNCIONÁRIO":
-        _person = new Employee(id, ohone, components[3]);
+        _person = new Employee(id, components[3], phone);
         break;
 
       case "DOCENTE":
-        _person = new Teacher(id, ohone, components[3]);
+        _person = new Teacher(id, components[3], phone);
         break;
 
       case "ALUNO":
-        _person = new Student(id, ohone, components[3], false);
+        _person = new Student(id, components[3], phone, false);
         break;
 
       case "DELEGADO":
-        _person = new Student(id, ohone, components[3], true);
+        _person = new Student(id, components[3], phone, true);
         break;
 
       default:
         throw new BadEntryException("Invalid token " + components[0] + "in line describing a person");
      }
 
-    _school.addPerson(person);
+    _school.addPerson(_person);
   }
 
   private void parseContext(String line) throws BadEntryException {
-    String lineContex = line.substring(2);
+    String lineContext = line.substring(2);
 
-    _person.parseContext(lineContext, school);
+    _person.parseContext(lineContext, _school);
   }
 }

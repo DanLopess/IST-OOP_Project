@@ -7,7 +7,7 @@ import sth.core.Project;
 import sth.core.School;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.iterator;
+import java.util.Iterator;
 
 /**
  * The Teacher Class
@@ -22,7 +22,6 @@ public class Teacher extends Person {
 	* @param phoneNumber Teacher's phoneNumber
 	 */
 	public Teacher (int id, String name, int phoneNumber) throws BadEntryException {
-		isRepresentative = false;
 		super(id, name, phoneNumber);
 		_disciplines = new ArrayList<Discipline>();
 	}
@@ -35,12 +34,12 @@ public class Teacher extends Person {
 	 *
    */
 	void createProject(String dName, String pName, String description) {
-		Iterator<Discipline> iterator = _disciplines.iterator;
+		Iterator<Discipline> iterator = _disciplines.iterator();
 		Discipline d;
 
 		while(iterator.hasNext()) {
 			d = iterator.next();
-			if (d.getName.equals(dname)) {
+			if (d.getName().equals(dName)) {
 				d.createProject(pName, description);
 			}
 		}
@@ -56,7 +55,7 @@ public class Teacher extends Person {
 
 @Override
 	public String toString () {
-		return "DOCENTE|"+ super._id + "|" + super._name;
+		return ("DOCENTE|"+ super.getId() + "|" + super.getName());
 	}
 
   void parseContext(String lineContext, School school) throws BadEntryException {

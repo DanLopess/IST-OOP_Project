@@ -6,7 +6,8 @@ import sth.core.Discipline;
 import sth.core.School;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.iterator;
+import java.util.Iterator;
+
 
 /**
  * The Student class.
@@ -25,8 +26,8 @@ public class Student extends Person {
 	 *
 	 */
 	public Student (int id, String name, int phoneNumber, boolean rep) throws BadEntryException {
-		_isRepresentative = rep;
 		super(id, name, phoneNumber);
+		_isRepresentative = rep;
 	}
 
 	/**
@@ -40,7 +41,7 @@ public class Student extends Person {
 	 * @param d adds a discipline to student's discipline List
 	 */
 	void addDiscipline (Discipline d)  throws BadEntryException {
-		if (_disciplines.length < 6){
+		if (_disciplines.size < 6){
 			_disciplines.add(d);
 		} else {
 			throw new BadEntryException("Impossible to add another discipline");
@@ -56,7 +57,7 @@ public class Student extends Person {
 				_isRepresentative = true;
 			}
 		} else {
-			_course.removeRepresentative(this)
+			_course.removeRepresentative(this);
 			_isRepresentative = false;
 		}
 	}
@@ -79,9 +80,9 @@ public class Student extends Person {
 @Override
 	public String toString () {
 		if (_isRepresentative){
-			return "DELEGADO|"+ super._id + "|" + super._name;
+			return "DELEGADO|"+ super.getId( )+ "|" + super.getName();
 		} else {
-			return "ALUNO|"+ super._id + "|" + super._name;
+			return "ALUNO|"+ super.getId() + "|" + super.getName();
 		}
 	}
 

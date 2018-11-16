@@ -10,14 +10,14 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.iterator;
+import java.util.Iterator;
 
 public class Discipline {
 	private String _name;
 	private int _capacity;
 	private Course _course;
-	private Map<Teacher> _teachers;
-	private Map<Student> _students;
+	private Map<Integer, Teacher> _teachers;
+	private Map<Integer, Student> _students;
 	private List<Project> _projects;
 
 	public Discipline (String name, int capacity, Course c) {
@@ -48,11 +48,11 @@ public class Discipline {
 		while(iterator.hasNext()) {
 			p = iterator.next();
 			if (p.getName().equals(name)) {
-				return p.getName();
+				return p;
 			}
 		}
 		/*if it didnt return, throw exception */
-		throw new NoSuchProjectIdException("No such project id: " + name);
+		throw new NoSuchProjectIdException("No such project name ");
 
 	}
 
@@ -63,11 +63,11 @@ public class Discipline {
 		while(iterator.hasNext()) {
 			t = iterator.next();
 			if (t.getName().equals(name)) {
-				return t.getName();
+				return t;
 			}
 		}
 		/*if it didnt return, throw exception */
-		throw new NoSuchPersonIdException("No such person id: " + name);
+		throw new NoSuchPersonIdException("No such person name ");
 	}
 
 	Student getStudent (String name) throws NoSuchPersonIdException {
@@ -77,11 +77,12 @@ public class Discipline {
 		while(iterator.hasNext()) {
 			s = iterator.next();
 			if (s.getName().equals(name)) {
-				return s.getName();
+				return s;
 			}
 		}
+
 		/*if it didnt return, throw exception */
-		throw new NoSuchPersonIdException("No such person id: " + name);
+		throw new NoSuchPersonIdException("No such person name " );
 	}
 
 	void addTeacher (Teacher t) {
@@ -93,10 +94,12 @@ public class Discipline {
 	}
 
 	void createProject(String name, String description) {
-		Project p = new Project(name);
+		Project p = new Project(name, description);
 		_projects.add(p);
 	}
 
-
+	public String toString() {
+		return (_course.toString() + "|" + _name);
+	}
 
 }

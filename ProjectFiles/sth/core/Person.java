@@ -11,7 +11,7 @@ public abstract class Person {
 			if (id >= 100000 && id <= 999999) {
 				_id = id;
 				_name = name;
-				_phoneNumber = phoneNumber
+				_phoneNumber = phoneNumber;
 			} else{
 					throw new BadEntryException("Invalid id " + id);
 			}
@@ -27,25 +27,21 @@ public abstract class Person {
 	 * Returns person's name
 	 */
 	public String getName() {
-		String tempName = new String(_name); /* Auxiliary variable */
-		return tempName;
+		return _name;
 	}
 
 	/*
 	 * getId - Returns person's id
 	 */
 	public int getId() {
-		int tempId; /* Auxiliary variable */
-		tempId = _id;
-		return tempId;
+		return _id;
 	}
 
 	/*
 	 * getPhoneNumber - Returns person's phone number
 	 */
 	public int getPhoneNumber() {
-		int tempPhone = new int(_phoneNumber); /* Auxiliary variable */
-		return tempPhone;
+		return _phoneNumber;
 	}
 
 	/* toString - 'Compiles' person's info into a String */
@@ -61,8 +57,4 @@ public abstract class Person {
   void parseContext(String context, School school) throws BadEntryException {
     throw new BadEntryException("Should not have extra context: " + context);
   }
-}
-
-
-
 }

@@ -1,6 +1,8 @@
 package sth.core;
 
 import sth.core.Survey;
+import java.util.List;
+import java.util.ArrayList;
 
 public class Project {
 	private String _name;
@@ -22,7 +24,7 @@ public class Project {
 		// TODO in final version
 	}
 
-	Collection<Submission> getSubmission() {
+	List<Submission> getSubmissions() {
 		// TODO in final version
 
 	}

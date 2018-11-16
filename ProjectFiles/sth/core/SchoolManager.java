@@ -15,12 +15,13 @@ import java.io.FileNotFoundException;
  */
 public class SchoolManager {
 	private School _school;
+	private Person _loggedUser;
 
   //FIXME add object attributes if needed
 
   //FIXME implement constructors if needed
 	public SchoolManager() {
-		private School _school = new School();
+		_school = new School();
 	}
   /**
    * @param datafile
@@ -50,6 +51,7 @@ public class SchoolManager {
    */
   public boolean isLoggedUserAdministrative() {
     //FIXME implement predicate
+		return false;
   }
 
   /**
@@ -57,6 +59,8 @@ public class SchoolManager {
    */
   public boolean isLoggedUserProfessor() {
     //FIXME implement predicate
+		return false;
+
   }
 
   /**
@@ -64,6 +68,8 @@ public class SchoolManager {
    */
   public boolean isLoggedUserStudent() {
     //FIXME implement predicate
+		return false;
+
   }
 
   /**
@@ -71,6 +77,8 @@ public class SchoolManager {
    */
   public boolean isLoggedUserRepresentative() {
     //FIXME implement predicate
+		return false;
+
   }
 
   //FIXME implement other methods (in general, one for each command in sth-app)

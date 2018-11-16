@@ -15,9 +15,9 @@ public class Survey {
 		// TODO in final version
 	}
 
-	void finalize() {
+	//void finalize() {
 		// TODO in final version
-	}
+	//}
 
 	void addAnswer() {
 		// TODO in final version
