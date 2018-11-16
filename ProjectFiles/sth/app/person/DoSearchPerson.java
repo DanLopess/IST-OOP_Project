@@ -3,6 +3,8 @@ package sth.app.person;
 import pt.tecnico.po.ui.Command;
 import pt.tecnico.po.ui.Input;
 import sth.core.SchoolManager;
+import java.util.Map;
+import java.util.HashMap;
 
 //FIXME import other classes if needed
 
@@ -10,21 +12,21 @@ import sth.core.SchoolManager;
  * 4.2.4. Search person.
  */
 public class DoSearchPerson extends Command<SchoolManager> {
-
-  //FIXME add input fields if needed
-  
+	private Map<Integer, String> _persons;
+	private Input<String> _string;
   /**
    * @param receiver
    */
   public DoSearchPerson(SchoolManager receiver) {
     super(Label.SEARCH_PERSON, receiver);
-    //FIXME initialize input fields if needed
+		_string = _form.addStringInput(Message.requestPersonName());
   }
 
   /** @see pt.tecnico.po.ui.Command#execute() */
   @Override
   public final void execute() {
-    //FIXME implement command
+		_persons = receiver.DoSearchPerson(_string);
+		
   }
 
 }

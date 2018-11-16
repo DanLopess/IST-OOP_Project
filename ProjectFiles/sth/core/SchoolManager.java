@@ -88,8 +88,24 @@ public class SchoolManager {
 		return (_school.getAllPersons());
 	}
 
-	public void DoChangePhoneNumber() throws BadEntryException {
-		
+	public void DoChangePhoneNumber(int phoneNumber) throws BadEntryException {
+
+	}
+
+	public String DoSearchPerson(String name) {
+		private Map<Integer, Person> _users = _school.getAllPersons();
+		Iterator<Map.Entry<Integer, Person>> entries = _users.entrySet().iterator();
+		private Map<Integer, String> _persons = new HashMap<Integer, String>();
+		Person p;
+
+		while (entries.hasNext()) {
+		    Map.Entry<Integer, Person> entry = entries.next();
+				p = entry.getValue();
+		    if(p.getName().contains(name)) {
+					_persons.put(p.getId(), p.getName());
+				}
+		}
+		return _persons;
 	}
 
 }
