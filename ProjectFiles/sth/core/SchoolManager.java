@@ -3,10 +3,10 @@ package sth.core;
 import sth.core.exception.BadEntryException;
 import sth.core.exception.ImportFileException;
 import sth.core.exception.NoSuchPersonIdException;
-import sth.core.exception.NoSuchPersonException;
-import sth.core.exception.NoSuchDisciplineException;
-import sth.core.exception.NoSuchProjectException;
-import sth.core.exception.DuplicateProjectException;
+import sth.app.exception.NoSuchPersonException;
+import sth.app.exception.NoSuchDisciplineException;
+import sth.app.exception.NoSuchProjectException;
+import sth.app.exception.DuplicateProjectException;
 import sth.app.exception.NoSurveyException;
 import java.io.IOException;
 import java.io.FileNotFoundException;
@@ -14,6 +14,8 @@ import sth.core.School;
 import sth.core.Person;
 import java.util.Map;
 import java.util.HashMap;
+import java.util.List;
+import java.util.ArrayList;
 
 /**
  * The façade class.
@@ -79,7 +81,7 @@ public class SchoolManager {
    * @return true when the currently logged in person is a representative
    */
   public boolean isLoggedUserRepresentative() {
-		if (_loggedUser instanceof Student && _loggedUser.isRepresentative())
+		if (_loggedUser instanceof Student /*&& _loggedUser.isRepresentative()*/)
 			return true;
 		return false;
 
@@ -110,7 +112,7 @@ public class SchoolManager {
 					_persons.put(p.getId(), p);
 				}
 		}
-		return _persons;
+		return null; //also sort and return a list of strings (description of each person)
 	}
 
 
@@ -118,10 +120,11 @@ public class SchoolManager {
 
 	}
 
-	public String DoShowPerson(String name) {
-		Person p = _school.parsePerson(name);
-		return p.toString();
+	public String DoShowPerson() {
+		return _loggedUser.toString();
 	}
+
+
 
 	public void DoCloseProject() throws NoSuchDisciplineException,
 	 				NoSuchProjectException {
@@ -133,11 +136,14 @@ public class SchoolManager {
 
 	}
 
-	public List<String> DoShowDisciplineStudents(String name) throws NoSuchDisciplineException {
+	public String DoShowDisciplineStudents(String name) throws NoSuchDisciplineException {
 		if(isLoggedUserProfessor()) {
 			// search for discipline and show students
-
-
+			//parse discipline and get discipline then parse students
+			Discipline _discipline;// = _loggedUser.getDiscipline(name);
+			Map<Integer,Student> _students = _discipline.getAllStudents();
+			String _students1;
+			return _students1;//add students to List<String> by order
 		}
 	}
 

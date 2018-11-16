@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class Discipline implements Comparator {
+public class Discipline {
 	private String _name;
 	private int _capacity;
 	private Course _course;

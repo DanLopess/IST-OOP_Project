@@ -1,6 +1,7 @@
 package sth.core;
 
 import sth.core.exception.BadEntryException;
+import sth.app.exception.NoSuchDisciplineException;
 import sth.core.Course;
 import sth.core.Discipline;
 import sth.core.Project;
@@ -32,7 +33,7 @@ public class Teacher extends Person {
 		while(iterator.hasNext()) {
 			d = iterator.next();
 			if(d.getName().equals(name)) {
-				return n;
+				return d;
 			}
 		}
 		throw new NoSuchDisciplineException("No such discipline: " + name);

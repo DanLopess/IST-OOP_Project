@@ -12,7 +12,7 @@ import sth.core.exception.BadEntryException;
 import sth.core.Person;
 
 public class Parser {
-
+	private Person _person;
   private School _school;
 
   Parser(School s) {
@@ -39,7 +39,6 @@ public class Parser {
     String[] components = header.split("\\|");
     int id;
     int phone;
-		Person person;
 
     if (components.length != 4)
       throw new BadEntryException("Invalid line " + header);

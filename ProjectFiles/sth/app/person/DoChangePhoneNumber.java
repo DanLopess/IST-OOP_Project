@@ -10,6 +10,7 @@ import sth.core.SchoolManager;
  */
 public class DoChangePhoneNumber extends Command<SchoolManager> {
 	private Input<Integer> _phone;
+	private Display _display;
 
   /**
    * @param receiver
@@ -17,13 +18,16 @@ public class DoChangePhoneNumber extends Command<SchoolManager> {
   public DoChangePhoneNumber(SchoolManager receiver) {
     super(Label.CHANGE_PHONE_NUMBER, receiver);
     _phone = _form.addIntegerInput(Message.requestPhoneNumber());
+		_display = new Display();
   }
 
   /** @see pt.tecnico.po.ui.Command#execute() */
   @Override
   public final void execute() {
 		_form.parse();
-		receiver.DoChangePhoneNumber(_phone.value());
+		_receiver.DoChangePhoneNumber(_phone.value());
+		_display.add(_receiver.DoShowPerson());
+		_display.display();
   }
 
 }
