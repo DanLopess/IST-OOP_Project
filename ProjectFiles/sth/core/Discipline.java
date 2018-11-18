@@ -94,8 +94,8 @@ public class Discipline {
 		}
 	}
 
-	void createProject(String name, String description) {
-		Project p = new Project(name, description);
+	void createProject(String name) {
+		Project p = new Project(name);
 		_projects.add(p);
 	}
 

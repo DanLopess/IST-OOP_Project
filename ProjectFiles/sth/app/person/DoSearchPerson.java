@@ -4,8 +4,11 @@ import pt.tecnico.po.ui.Command;
 import pt.tecnico.po.ui.Input;
 import pt.tecnico.po.ui.Display;
 import sth.core.SchoolManager;
-import java.util.Map;
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Collections;
+import java.util.Iterator;
+import sth.app.exception.NoSuchPersonException;
 
 /**
  * 4.2.4. Search person.
@@ -21,23 +24,18 @@ public class DoSearchPerson extends Command<SchoolManager> {
   }
 
   @Override
-  public final void execute() {
+  public final void execute() throws NoSuchPersonException{
 		_form.parse();
 
 		List<String> _persons;
-		try {
-			_persons = _receiver.DoSearchPerson(_string.value());
-			Collections.sort(_persons);
-			Iterator<String> iterator = _persons.iterator();
+		_persons = _receiver.DoSearchPerson(_string.value());
+		Collections.sort(_persons);
+		Iterator<String> iterator = _persons.iterator();
 
-			while (iterator.hasNext()) {
-				_display.addLine(iterator.next());
-			}
-			_display.display();
-
-	} catch (NoSuchPersonException nspe) {
-			_display.popup(Message.fileNotFound());
+		while (iterator.hasNext()) {
+			_display.addLine(iterator.next());
 		}
+		_display.display();
 	}
 
 }

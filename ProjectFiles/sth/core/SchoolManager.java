@@ -14,8 +14,10 @@ import sth.core.School;
 import sth.core.Person;
 import java.util.Map;
 import java.util.HashMap;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Iterator;
+
 
 /**
  * The façade class.
@@ -111,7 +113,11 @@ public class SchoolManager {
 				_persons.add(p.toString());
 			}
 		}
-		return _persons;
+		if(_persons.size()>0)
+			return _persons;
+		else {
+			throw new NoSuchPersonException(1);
+		}
 	}
 
 
@@ -137,7 +143,7 @@ public class SchoolManager {
 	 				NoSuchProjectException {
 		Teacher teacher;
 		if(isLoggedUserProfessor()) {
-			_loggedUser.createProject();
+			//_loggedUser.createProject(); loggeduser doesnt have this method
 		}
 
 	}
@@ -149,12 +155,9 @@ public class SchoolManager {
 
 	public List<String> DoShowDisciplineStudents(String name) throws NoSuchDisciplineException {
 		if(isLoggedUserProfessor()) {
-			// search for discipline and show students
-			//parse discipline and get discipline then parse students
-			//Discipline _discipline;// = _loggedUser.getDiscipline(name);
-			//Map<Integer,Student> _students = _discipline.getAllStudents();
-			String _students1 = new String();
-			return _students1;//add students to List<String> by order
+			ArrayList<String> _students = new ArrayList<String>();
+			return _students; // not implemented because loggedUser is an abstract type
+												// To be fixed in final version
 		}
 		return null;
 	}

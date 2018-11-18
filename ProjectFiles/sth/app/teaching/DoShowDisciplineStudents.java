@@ -6,6 +6,10 @@ import pt.tecnico.po.ui.Input;
 import pt.tecnico.po.ui.Display;
 import sth.core.SchoolManager;
 import sth.core.Person;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Collections;
+import java.util.Iterator;
 
 
 /**
@@ -27,19 +31,15 @@ public class DoShowDisciplineStudents extends Command<SchoolManager> {
 		_form.parse();
 
 		List<String> _persons;
-		try {
-			_persons = _receiver.DoShowDisciplineStudents(_disciplineName);
-			Collections.sort(_persons);
-			Iterator<String> iterator = _persons.iterator();
+		_persons = _receiver.DoShowDisciplineStudents(_disciplineName.value());
+		Collections.sort(_persons);
+		Iterator<String> iterator = _persons.iterator();
 
-			while (iterator.hasNext()) {
-				_display.addLine(iterator.next());
-			}
-			_display.display();
-
-	} catch (NoSuchPersonException nspe) {
-			_display.popup(Message.fileNotFound());
+		while (iterator.hasNext()) {
+			_display.addLine(iterator.next());
 		}
+		_display.display();
+
 	}
 
 }

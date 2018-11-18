@@ -38,6 +38,11 @@ public class School implements java.io.Serializable {
     _parser.parseFile(filename);
   }
 
+
+	/**
+	 * finds a course through its name
+   * @param name
+   */
 	Course parseCourse(String name) {
 		Iterator<Course> iterator = _courses.iterator();
 		Course c;
@@ -50,6 +55,11 @@ public class School implements java.io.Serializable {
 		return null;
 	}
 
+
+	/**
+	 * find a person through its name
+   * @param name
+   */
 	Person parsePerson(String name) {
 		Iterator<Person> iterator = _users.iterator();
 		Person p;
@@ -62,23 +72,36 @@ public class School implements java.io.Serializable {
 		return null;
 	}
 
+
+	/**
+	 * this method searches for a person through its id
+   * @param id an integer that is relate
+   */
 	Person parsePersonById(int id) {
 		Iterator<Person> iterator = _users.iterator();
 		Person p;
 		while (iterator.hasNext()) {
 				p = iterator.next();
-				if(p.getValue().getId() == id) {
+				if(p.getId() == id) {
 					return p;
 				}
 		}
 		return null;
 	}
 
-	void addPerson(Person p) {
-		_nextPersonId++;
-		_users.put(_nextPersonId, p);
+
+	/**
+   * this method adds a given person to all school's users list
+	 * @param person an instance of the class person
+   */
+	void addPerson(Person person) {
+		_users.add(person);
 	}
 
+	/**
+   * This method returns a list of persons with all school's users.
+	 *
+   */
 	public List<Person> getAllUsers() {
 		return _users;
 	}

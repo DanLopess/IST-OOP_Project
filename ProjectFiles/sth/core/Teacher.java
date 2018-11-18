@@ -57,7 +57,7 @@ public class Teacher extends Person {
 		while(iterator.hasNext()) {
 			d = iterator.next();
 			if (d.getName().equals(dName)) {
-				d.createProject(pName, description);
+				d.createProject(pName);
 			}
 		}
 	}
