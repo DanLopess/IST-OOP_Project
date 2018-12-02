@@ -47,14 +47,14 @@ public class Student extends Person {
 	}
 
 	/**
-	 * @param rep boolean that indicates if student is or is not a representative
+	 * @param rep boolean that indicates if student is or is not to be a representative
 	 */
 	void setRepresentative (boolean rep) {
 		if (rep){
-			if (_course.addRepresentative(this)) {
+			if (_course.addRepresentative(this)) { // if able to add representative
 				_isRepresentative = true;
 			}
-		} else {
+		} else { 
 			_course.removeRepresentative(this);
 			_isRepresentative = false;
 		}
@@ -84,19 +84,19 @@ public class Student extends Person {
 		}
 	}
 
-  void parseContext(String lineContext, School school) throws BadEntryException {
-    String components[] =  lineContext.split("\\|");
+	void parseContext(String lineContext, School school) throws BadEntryException {
+		String components[] =  lineContext.split("\\|");
 
-    if (components.length != 2)
-      throw new BadEntryException("Invalid line context " + lineContext);
+		if (components.length != 2)
+			throw new BadEntryException("Invalid line context " + lineContext);
 
-    if (_course == null) {
-      _course = school.parseCourse(components[0]);
-      _course.addStudent(this);
-    }
+		if (_course == null) {
+			_course = school.parseCourse(components[0]);
+			_course.addStudent(this);
+		}
 
-    Discipline dis = _course.parseDiscipline(components[1]);
+		Discipline dis = _course.parseDiscipline(components[1]);
 
-    dis.enrollStudent(this);
-  }
+		dis.enrollStudent(this);
+	}
 }

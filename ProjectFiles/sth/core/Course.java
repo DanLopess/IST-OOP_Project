@@ -19,7 +19,7 @@ public class Course {
 	public Course (String name) {
 		_name = name;
 		_disciplines = new ArrayList<Discipline>();
-		_students = new HashMap<Integer, Student>(); // in the integer we will use students id
+		_students = new HashMap<Integer, Student>(); // key is students' id for easy mapping
 		_representatives = new ArrayList<Student>();
 	}
 
@@ -34,15 +34,15 @@ public class Course {
 	}
 
 	void addStudent (Student s) {
-		if(_students.size() < 200) {
+		if(_students.size() < 200) { 
 			_students.put(s.getId(), s);
 		}
 	}
 
-	boolean addRepresentative (Student s) {
+	boolean addRepresentative (Student s) { 
 		if(_representatives.size() < 7) {
-				_representatives.add(s);
-				return true;
+			_representatives.add(s);
+			return true;
 		}
 		return false;
 	}
@@ -82,7 +82,7 @@ public class Course {
 		    Map.Entry<Integer, Student> entry = entries.next();
 		    if(entry.getValue().getName().equals(name)) {
 					return entry.getValue();
-				}
+			}
 		}
 		return null;
 	}

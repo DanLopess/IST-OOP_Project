@@ -7,6 +7,8 @@ import sth.core.Person;
 import java.io.IOException;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * School implementation.
@@ -16,7 +18,7 @@ public class School implements java.io.Serializable {
   /** Serial number for serialization. */
   private static final long serialVersionUID = 201810051538L;
 
-	private List<Person> _users;
+	private Map<Integer, Person> _people;
 	private List<Course> _courses;
 	private Parser _parser;
 	private String _name;
@@ -24,7 +26,7 @@ public class School implements java.io.Serializable {
 
 	public School () {
 		_name = "Instituto Superior Tecnico";
-		_users = new ArrayList<Person>();
+		_people = new HashMap <Integer, Person>();
 		_courses = new ArrayList<Course>();
 		_parser = new Parser(this);
 	}
@@ -40,9 +42,9 @@ public class School implements java.io.Serializable {
 
 
 	/**
-	 * finds a course through its name
-   * @param name
-   */
+	* finds a course through its name
+   	* @param name
+	*/
 	Course parseCourse(String name) {
 		Iterator<Course> iterator = _courses.iterator();
 		Course c;
@@ -57,36 +59,34 @@ public class School implements java.io.Serializable {
 
 
 	/**
-	 * find a person through its name
-   * @param name
-   */
+	* find a person through its name
+	* @param name
+   	* @return Person
+   	*/
 	Person parsePerson(String name) {
-		Iterator<Person> iterator = _users.iterator();
-		Person p;
-		while (iterator.hasNext()) {
-				p = iterator.next();
-				if(p.getName().equals(name)) {
-					return p;
-				}
+		Iterator<Map.Entry<Integer, Person>> entries = _people.entrySet().iterator();
+
+		while (entries.hasNext()) {
+		    Map.Entry<Integer, Person> entry = entries.next();
+		    if(entry.getValue().getName().equals(name)) {
+					return entry.getValue();
+			}
 		}
 		return null;
 	}
 
 
 	/**
-	 * this method searches for a person through its id
-   * @param id an integer that is relate
-   */
-	Person parsePersonById(int id) {
-		Iterator<Person> iterator = _users.iterator();
-		Person p;
-		while (iterator.hasNext()) {
-				p = iterator.next();
-				if(p.getId() == id) {
-					return p;
-				}
+	* this method searches for a person through its id
+	   * @param id an integer that is relate
+	   * @return Person 
+   	*/
+	Person parsePersonById(int id) throws NoSuchPersonIdException{
+		if (_people.containsKey(id)) {
+			return _people.get(id);
+		} else {
+			throw new NoSuchPersonIdException("No such id");
 		}
-		return null;
 	}
 
 
@@ -95,14 +95,14 @@ public class School implements java.io.Serializable {
 	 * @param person an instance of the class person
    */
 	void addPerson(Person person) {
-		_users.add(person);
+		_people.putIfAbsent(getId(person), person);
 	}
 
 	/**
-   * This method returns a list of persons with all school's users.
-	 *
+   	* This method returns a list of persons with all school's users.
+	*
    */
-	public List<Person> getAllUsers() {
-		return _users;
+	public Map<Integer, Person> getAllUsers() {
+		return _people;
 	}
 }

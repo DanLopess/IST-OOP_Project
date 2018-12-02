@@ -8,20 +8,20 @@ public abstract class Person {
 	private int _phoneNumber;
 
 	public Person (int id, String name, int phoneNumber) throws BadEntryException {
-			if (id >= 100000 && id <= 999999) {
-				_id = id;
-				_name = name;
-				_phoneNumber = phoneNumber;
-			} else{
-					throw new BadEntryException("Invalid id " + id);
-			}
+		if (id >= 100000 && id <= 999999) {
+			_id = id;
+			_name = name;
+			_phoneNumber = phoneNumber;
+		} else{
+				throw new BadEntryException("Invalid id " + id);
+		}
 	}
 
 	/*
 	 * setPhoneNumber - changes Person's phone number
 	 */
 	public void setPhoneNumber(int phoneNumber) {
-			_phoneNumber = phoneNumber;
+		_phoneNumber = phoneNumber;
 	}
 	/*
 	 * Returns person's name

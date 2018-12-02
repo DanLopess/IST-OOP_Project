@@ -3,11 +3,7 @@ package sth.core;
 import sth.core.exception.BadEntryException;
 import sth.core.exception.ImportFileException;
 import sth.core.exception.NoSuchPersonIdException;
-import sth.app.exception.NoSuchPersonException;
-import sth.app.exception.NoSuchDisciplineException;
-import sth.app.exception.NoSuchProjectException;
-import sth.app.exception.DuplicateProjectException;
-import sth.app.exception.NoSurveyException;
+import sth.core.exception.NoSuchProjectException;
 import java.io.IOException;
 import java.io.FileNotFoundException;
 import sth.core.School;
@@ -29,71 +25,72 @@ public class SchoolManager {
 	public SchoolManager() {
 		_school = new School();
 	}
-  /**
-   * @param datafile
-   * @throws ImportFileException
-   * @throws InvalidCourseSelectionException
-   */
-  public void importFile(String datafile) throws ImportFileException {
-    try {
-      _school.importFile(datafile);
-    } catch (IOException | BadEntryException e) {
-      throw new ImportFileException(e);
-    }
-  }
 
-  /**
-   * Do the login of the user with the given identifier.
+	/**
+	 * @param datafile
+	 * @throws ImportFileException
+	 * @throws InvalidCourseSelectionException
+	 */
+	public void importFile(String datafile) throws ImportFileException {
+		try {
+			_school.importFile(datafile);
+		} catch (IOException | BadEntryException e) {
+			throw new ImportFileException(e);
+		}
+	}
 
-   * @param id identifier of the user to login
-   * @throws NoSuchPersonIdException if there is no uers with the given identifier
-   */
-  public void login(int id) throws NoSuchPersonIdException {
+	/**
+	 * Do the login of the user with the given identifier.
+
+	* @param id identifier of the user to login
+	* @throws NoSuchPersonIdException if there is no uers with the given identifier
+	*/
+	public void login(int id) throws NoSuchPersonIdException {
 		_loggedUser = _school.parsePersonById(id);
-  }
+	}
 
-  /**
-   * @return true when the currently logged in person is an administrative
-   */
-  public boolean isLoggedUserAdministrative() {
+	/**
+	 * @return true when the currently logged in person is an administrative
+	 */
+	public boolean isLoggedUserAdministrative() {
 		if (_loggedUser instanceof Employee)
 			return true;
 		return false;
-  }
+	}
 
-  /**
-   * @return true when the currently logged in person is a professor
-   */
-  public boolean isLoggedUserProfessor() {
-    if (_loggedUser instanceof Teacher)
+	/**
+	 * @return true when the currently logged in person is a professor
+	 */
+	public boolean isLoggedUserProfessor() {
+		if (_loggedUser instanceof Teacher)
 			return true;
 		return false;
-  }
+	}
 
-  /**
-   * @return true when the currently logged in person is a student
-   */
-  public boolean isLoggedUserStudent() {
+	/**
+	 * @return true when the currently logged in person is a student
+	 */
+	public boolean isLoggedUserStudent() {
 		if (_loggedUser instanceof Student)
 			return true;
 		return false;
-  }
+	}
 
-  /**
-   * @return true when the currently logged in person is a representative
-   */
-  public boolean isLoggedUserRepresentative() {
-		if (_loggedUser instanceof Student )
+	/**
+	 * @return true when the currently logged in person is a representative
+	 */
+	public boolean isLoggedUserRepresentative() {
+		if (_loggedUser instanceof Student && _loggedUser.isRepresentative()) 
 			return true;
 		return false;
 
-  }
+	}
 
 	public Person getLoggedUser() {
 		return _loggedUser;
 	}
 
-	public List<Person> getAllUsers() {
+	public Map<Integer, Person> getAllUsers() {
 		return (_school.getAllUsers());
 	}
 
@@ -109,7 +106,7 @@ public class SchoolManager {
 
 		while (iterator.hasNext()) {
 			p = iterator.next();
-	    if(p.getName().contains(name)) {
+		if(p.getName().contains(name)) {
 				_persons.add(p.toString());
 			}
 		}
@@ -140,7 +137,7 @@ public class SchoolManager {
 
 
 	public void DoCloseProject(String discipline, String pName) throws NoSuchDisciplineException,
-	 				NoSuchProjectException {
+					NoSuchProjectException {
 		Teacher teacher;
 		if(isLoggedUserProfessor()) {
 			//_loggedUser.createProject(); loggeduser doesnt have this method
@@ -149,7 +146,7 @@ public class SchoolManager {
 	}
 
 	public void DoCreateProject(String discipline, String pName) throws NoSuchDisciplineException,
-	 				NoSuchProjectException, DuplicateProjectException{
+					NoSuchProjectException, DuplicateProjectException{
 
 	}
 
@@ -163,7 +160,7 @@ public class SchoolManager {
 	}
 
 	public String DoShowProjectSubmissions() throws NoSuchDisciplineException,
-	 		NoSuchProjectException, NoSurveyException {
+			NoSuchProjectException, NoSurveyException {
 		return null;
 	}
 
