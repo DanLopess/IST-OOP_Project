@@ -23,8 +23,12 @@ public class DoChangePhoneNumber extends Command<SchoolManager> {
   @Override
   public final void execute() {
 		_form.parse();
-		_receiver.DoChangePhoneNumber(_phone.value());
-		_display.add(_receiver.DoShowPerson());
+    List<String> string = _receiver.changePhoneNumber(_phone.value());
+    Iterator<String> iterator = _persons.iterator();
+    
+    while (iterator.hasNext()) {
+      _display.addLine(iterator.next());
+    }
 		_display.display();
   }
 

@@ -1,6 +1,7 @@
 package sth.core;
 
 import sth.core.exception.BadEntryException;
+import sth.core.exception.NoSuchDisciplineIdException;
 import sth.core.Course;
 import sth.core.Discipline;
 import sth.core.Project;
@@ -26,7 +27,7 @@ public class Teacher extends Person {
 		_disciplines = new ArrayList<Discipline>();
 	}
 
-	Discipline getDiscipline(String name) throws NoSuchDisciplineException {
+	Discipline getDiscipline(String name) throws NoSuchDisciplineIdException {
 		Iterator<Discipline> iterator = _disciplines.iterator();
 		Discipline d;
 		while(iterator.hasNext()) {
@@ -35,7 +36,7 @@ public class Teacher extends Person {
 				return d;
 			}
 		}
-		throw new NoSuchDisciplineException("No such discipline: " + name);
+		throw new NoSuchDisciplineIdException("No such discipline: " + name);
 	}
 
 	List<Discipline> getAllDisciplines() {
@@ -43,12 +44,11 @@ public class Teacher extends Person {
 	}
 
 	/**
-   * creates a project to a certain discipline
-   * @param dName name of the discipline
-   * @param pName name of the project
+	 * creates a project to a certain discipline
+	 * @param dName name of the discipline
+	 * @param pName name of the project
 	 * @param description description of the project
-	 *
-   */
+	 */
 	void createProject(String dName, String pName) {
 		Iterator<Discipline> iterator = _disciplines.iterator();
 		Discipline d;
@@ -69,21 +69,33 @@ public class Teacher extends Person {
 		d.addTeacher(this);
 	}
 
+
 @Override
-	public String toString () {
-		return ("DOCENTE|"+ super.getId() + "|" + super.getName());
+	public List<String> toString () {
+		List<String> string = new ArrayList<String>();
+		
+		toString.add("DOCENTE|"+ super.getId() + "|" + super.getName());
+
+		Iterator<Discipline> iterator = new _disciplines.iterator();
+		Discipline d;
+		while(iterator.hasNext()) {
+			d = iterator.next();
+			string.add(d.toString());
+		}
+		Collections.sort(string);
+		return string;
 	}
 
-  void parseContext(String lineContext, School school) throws BadEntryException {
-    String components[] =  lineContext.split("\\|");
+	void parseContext(String lineContext, School school) throws BadEntryException {
+		String components[] =  lineContext.split("\\|");
 
-    if (components.length != 2)
-      throw new BadEntryException("Invalid line context " + lineContext);
+		if (components.length != 2)
+			throw new BadEntryException("Invalid line context " + lineContext);
 
-    Course course = school.parseCourse(components[0]);
-    Discipline discipline = course.parseDiscipline(components[1]);
+		Course course = school.parseCourse(components[0]);
+		Discipline discipline = course.parseDiscipline(components[1]);
 
 		addDiscipline(discipline);
-    discipline.addTeacher(this);
-  }
+		discipline.addTeacher(this);
+	}
 }

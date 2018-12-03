@@ -41,7 +41,7 @@ public class Discipline {
 		return _course;
 	}
 
-	Project getProject(String name) {
+	Project getProject(String name) throws NoSuchProjectIdException {
 		Iterator<Project> iterator = _projects.iterator();
 		Project p;
 
@@ -51,30 +51,29 @@ public class Discipline {
 				return p;
 			}
 		}
-		return null;
+		throw new NoSuchProjectIdException(name);
 	}
 
-	Teacher getTeacher(String name)  {
+	Teacher getTeacher(String name)  throws NoSuchPersonIdException{
 		Iterator<Map.Entry<Integer, Teacher>> entries = _teachers.entrySet().iterator();
 
 		while (entries.hasNext()) {
 		    Map.Entry<Integer, Teacher> entry = entries.next();
 		    if(entry.getValue().getName().equals(name)) {
-					return entry.getValue();
-				}
+				return entry.getValue();
+			}
 		}
-		return null;
-
+		throw new NoSuchPersonIdException(name);
 	}
 
-	Student getStudent (String name) {
+	Student getStudent(String name) {
 		Iterator<Map.Entry<Integer, Student>> entries = _students.entrySet().iterator();
 
 		while (entries.hasNext()) {
 		    Map.Entry<Integer, Student> entry = entries.next();
 		    if(entry.getValue().getName().equals(name)) {
-					return entry.getValue();
-				}
+				return entry.getValue();
+			}
 		}
 		return null;
 
@@ -84,13 +83,13 @@ public class Discipline {
 		return _students;
 	}
 
-	void addTeacher (Teacher t) {
-		_teachers.put(t.getId(), t);
+	void addTeacher(Teacher t) {
+		_teachers.putIfAbsent(t.getId(), t);
 	}
 
-	void enrollStudent (Student s) {
+	void enrollStudent(Student s) {
 		if (_students.size() < _capacity) {
-			_students.put(s.getId(), s);
+			_students.putIfAbsent(s.getId(), s);
 		}
 	}
 
@@ -99,7 +98,12 @@ public class Discipline {
 		_projects.add(p);
 	}
 
+	void closeProject(String name) throws NoSuchProjectIdException {
+		Project p = this.getProject(name);
+		p.close();
+	}
+
 	public String toString() {
-		return ("* " + _course.getName() + "" + "- " + _name);
+		return ("* " + _course.getName() + " - " + _name);
 	}
 }

@@ -76,16 +76,26 @@ public class Student extends Person {
 	}
 
 @Override
-	public String toString () {
+	public List<String> toString () {
+		List<String> toString = new ArrayList<String>();
 		if (_isRepresentative){
-			return "DELEGADO|"+ super.getId( )+ "|" + super.getName();
+			toString.add("DELEGADO|"+ super.getId( )+ "|" + super.getName());
 		} else {
-			return "ALUNO|"+ super.getId() + "|" + super.getName();
+			toString.add("ALUNO|"+ super.getId() + "|" + super.getName());
 		}
+
+		Iterator<Discipline> iterator = new _disciplines.iterator();
+		Discipline d;
+		while(iterator.hasNext()) {
+			d = iterator.next();
+			toString.add("* " + _course.getName() + " - " + d.getName());
+		}
+		Collections.sort(toString);
+		return toString;
 	}
 
 	void parseContext(String lineContext, School school) throws BadEntryException {
-		String components[] =  lineContext.split("\\|");
+		String components[] =  lineContext.split("\\|"); // TODO USE THIS TO SORT STRINGS IN APP
 
 		if (components.length != 2)
 			throw new BadEntryException("Invalid line context " + lineContext);

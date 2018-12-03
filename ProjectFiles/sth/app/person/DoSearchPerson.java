@@ -20,22 +20,24 @@ public class DoSearchPerson extends Command<SchoolManager> {
    */
   public DoSearchPerson(SchoolManager receiver) {
     super(Label.SEARCH_PERSON, receiver);
-		_string = _form.addStringInput(Message.requestPersonName());
+	_string = _form.addStringInput(Message.requestPersonName());
   }
 
   @Override
   public final void execute() throws NoSuchPersonException{
 		_form.parse();
 
-		List<String> _persons;
-		_persons = _receiver.DoSearchPerson(_string.value());
-		Collections.sort(_persons);
-		Iterator<String> iterator = _persons.iterator();
+		List<List<String>> _persons;
+		_persons = _receiver.searchPerson(_string.value());
+		Iterator<List<String>> iterator = _persons.iterator();
 
 		while (iterator.hasNext()) {
-			_display.addLine(iterator.next());
+			List<String> next = iterator.next();
+			Iterator<String> iterator2 = _persons.iterator();
+			while (iterator2.hasNext()) {
+				_display.addLine(iterator2.next());
+			}
 		}
 		_display.display();
 	}
-
 }

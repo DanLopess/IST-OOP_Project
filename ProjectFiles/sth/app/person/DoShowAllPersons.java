@@ -23,15 +23,18 @@ public class DoShowAllPersons extends Command<SchoolManager> {
   /** @see pt.tecnico.po.ui.Command#execute() */
   @Override
   public final void execute() {
-		_form.parse();
+		super._form.parse();
 
-		List<String> _persons;
-		_persons = _receiver.DoShowAllPersons();
-		Collections.sort(_persons);
-		Iterator<String> iterator = _persons.iterator();
+		List<List<String>> _persons;
+		_persons = _receiver.getAllPersons();
+		Iterator<List<String>> iterator = _persons.iterator();
 
 		while (iterator.hasNext()) {
-			_display.addLine(iterator.next());
+			List<String> next = iterator.next();
+			Iterator<String> iterator2 = _persons.iterator();
+			while (iterator2.hasNext()) {
+				_display.addLine(iterator2.next());
+			}
 		}
 		_display.display();
 	}

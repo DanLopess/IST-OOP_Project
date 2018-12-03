@@ -15,8 +15,8 @@ import java.util.Map;
  */
 public class School implements java.io.Serializable {
 
-  /** Serial number for serialization. */
-  private static final long serialVersionUID = 201810051538L;
+  	/** Serial number for serialization. */
+  	private static final long serialVersionUID = 201810051538L;
 
 	private Map<Integer, Person> _people;
 	private List<Course> _courses;
@@ -31,19 +31,18 @@ public class School implements java.io.Serializable {
 		_parser = new Parser(this);
 	}
 
-  /**
-   * @param filename
-   * @throws BadEntryException
-   * @throws IOException
-   */
-  void importFile(String filename) throws IOException, BadEntryException {
-    _parser.parseFile(filename);
-  }
-
+	/**
+	 * @param filename
+	 * @throws BadEntryException
+	 * @throws IOException
+	 */
+	void importFile(String filename) throws IOException, BadEntryException {
+		_parser.parseFile(filename);
+	}
 
 	/**
 	* finds a course through its name
-   	* @param name
+	* @param name
 	*/
 	Course parseCourse(String name) {
 		Iterator<Course> iterator = _courses.iterator();
@@ -61,8 +60,8 @@ public class School implements java.io.Serializable {
 	/**
 	* find a person through its name
 	* @param name
-   	* @return Person
-   	*/
+	* @return Person
+	*/
 	Person parsePerson(String name) {
 		Iterator<Map.Entry<Integer, Person>> entries = _people.entrySet().iterator();
 
@@ -82,20 +81,19 @@ public class School implements java.io.Serializable {
 	   * @return Person 
    	*/
 	Person parsePersonById(int id) throws NoSuchPersonIdException{
-		if (_people.containsKey(id)) {
+		if (_people.containsKey(id)) 
 			return _people.get(id);
-		} else {
-			throw new NoSuchPersonIdException("No such id");
-		}
+		else 
+			throw new NoSuchPersonIdException(id);
 	}
 
 
 	/**
-   * this method adds a given person to all school's users list
+	 * this method adds a given person to all school's users list
 	 * @param person an instance of the class person
-   */
+	 */
 	void addPerson(Person person) {
-		_people.putIfAbsent(getId(person), person);
+		_people.putIfAbsent(person.getId(), person);
 	}
 
 	/**

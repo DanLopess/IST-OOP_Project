@@ -18,7 +18,7 @@ public class DoShowPerson extends Command<SchoolManager> {
 
   @Override
   public final void execute() {
-		_display.addLine(_receiver.DoShowPerson());
+		_display.addLine(_receiver.showPerson());
 		_display.display();
   }
 

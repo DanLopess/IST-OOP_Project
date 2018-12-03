@@ -1,0 +1,10 @@
+- Como implementar serializable? Numero a toa?
+- Agora é para implementar tudo?
+- 
+
+
+TODO:
+- Teacher portal
+- student portal
+- Representative portal
+
