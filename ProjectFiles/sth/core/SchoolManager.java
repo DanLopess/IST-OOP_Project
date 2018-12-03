@@ -168,7 +168,7 @@ public class SchoolManager {
 	}
 
 	public String getProjectSubmissions()  {
-		return null;
+		return null; // TODO
 	}
 
 	public List<List<String>> getDisciplineStudents(String name) throws NoSuchDisciplineIdException {
@@ -180,14 +180,19 @@ public class SchoolManager {
 	}
 
 	public String getSurveyResults() {
-		return null;
+		return null; // TODO
 	}
+
 
 	
 	/**
 	 * === Student's portal ===
 	 */
-	
+	public void deliverProject(String discipline, String pName, String text)  throws NoSuchDisciplineIdException,
+							NoSuchProjectIdException {
+		Discipline d =((Student)_loggedUser).getDiscipline(discipline);
+		
+	}
 
 	 
 	/**

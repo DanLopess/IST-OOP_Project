@@ -4,6 +4,8 @@ import sth.core.exception.BadEntryException;
 import sth.core.Course;
 import sth.core.Discipline;
 import sth.core.School;
+import sth.core.survey.Survey;
+import sth.core.survey.SurveyState;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Iterator;
@@ -41,9 +43,20 @@ public class Student extends Person {
 	 * @param d adds a discipline to student's discipline List
 	 */
 	void addDiscipline (Discipline d) {
-		if (_disciplines.size() < 6){
+		if (_disciplines.size() < 6 && !(_disciplines.contains(d))) {
 			_disciplines.add(d);
 		}
+	}
+
+	Discipline getDiscipline(String name) throws NoSuchDisciplineIdException {
+		Iterator<Discipline> iterator = _disciplines.iterator();
+
+		while(iterator.hasNext()) {
+			Discipline d = iterator.next();
+			if (d.getName().equals(name))
+				return d;
+		}
+		throw new NoSuchDisciplineIdException("Discipline not found: " + name);
 	}
 
 	/**
@@ -59,6 +72,10 @@ public class Student extends Person {
 			_isRepresentative = false;
 		}
 	}
+
+	/**
+	 * === Representative related methods ===
+	 */
 
 	/**
 	 * @return boolean of whether student is a representative

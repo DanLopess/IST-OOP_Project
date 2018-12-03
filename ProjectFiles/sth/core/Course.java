@@ -28,7 +28,7 @@ public class Course {
 	}
 
 	void addDiscipline (Discipline d) {
-		if(_disciplines.size() < 6) {
+		if(!(_disciplines.contains(d))) {
 			_disciplines.add(d);
 		}
 	}
@@ -40,15 +40,21 @@ public class Course {
 	}
 
 	boolean addRepresentative (Student s) { 
-		if(_representatives.size() < 7) {
+		if(_representatives.size() < 7 && !(_representatives.contains(s))) {
 			_representatives.add(s);
 			return true;
 		}
 		return false;
 	}
 
-	void removeRepresentative (Student s) {
-		_representatives.remove(s.getId());
+	void removeRepresentative (Student st) {
+		Iterator<Object> iterator  = _representatives.iterator();
+		
+		while (iterator.hasNext()) {
+			Student s = i.next();
+			if(s.getId() == st.getId())
+				iterator.remove();
+		}
 	}
 
 

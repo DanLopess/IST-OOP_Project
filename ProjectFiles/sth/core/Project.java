@@ -8,7 +8,7 @@ public class Project {
 	private String _name;
 	private String _description;
 	private boolean _closed;
-	private Survey _survey; 		// TODO in final version
+	private Survey _survey;
 
 	public Project(String name) {
 		_name = name;
