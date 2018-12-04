@@ -1,12 +1,10 @@
 package sth.core;
 
 import sth.core.exception.BadEntryException;
-import sth.core.Course;
-import sth.core.Discipline;
-import sth.core.School;
-import sth.core.survey.Survey;
-import sth.core.survey.SurveyState;
+import sth.core.exception.NoSuchDisciplineIdException;
+
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Iterator;
 
@@ -93,7 +91,7 @@ public class Student extends Person {
 	}
 
 @Override
-	public List<String> toString () {
+	public String toString () {
 		List<String> toString = new ArrayList<String>();
 		if (_isRepresentative){
 			toString.add("DELEGADO|"+ super.getId( )+ "|" + super.getName());
@@ -101,14 +99,16 @@ public class Student extends Person {
 			toString.add("ALUNO|"+ super.getId() + "|" + super.getName());
 		}
 
-		Iterator<Discipline> iterator = new _disciplines.iterator();
+		Iterator<Discipline> iterator = _disciplines.iterator();
 		Discipline d;
 		while(iterator.hasNext()) {
 			d = iterator.next();
 			toString.add("* " + _course.getName() + " - " + d.getName());
 		}
 		Collections.sort(toString);
-		return toString;
+
+
+		return "";
 	}
 
 	void parseContext(String lineContext, School school) throws BadEntryException {

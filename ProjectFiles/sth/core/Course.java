@@ -1,13 +1,6 @@
 package sth.core;
 
-import sth.core.Student;
-import sth.core.Discipline;
-import sth.core.exception.BadEntryException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Iterator;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class Course {
 	private String _name;
@@ -48,10 +41,10 @@ public class Course {
 	}
 
 	void removeRepresentative (Student st) {
-		Iterator<Object> iterator  = _representatives.iterator();
+		Iterator<Student> iterator  = _representatives.iterator();
 		
 		while (iterator.hasNext()) {
-			Student s = i.next();
+			Student s = iterator.next();
 			if(s.getId() == st.getId())
 				iterator.remove();
 		}

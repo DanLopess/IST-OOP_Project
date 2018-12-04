@@ -5,25 +5,24 @@ import sth.core.exception.BadEntryException;
 public abstract class Person {
 	private int _id;
 	private String _name;
-	private int _phoneNumber;
+	private String _phoneNumber;
 
 	/*
 	* Person - class constructor
 	*/
-	public Person (int id, String name, int phoneNumber) throws BadEntryException {
-		if (id >= 100000 && id <= 999999) {
-			_id = id;
-			_name = name;
-			_phoneNumber = phoneNumber;
-		} else{
+	public Person (int id, String name, String phoneNumber) throws BadEntryException {
+		if( !(id >= 100000 && id <= 999999) ){
 			throw new BadEntryException("Invalid id " + id);
 		}
+		_id = id;
+		_name = name;
+		_phoneNumber = phoneNumber;
 	}
 
 	/*
 	* setPhoneNumber - changes Person's phone number
 	*/
-	public void setPhoneNumber(int phoneNumber) {
+	public void setPhoneNumber(String phoneNumber) {
 		_phoneNumber = phoneNumber;
 	}
 
@@ -44,16 +43,16 @@ public abstract class Person {
 	/*
 	* getPhoneNumber - Returns person's phone number
 	*/
-	public int getPhoneNumber() {
+	public String getPhoneNumber() {
 		return _phoneNumber;
 	}
 
-	/* 
-	* toString - 'Compiles' person's info into a String 
-	*/
-	public abstract String toString();
+    @Override
+    public String toString() {
+        return this._id + "|" + this._name;
+    }
 
-	/**
+    /**
 	 * Parses the context information for a person from the import file.
 	 * This method defines the default behavior: no extra information is needed
 	 * thus it throws the exception.

@@ -1,17 +1,9 @@
 package sth.core;
 
-import sth.core.exception.BadEntryException;
-import sth.core.exception.ImportFileException;
-import sth.core.exception.NoSuchPersonIdException;
+import sth.core.exception.*;
+
 import java.io.IOException;
-import java.io.FileNotFoundException;
-import sth.core.School;
-import sth.core.Person;
-import java.util.Map;
-import java.util.HashMap;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Iterator;
+import java.util.*;
 
 
 /**
@@ -95,36 +87,24 @@ public class SchoolManager {
 	 * === Person's Portal ===
 	 */
 	
-	public List<String> showPerson() {
+	public String showPerson() {
 		return _loggedUser.toString();
 	}
 	
-	public List<String> changePhoneNumber(int phoneNumber) {
+	public String changePhoneNumber(String phoneNumber) {
 		_loggedUser.setPhoneNumber(phoneNumber);
 		return this.showPerson();
 	}
 
-	public List<List<String>> getAllPersons() {  
-		Map<Integer,Person> users = _school.getAllUsers();
-		//Convert HashMap to TreeMap.It will be sorted in natural order. (by id)
-		Map<Integer,Person> usersTree = new TreeMap<Integer,String>(users); 
-
-		Iterator<Map.Entry<Integer, Person>> entries = usersTree.entrySet().iterator();
-		List<List<String>> personsToString = new ArrayList<ArrayList<String>>();
-
-		while (entries.hasNext()) {
-			Map.Entry<Integer, Person> entry = entries.next();
-			personsToString.add(entry.getValue().toString());
-		}
-
-		return personsToString;
+	public List<Person> getAllPersons() {
+		return new ArrayList<>(_school.getAllUsers().values());
 	}
 
-	public List<List<String>> searchPerson(String name) { // Sorted by name
+	public List<String> searchPerson(String name) { // Sorted by name
 		Iterator<Map.Entry<Integer, Person>> entries = _school.getAllUsers().entrySet().iterator();
 		List<Person> persons = new ArrayList<Person>();
-		List<List<String>> personsToString = new ArrayList<ArrayList<String>>();
-		Iterator<Person> iterator = new persons.iterator();
+		List<String> personsToString = new ArrayList<>();
+		Iterator<Person> iterator = persons.iterator();
 
 		while (entries.hasNext()) {
 			Map.Entry<Integer, Person> entry = entries.next();
@@ -132,7 +112,7 @@ public class SchoolManager {
 				persons.add(entry.getValue());
 			}
 		}
-		Collections.sort(Persons, new Comparator<Person>() {
+		Collections.sort(persons, new Comparator<Person>() {
 		@Override
 			public int compare(Person p1, Person p2) {
         		return p1.getName().compareTo(p2.getName());
@@ -141,7 +121,7 @@ public class SchoolManager {
 
 		while (iterator.hasNext()) {
 			Person p = iterator.next();
-			personsToString.add(p.toString);
+			personsToString.add(p.toString());
 		}
 
 		return personsToString;
@@ -158,7 +138,7 @@ public class SchoolManager {
 		}
 	}
 
-	public void closeProject(String discipline, String pName) throws NoSuchProjectIdException, 
+	public void closeProject(String discipline, String pName) throws NoSuchProjectIdException,
 							NoSuchDisciplineIdException {
 		if(isLoggedUserProfessor()) {
 			Discipline d = ((Teacher)_loggedUser).getDiscipline(discipline);
@@ -171,7 +151,7 @@ public class SchoolManager {
 		return null; // TODO
 	}
 
-	public List<List<String>> getDisciplineStudents(String name) throws NoSuchDisciplineIdException {
+	public List<String> getDisciplineStudents(String name) throws NoSuchDisciplineIdException {
 		if(isLoggedUserProfessor()) {
 			ArrayList<String> _students = new ArrayList<String>();
 			return _students; // TODO get all disciplines
@@ -194,7 +174,15 @@ public class SchoolManager {
 		
 	}
 
-	 
+	public void DoCreateProject(String dName, String pName) throws NoSuchDisciplineIdException {
+		((Teacher)_loggedUser).getDiscipline(dName).createProject(pName);
+	}
+
+	public List<Person> DoShowDisciplineStudents(String value) {
+		return new ArrayList<>();
+	}
+
+
 	/**
 	 * === Representative's portal ===
 	 */

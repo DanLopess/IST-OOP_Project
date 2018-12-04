@@ -1,16 +1,9 @@
 package sth.core;
 
-import sth.core.Course;
-import sth.core.Teacher;
-import sth.core.Project;
-import sth.core.Student;
-import sth.core.exception.NoSuchProjectIdException;
 import sth.core.exception.NoSuchPersonIdException;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Iterator;
+import sth.core.exception.NoSuchProjectIdException;
+
+import java.util.*;
 
 public class Discipline {
 	private String _name;
@@ -24,9 +17,9 @@ public class Discipline {
 		_name = name;
 		_capacity = capacity;
 		_course = c;
-		_teachers = new HashMap<Integer, Teacher>();
-		_students = new HashMap<Integer, Student>();
-		_projects = new ArrayList<Project>();
+		_teachers = new HashMap<>();
+		_students = new HashMap<>();
+		_projects = new ArrayList<>();
 	}
 
 	public String getName () {
@@ -63,7 +56,7 @@ public class Discipline {
 				return entry.getValue();
 			}
 		}
-		throw new NoSuchPersonIdException(name);
+		throw new NoSuchPersonIdException(0);
 	}
 
 	Student getStudent(String name) {

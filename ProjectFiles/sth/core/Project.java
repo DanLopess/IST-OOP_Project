@@ -1,8 +1,8 @@
 package sth.core;
 
-import sth.core.Survey;
+import sth.core.survey.Survey;
+
 import java.util.List;
-import java.util.ArrayList;
 
 public class Project {
 	private String _name;

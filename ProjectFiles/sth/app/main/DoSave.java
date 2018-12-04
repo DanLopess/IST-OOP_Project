@@ -21,6 +21,10 @@ public class DoSave extends Command<SchoolManager> {
   /** @see pt.tecnico.po.ui.Command#execute() */
   @Override
   public final void execute() {
+
+    // 1) Usar o parser
+    // 2) se o utilizador tiver nos dados lidos pelo parser
+    // 3) faz replace da school
 		/*
 		public void saveObject(String outputFilename, Object anObject) throws IOException {
 			ObjectOutputStream obOut = null;

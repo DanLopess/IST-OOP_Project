@@ -30,15 +30,14 @@ public class DoShowDisciplineStudents extends Command<SchoolManager> {
   public final void execute() throws DialogException {
 		_form.parse();
 
-		List<String> _persons;
+		List<Person> _persons;
 		_persons = _receiver.DoShowDisciplineStudents(_disciplineName.value());
-		Collections.sort(_persons);
-		Iterator<String> iterator = _persons.iterator();
 
-		while (iterator.hasNext()) {
-			_display.addLine(iterator.next());
+		for (Person p : _persons ){
+			_display.addLine(p.toString());
+
 		}
-		_display.display();
+	  _display.display();
 
 	}
 

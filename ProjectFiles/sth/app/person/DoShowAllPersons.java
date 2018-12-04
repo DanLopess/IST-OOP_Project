@@ -2,6 +2,7 @@ package sth.app.person;
 
 import pt.tecnico.po.ui.Command;
 import pt.tecnico.po.ui.Display;
+import sth.core.Person;
 import sth.core.SchoolManager;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,9 +26,8 @@ public class DoShowAllPersons extends Command<SchoolManager> {
   public final void execute() {
 		super._form.parse();
 
-		List<List<String>> _persons;
-		_persons = _receiver.getAllPersons();
-		Iterator<List<String>> iterator = _persons.iterator();
+		List<Person> _people = _receiver.getAllPersons();
+
 
 		while (iterator.hasNext()) {
 			List<String> next = iterator.next();

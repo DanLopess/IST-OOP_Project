@@ -1,3 +1,6 @@
+
+package sth.core.survey;
+
 abstract class SurveyState {
     protected Survey _survey;
 
