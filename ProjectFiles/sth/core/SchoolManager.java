@@ -30,6 +30,22 @@ public class SchoolManager {
 		}
 	}
 
+    public void doOpen(String datafile) throws ImportFileException, NoSuchPersonIdException {
+        try {
+            Person newLoggin ;
+            // Carrega a informacao da nova escola
+            School newSchool = new School();
+            newSchool.importFile(datafile);
+            // tenta fazer o login na nova escola
+            newLoggin = newSchool.parsePersonById(_loggedUser.getId());
+            // se for bem sucedido, entao troca os dados pela nova escola.
+            _school = newSchool;
+            _loggedUser = newLoggin;
+        } catch (IOException | BadEntryException e) {
+            throw new ImportFileException(e);
+        }
+    }
+
 	/**
 	 * Do the login of the user with the given identifier.
 	 * @param id identifier of the user to login
@@ -183,7 +199,8 @@ public class SchoolManager {
 	}
 
 
-	/**
+
+    /**
 	 * === Representative's portal ===
 	 */
 }
