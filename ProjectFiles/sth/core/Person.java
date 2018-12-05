@@ -1,6 +1,8 @@
 package sth.core;
 
 import sth.core.exception.BadEntryException;
+import java.util.List;
+import java.util.ArrayList;
 
 public abstract class Person {
 	private int _id;

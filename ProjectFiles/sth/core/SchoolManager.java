@@ -3,16 +3,13 @@ package sth.core;
 import sth.core.exception.BadEntryException;
 import sth.core.exception.ImportFileException;
 import sth.core.exception.NoSuchPersonIdException;
+import sth.core.exception.NoSuchProjectIdException;
+import sth.core.exception.NoSuchDisciplineIdException;
 import java.io.IOException;
 import java.io.FileNotFoundException;
 import sth.core.School;
 import sth.core.Person;
-import java.util.Map;
-import java.util.HashMap;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Iterator;
-
+import java.util.*;
 
 /**
  * The façade class.
@@ -20,6 +17,7 @@ import java.util.Iterator;
 public class SchoolManager {
 	private School _school;
 	private Person _loggedUser;
+	private String _fileName;
 
 	public SchoolManager() {
 		_school = new School();
@@ -33,9 +31,17 @@ public class SchoolManager {
 	public void importFile(String datafile) throws ImportFileException {
 		try {
 			_school.importFile(datafile);
+			_fileName = datafile;
 		} catch (IOException | BadEntryException e) {
 			throw new ImportFileException(e);
 		}
+	}
+
+	public boolean hasFileName() {
+		if (_fileName != null) 
+			return true;
+		else
+			return false;
 	}
 
 	/**
@@ -45,6 +51,31 @@ public class SchoolManager {
 	 */
 	public void login(int id) throws NoSuchPersonIdException {
 		_loggedUser = _school.parsePersonById(id);
+	}
+
+	public void doOpen(String datafile) throws ImportFileException, NoSuchPersonIdException {
+        try {
+            Person newLoggin ;
+            // Loads new school information
+            School newSchool = new School();
+            newSchool.importFile(datafile);
+            // Tries to login the new user 
+            newLoggin = newSchool.parsePersonById(_loggedUser.getId());
+            // if successful, overrides school data.
+            _school = newSchool;
+            _loggedUser = newLoggin;
+        } catch (IOException | BadEntryException e) {
+            throw new ImportFileException(e);
+        }
+	}
+	
+	public void doSave(String fileName) throws NoSuchPersonIdException {
+		if(fileName == null) {
+			
+		} else {
+			_fileName = fileName;
+			
+		}
 	}
 
 	/**
@@ -92,39 +123,47 @@ public class SchoolManager {
 	}
 
 	/**
+	 * auxiliary method that receives a map of users
+	 * and using each user individual toString
+	 * returns all those users' toString
+	 */
+	public List<String> printUsers(Map<Integer,Person> users) {
+		//Convert HashMap to TreeMap.It will be sorted in natural order. (by id)
+		Map<Integer,Person> usersTree = new TreeMap<Integer,Person>(users); 
+		List<String> toStringLines = new ArrayList<String>();
+		
+		Iterator<Map.Entry<Integer, Person>> entries = usersTree.entrySet().iterator();
+
+		while (entries.hasNext()) {
+			Map.Entry<Integer, Person> entry = entries.next();
+			toStringLines.add(entry.getValue().toString());
+		}
+
+		return toStringLines;
+	}
+
+	/**
 	 * === Person's Portal ===
 	 */
 	
-	public List<String> showPerson() {
+	public String showPerson() {
 		return _loggedUser.toString();
 	}
 	
-	public List<String> changePhoneNumber(int phoneNumber) {
+	public String changePhoneNumber(int phoneNumber) {
 		_loggedUser.setPhoneNumber(phoneNumber);
 		return this.showPerson();
 	}
 
-	public List<List<String>> getAllPersons() {  
-		Map<Integer,Person> users = _school.getAllUsers();
-		//Convert HashMap to TreeMap.It will be sorted in natural order. (by id)
-		Map<Integer,Person> usersTree = new TreeMap<Integer,String>(users); 
-
-		Iterator<Map.Entry<Integer, Person>> entries = usersTree.entrySet().iterator();
-		List<List<String>> personsToString = new ArrayList<ArrayList<String>>();
-
-		while (entries.hasNext()) {
-			Map.Entry<Integer, Person> entry = entries.next();
-			personsToString.add(entry.getValue().toString());
-		}
-
-		return personsToString;
+	public List<String> getAllPersons() {  
+		return printUsers(_school.getAllUsers());
 	}
 
-	public List<List<String>> searchPerson(String name) { // Sorted by name
+	public List<String> searchPerson(String name) { // Sorted by name
 		Iterator<Map.Entry<Integer, Person>> entries = _school.getAllUsers().entrySet().iterator();
 		List<Person> persons = new ArrayList<Person>();
-		List<List<String>> personsToString = new ArrayList<ArrayList<String>>();
-		Iterator<Person> iterator = new persons.iterator();
+		List<String> personsToString = new ArrayList<String>();
+		Iterator<Person> iterator = persons.iterator();
 
 		while (entries.hasNext()) {
 			Map.Entry<Integer, Person> entry = entries.next();
@@ -132,7 +171,7 @@ public class SchoolManager {
 				persons.add(entry.getValue());
 			}
 		}
-		Collections.sort(Persons, new Comparator<Person>() {
+		Collections.sort(persons, new Comparator<Person>() {
 		@Override
 			public int compare(Person p1, Person p2) {
         		return p1.getName().compareTo(p2.getName());
@@ -141,7 +180,7 @@ public class SchoolManager {
 
 		while (iterator.hasNext()) {
 			Person p = iterator.next();
-			personsToString.add(p.toString);
+			personsToString.add(p.toString());
 		}
 
 		return personsToString;
@@ -152,50 +191,122 @@ public class SchoolManager {
 	 */
 
 	public void createProject(String discipline, String pName) throws NoSuchDisciplineIdException {
-		if(isLoggedUserProfessor()) {
+		if(this.isLoggedUserProfessor()) {
 			Discipline d = ((Teacher)_loggedUser).getDiscipline(discipline);
 			d.createProject(pName);
 		}
 	}
 
 	public void closeProject(String discipline, String pName) throws NoSuchProjectIdException, 
-							NoSuchDisciplineIdException {
-		if(isLoggedUserProfessor()) {
+	NoSuchDisciplineIdException 
+	{
+		if(this.isLoggedUserProfessor()) {
 			Discipline d = ((Teacher)_loggedUser).getDiscipline(discipline);
 			d.closeProject(pName);
 		}
 
 	}
 
-	public String getProjectSubmissions()  {
-		return null; // TODO
-	}
-
-	public List<List<String>> getDisciplineStudents(String name) throws NoSuchDisciplineIdException {
-		if(isLoggedUserProfessor()) {
-			ArrayList<String> _students = new ArrayList<String>();
-			return _students; // TODO get all disciplines
+	public List<String> getProjectSubmissions(String discipline, String pName)  throws NoSuchProjectIdException, 
+	NoSuchDisciplineIdException 
+	{	
+		if(this.isLoggedUserProfessor()) {
+			Discipline d = ((Teacher)_loggedUser).getDiscipline(discipline);
+			return(d.getProjectSubmissions(pName));
 		}
 		return null;
 	}
 
-	public String getSurveyResults() {
-		return null; // TODO
+	public List<String> getDisciplineStudents(String discipline) throws NoSuchDisciplineIdException {
+		if(this.isLoggedUserProfessor()) {
+			Discipline d = ((Teacher)_loggedUser).getDiscipline(discipline);
+			//Convert HashMap to TreeMap.It will be sorted in natural order. (by id)
+			Map<Integer,Student> usersTree = new TreeMap<Integer,Student>(d.getAllStudents()); 
+			List<String> toStringLines = new ArrayList<String>();
+			
+			Iterator<Map.Entry<Integer, Student>> entries = usersTree.entrySet().iterator();
+
+			while (entries.hasNext()) {
+				Map.Entry<Integer, Student> entry = entries.next();
+				toStringLines.add(entry.getValue().toString());
+			}
+
+			return toStringLines;
+		}
+		return null;
 	}
 
+	public String getSurveyResults(String discipline, String pName) throws NoSuchDisciplineIdException , 
+	NoSuchProjectIdException 
+	{
+		if(this.isLoggedUserProfessor()) {
+			Project p = (((Teacher)_loggedUser).getDiscipline(discipline)).getProject(pName);
+			Survey s = p.getSurvey();
+			return s.toString();
+		}
+		return null;
+	}
 
 	
 	/**
 	 * === Student's portal ===
 	 */
 	public void deliverProject(String discipline, String pName, String text)  throws NoSuchDisciplineIdException,
-							NoSuchProjectIdException {
-		Discipline d =((Student)_loggedUser).getDiscipline(discipline);
-		
+	NoSuchProjectIdException 
+	{
+		if (this.isLoggedUserStudent())
+			((Student)_loggedUser).submitProject(discipline, pName, text);
 	}
 
+	public void fillSurvey (String discipline, String pName, String answer) throws NoSuchDisciplineIdException, 
+	NoSuchProjectIdException 
+	{
+		if (this.isLoggedUserStudent())
+			((Student)_loggedUser).submitAnswerToSurvey(discipline, pName, answer);
+	}
 	 
 	/**
 	 * === Representative's portal ===
 	 */
+
+	public void createSurvey(String discipline, String pName) throws NoSuchDisciplineIdException, 
+	NoSuchProjectIdException 
+	{
+		if (this.isLoggedUserRepresentative())	{
+			Project p = (((Student)_loggedUser).getDiscipline(discipline)).getProject(pName);
+			if (p.getSurvey() == null) {
+				
+			}
+		}
+		//if... representative, call student function: createSurvey
+	}
+
+	public void cancelSurvey(String discipline, String pName) throws NoSuchDisciplineIdException, 
+	NoSuchProjectIdException 
+	{
+		//if... representative, call student function: cancelSurvey...
+	}
+
+	public void openSurvey(String discipline, String pName) throws NoSuchDisciplineIdException, 
+	NoSuchProjectIdException 
+	{
+		
+	}
+
+	public void closeSurvey(String discipline, String pName) throws NoSuchDisciplineIdException, 
+	NoSuchProjectIdException 
+	{
+		
+	}
+
+	public void finishSurvey(String discipline, String pName) throws NoSuchDisciplineIdException, 
+	NoSuchProjectIdException 
+	{
+		
+	}
+
+	public void showSurveys(String discipline) throws NoSuchDisciplineIdException	{
+		
+	}
+
 }

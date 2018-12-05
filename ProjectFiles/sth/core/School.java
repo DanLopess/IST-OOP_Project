@@ -5,10 +5,7 @@ import sth.core.exception.BadEntryException;
 import sth.core.exception.NoSuchPersonIdException;
 import sth.core.Person;
 import java.io.IOException;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * School implementation.

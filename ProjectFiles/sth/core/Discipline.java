@@ -1,16 +1,14 @@
 package sth.core;
 
+import sth.core.Survey;
+import sth.core.Survey;
 import sth.core.Course;
 import sth.core.Teacher;
 import sth.core.Project;
 import sth.core.Student;
 import sth.core.exception.NoSuchProjectIdException;
 import sth.core.exception.NoSuchPersonIdException;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.*;
 
 public class Discipline {
 	private String _name;
@@ -54,7 +52,7 @@ public class Discipline {
 		throw new NoSuchProjectIdException(name);
 	}
 
-	Teacher getTeacher(String name)  throws NoSuchPersonIdException{
+	Teacher getTeacher(String name) {
 		Iterator<Map.Entry<Integer, Teacher>> entries = _teachers.entrySet().iterator();
 
 		while (entries.hasNext()) {
@@ -63,7 +61,7 @@ public class Discipline {
 				return entry.getValue();
 			}
 		}
-		throw new NoSuchPersonIdException(name);
+		return null;
 	}
 
 	Student getStudent(String name) {
@@ -76,7 +74,6 @@ public class Discipline {
 			}
 		}
 		return null;
-
 	}
 
 	Map<Integer, Student> getAllStudents() {
@@ -101,6 +98,33 @@ public class Discipline {
 	void closeProject(String name) throws NoSuchProjectIdException {
 		Project p = this.getProject(name);
 		p.close();
+	}
+
+	List<String> getProjectSubmissions(String pName) throws NoSuchProjectIdException {
+		Project p = this.getProject(pName);
+		List<String> submissionsToString = new ArrayList<String>();
+
+		submissionsToString.add(_name + " - " + pName);
+		//Convert HashMap(from projectSubmissions) to TreeMap.It will be sorted in natural order. (by id)
+		Map<Integer,Submission> usersTree = new TreeMap<Integer,Submission>(p.getSubmissions()); 
+
+		Iterator<Map.Entry<Integer, Submission>> entries = usersTree.entrySet().iterator();
+
+		while (entries.hasNext()) {
+			Map.Entry<Integer, Submission> entry = entries.next();
+			submissionsToString.add(entry.getValue().toString());
+		}
+
+		return submissionsToString;
+	}
+
+	List<String> surveyToString(String pName) throws NoSuchProjectIdException {
+		Project p = this.getProject(pName);
+		Survey s = p.getSurvey();
+		List<String> results = new ArrayList<String>();
+		results.add(_name + " - " + p.getName());
+		// TODO show different survey info for diff states
+		return results;
 	}
 
 	public String toString() {

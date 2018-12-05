@@ -9,6 +9,7 @@ import sth.core.School;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Iterator;
+import java.util.Collections;
 
 /**
  * The Teacher Class
@@ -71,19 +72,26 @@ public class Teacher extends Person {
 
 
 @Override
-	public List<String> toString () {
-		List<String> string = new ArrayList<String>();
+	public String toString () {
+		List<String> toString = new ArrayList<String>();
 		
 		toString.add("DOCENTE|"+ super.getId() + "|" + super.getName());
 
-		Iterator<Discipline> iterator = new _disciplines.iterator();
+		Iterator<Discipline> iterator = _disciplines.iterator();
 		Discipline d;
 		while(iterator.hasNext()) {
 			d = iterator.next();
-			string.add(d.toString());
+			toString.add(d.toString());
 		}
-		Collections.sort(string);
-		return string;
+
+		Collections.sort(toString);
+		Iterator<String> iterator2 = toString.iterator();
+		String s = new String();
+		while(iterator.hasNext()) {
+			iterator.next();
+			s = s + iterator.next() + "\n";
+		}
+		return s;
 	}
 
 	void parseContext(String lineContext, School school) throws BadEntryException {

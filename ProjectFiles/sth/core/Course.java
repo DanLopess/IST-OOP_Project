@@ -48,10 +48,10 @@ public class Course {
 	}
 
 	void removeRepresentative (Student st) {
-		Iterator<Object> iterator  = _representatives.iterator();
+		Iterator<Student> iterator  = _representatives.iterator();
 		
 		while (iterator.hasNext()) {
-			Student s = i.next();
+			Student s = iterator.next();
 			if(s.getId() == st.getId())
 				iterator.remove();
 		}

@@ -18,20 +18,17 @@ public class DoOpen extends Command<SchoolManager> {
    */
   public DoOpen(SchoolManager receiver) {
     super(Label.OPEN, receiver);
-		_inputFilename = _form.addStringInput(Message.openFile());
+    _inputFilename = _form.addStringInput(Message.openFile());
   }
 
   /** @see pt.tecnico.po.ui.Command#execute() */
   @Override
-  public final void execute() throws DialogException {
-		/*_form.parse();
-		try {
-			_receiver.importFile(_inputFilename.value());
-    } catch (FileNotFoundException fnfe) {
-      _display.popup(Message.fileNotFound());
-    } catch (ClassNotFoundException | IOException e) {
-      e.printStackTrace();
-    }*/
+	public final void execute() throws DialogException, NoSuchPersonIdException {
+    _form.parse();
+    try {
+        _receiver.doOpen(_inputFilename.value());
+    } catch (ImportFileException e) {
+        e.printStackTrace();
+    }
   }
-
 }

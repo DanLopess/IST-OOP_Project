@@ -1,14 +1,17 @@
 package sth.core;
 
 import sth.core.exception.BadEntryException;
+import sth.core.exception.NoSuchDisciplineIdException;
+import sth.core.exception.NoSuchProjectIdException;
 import sth.core.Course;
 import sth.core.Discipline;
 import sth.core.School;
-import sth.core.survey.Survey;
-import sth.core.survey.SurveyState;
+import sth.core.Survey;
+import sth.core.SurveyState;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Iterator;
+import java.util.Collections;
 
 
 /**
@@ -73,6 +76,23 @@ public class Student extends Person {
 		}
 	}
 
+	void submitProject (String discipline, String pName, String message) throws NoSuchDisciplineIdException,
+	NoSuchProjectIdException
+	{
+		Discipline dis = this.getDiscipline(discipline);
+		Project prjct = dis.getProject(pName);
+		Submission s = new Submission(message, this.getId());
+		prjct.addSubmission(this.getId(), s);
+	}
+
+	void submitAnswerToSurvey (String discipline, String pName, String comment) throws NoSuchDisciplineIdException,
+	NoSuchProjectIdException 
+	{
+		// TODO
+	}
+
+
+
 	/**
 	 * === Representative related methods ===
 	 */
@@ -84,16 +104,46 @@ public class Student extends Person {
 		return _isRepresentative;
 	}
 
-	void submitAnswerToSurvey () {
-		// TODO in final version
+	public void createSurvey(String discipline, String pName) throws NoSuchDisciplineIdException, 
+	NoSuchProjectIdException 
+	{
+		//if... representative, call student function: createSurvey
 	}
 
-	void submitProject () {
-		// TODO in final version
+	public void cancelSurvey(String discipline, String pName) throws NoSuchDisciplineIdException, 
+	NoSuchProjectIdException 
+	{
+		//if... representative, call student function: cancelSurvey...
 	}
+
+	public void openSurvey(String discipline, String pName) throws NoSuchDisciplineIdException, 
+	NoSuchProjectIdException 
+	{
+		
+	}
+
+	public void closeSurvey(String discipline, String pName) throws NoSuchDisciplineIdException, 
+	NoSuchProjectIdException 
+	{
+		
+	}
+
+	public void finishSurvey(String discipline, String pName) throws NoSuchDisciplineIdException, 
+	NoSuchProjectIdException 
+	{
+		
+	}
+
+	public void showSurveys(String discipline) throws NoSuchDisciplineIdException	{
+		
+	}
+
+
+
+
 
 @Override
-	public List<String> toString () {
+	public String toString () {
 		List<String> toString = new ArrayList<String>();
 		if (_isRepresentative){
 			toString.add("DELEGADO|"+ super.getId( )+ "|" + super.getName());
@@ -101,14 +151,21 @@ public class Student extends Person {
 			toString.add("ALUNO|"+ super.getId() + "|" + super.getName());
 		}
 
-		Iterator<Discipline> iterator = new _disciplines.iterator();
+		Iterator<Discipline> iterator = _disciplines.iterator();
 		Discipline d;
 		while(iterator.hasNext()) {
 			d = iterator.next();
 			toString.add("* " + _course.getName() + " - " + d.getName());
 		}
 		Collections.sort(toString);
-		return toString;
+
+		Iterator<String> iterator2 = toString.iterator();
+		String s = new String();
+		while(iterator.hasNext()) {
+			iterator.next();
+			s = s + iterator.next() + "\n";
+		}
+		return s;
 	}
 
 	void parseContext(String lineContext, School school) throws BadEntryException {
