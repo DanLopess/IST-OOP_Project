@@ -27,7 +27,7 @@ public class DoSave extends Command<SchoolManager> {
   public final void execute() {
 		_form.parse();
 		if (!_receiver.hasFileName()) {
-			_receiver.doSave(_inputFilename.value());
+			_receiver.doSave(_outputFileName.value());
 		} else {
 			_receiver.doSave(null);
 		}

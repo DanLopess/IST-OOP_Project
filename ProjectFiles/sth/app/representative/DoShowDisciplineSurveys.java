@@ -11,21 +11,23 @@ import sth.core.SchoolManager;
  * 4.6.6. Show discipline surveys.
  */
 public class DoShowDisciplineSurveys extends Command<SchoolManager> {
-
-  //FIXME add input fields if needed
+  private Input<String> _discipline;
 
   /**
    * @param receiver
    */
   public DoShowDisciplineSurveys(SchoolManager receiver) {
     super(Label.SHOW_DISCIPLINE_SURVEYS, receiver);
-    //FIXME initialize input fields if needed
+    _discipline = _form.addStringInput(Message.requestDisciplineName());
   }
 
   /** @see pt.tecnico.po.ui.Command#execute() */
   @Override
   public final void execute() throws DialogException {
-    //FIXME implement command
+    _form.parse();
+    _display.clear();
+    String  s = _receiver.getDisciplineSurveys(_discipline.value());
+    _display.add(s);
+    _display.display();
   }
-
 }

@@ -85,7 +85,7 @@ public class Student extends Person {
 		prjct.addSubmission(this.getId(), s);
 	}
 
-	void submitAnswerToSurvey (String discipline, String pName, String comment) throws NoSuchDisciplineIdException,
+	void submitAnswerToSurvey (String discipline, String pName, int hours) throws NoSuchDisciplineIdException,
 	NoSuchProjectIdException 
 	{
 		// TODO

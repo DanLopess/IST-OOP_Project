@@ -1,5 +1,6 @@
 package sth.core;
 
+import pt.tecnico.po.ui.DialogException;
 import sth.core.exception.BadEntryException;
 import sth.core.exception.ImportFileException;
 import sth.core.exception.NoSuchPersonIdException;
@@ -57,7 +58,7 @@ public class SchoolManager {
 		_loggedUser = _school.parsePersonById(id);
 	}
 
-	public void doOpen(String datafile) throws ImportFileException, NoSuchPersonIdException {
+	public void doOpen(String datafile) throws ImportFileException, NoSuchPersonIdException, DialogException {
         try {
             Person newLoggin ;
             // Loads new school information
@@ -262,11 +263,11 @@ public class SchoolManager {
 			((Student)_loggedUser).submitProject(discipline, pName, text);
 	}
 
-	public void fillSurvey (String discipline, String pName, String answer) throws NoSuchDisciplineIdException, 
+	public void fillSurvey (String discipline, String pName, int hours) throws NoSuchDisciplineIdException, 
 	NoSuchProjectIdException 
 	{
 		if (this.isLoggedUserStudent())
-			((Student)_loggedUser).submitAnswerToSurvey(discipline, pName, answer);
+			((Student)_loggedUser).submitAnswerToSurvey(discipline, pName, hours);
 	}
 	 
 	/**
@@ -309,7 +310,7 @@ public class SchoolManager {
 		
 	}
 
-	public void showSurveys(String discipline) throws NoSuchDisciplineIdException	{
+	public void getDisciplineSurveys(String discipline) throws NoSuchDisciplineIdException	{
 		
 	}
 

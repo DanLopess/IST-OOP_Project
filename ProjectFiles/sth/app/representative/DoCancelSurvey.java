@@ -2,7 +2,6 @@ package sth.app.representative;
 
 import pt.tecnico.po.ui.DialogException;
 import pt.tecnico.po.ui.Input;
-import java.io.DialogException;
 import sth.core.SchoolManager;
 import sth.app.exception.NonEmptySurveyException;
 import sth.app.exception.NoSurveyException;

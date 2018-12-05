@@ -9,11 +9,11 @@ public class Answer {
 		_hours = hours;
 	}
 
-	public String getMessage() {
+	String getMessage() {
 		return _message;
 	}
 
-	public int getHours() {
+	int getHours() {
 		return _hours;
 	}
 

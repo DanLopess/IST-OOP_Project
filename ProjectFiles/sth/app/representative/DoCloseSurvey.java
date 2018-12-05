@@ -3,9 +3,12 @@ package sth.app.representative;
 import pt.tecnico.po.ui.DialogException;
 import pt.tecnico.po.ui.Input;
 import sth.core.SchoolManager;
-
 import sth.core.exception.NoSuchProjectIdException;
 import sth.core.exception.NoSuchDisciplineIdException;
+import sth.app.exception.NoSurveyException;
+import sth.app.exception.ClosingSurveyException;
+import sth.core.exception.NoSurveyIdException;
+import sth.core.exception.ClosingSurveyIdException;
 
 /**
  * 4.5.4. Close survey.
