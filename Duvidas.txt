@@ -17,5 +17,7 @@ TODO:
 - implementar padroes de desenho
 - Notificacoes
 - Survey
+OLA SOU LINDA
+
 
 
