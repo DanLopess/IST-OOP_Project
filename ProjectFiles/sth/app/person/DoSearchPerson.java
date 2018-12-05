@@ -25,14 +25,10 @@ public class DoSearchPerson extends Command<SchoolManager> {
 		_form.parse();
 		_display.clear();
 		
-		List<String> _persons;
-		_persons = _receiver.searchPerson(_string.value());
-		Iterator<String> iterator = _persons.iterator();
-
-		while (iterator.hasNext()) {
-			String next = iterator.next();
-			_display.addLine(next);
-		}
+		String persons;
+		persons = _receiver.searchPerson(_string.value());
+		
+		_display.add(persons);
 		_display.display();
 	}
 }

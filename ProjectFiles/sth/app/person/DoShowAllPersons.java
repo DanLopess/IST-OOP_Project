@@ -26,14 +26,9 @@ public class DoShowAllPersons extends Command<SchoolManager> {
 		_form.parse();
 		_display.clear();
 		
-		List<String> _persons;
-		_persons = _receiver.getAllPersons();
-		Iterator<String> iterator = _persons.iterator();
-
-		while (iterator.hasNext()) {
-			String next = iterator.next();
-			_display.addLine(next);
-		}
+		String persons;
+		persons = _receiver.getAllPersons();
+		_display.add(persons);
 		_display.display();
 	}
 }

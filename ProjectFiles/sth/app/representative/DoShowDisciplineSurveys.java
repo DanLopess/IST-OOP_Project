@@ -4,6 +4,7 @@ import pt.tecnico.po.ui.Command;
 import pt.tecnico.po.ui.DialogException;
 import pt.tecnico.po.ui.Input;
 import sth.core.SchoolManager;
+import sth.core.exception.NoSuchDisciplineIdException;
 
 //FIXME import other classes if needed
 
@@ -26,7 +27,12 @@ public class DoShowDisciplineSurveys extends Command<SchoolManager> {
   public final void execute() throws DialogException {
     _form.parse();
     _display.clear();
-    String  s = _receiver.getDisciplineSurveys(_discipline.value());
+    String s = new String();
+    try {
+      s = _receiver.getDisciplineSurveys(_discipline.value());
+    } catch (NoSuchDisciplineIdException e) {
+      e.getStackTrace();
+    }
     _display.add(s);
     _display.display();
   }

@@ -9,6 +9,10 @@ import sth.core.exception.DuplicateSurveyIdException;
 import sth.core.exception.NonEmptySurveyIdException;
 import sth.core.exception.NoSurveyIdException;
 import sth.core.exception.SurveyIdFinishedException;
+import sth.core.exception.NoSurveyIdException;
+import sth.core.exception.ClosingSurveyIdException;
+import sth.core.exception.FinishingSurveyIdException;
+import sth.core.exception.OpeningSurveyIdException;
 import java.io.IOException;
 import java.io.FileNotFoundException;
 import sth.core.School;
@@ -279,7 +283,7 @@ public class SchoolManager {
 	 */
 
 	public void createSurvey(String discipline, String pName) throws NoSuchDisciplineIdException, 
-	NoSuchProjectIdException 
+	NoSuchProjectIdException, DuplicateSurveyIdException
 	{
 		if (this.isLoggedUserRepresentative())	{
 			Project p = (((Student)_loggedUser).getDiscipline(discipline)).getProject(pName);
@@ -297,25 +301,25 @@ public class SchoolManager {
 	}
 
 	public void openSurvey(String discipline, String pName) throws NoSuchDisciplineIdException, 
-	NoSuchProjectIdException, NonEmptySurveyIdException, NoSurveyIdException, SurveyIdFinishedException  
+	NoSuchProjectIdException, NoSurveyIdException, OpeningSurveyIdException  
 	{
 		
 	}
 
 	public void closeSurvey(String discipline, String pName) throws NoSuchDisciplineIdException, 
-	NoSuchProjectIdException 
+	NoSuchProjectIdException, NoSurveyIdException, ClosingSurveyIdException
 	{
 		
 	}
 
 	public void finishSurvey(String discipline, String pName) throws NoSuchDisciplineIdException, 
-	NoSuchProjectIdException 
+	NoSuchProjectIdException, FinishingSurveyIdException, NoSurveyIdException
 	{
 		
 	}
 
-	public void getDisciplineSurveys(String discipline) throws NoSuchDisciplineIdException	{
-		
+	public String getDisciplineSurveys(String discipline) throws NoSuchDisciplineIdException	{
+		return "";
 	}
 
 }
