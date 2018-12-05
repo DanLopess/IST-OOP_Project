@@ -22,13 +22,10 @@ public class DoChangePhoneNumber extends Command<SchoolManager> {
   /** @see pt.tecnico.po.ui.Command#execute() */
   @Override
   public final void execute() {
-		_form.parse();
-    List<String> string = _receiver.changePhoneNumber(_phone.value());
-    Iterator<String> iterator = _persons.iterator();
-    
-    while (iterator.hasNext()) {
-      _display.addLine(iterator.next());
-    }
+    _form.parse();
+    _display.clear();
+    String st = _receiver.changePhoneNumber(_phone.value());
+    _display.addLine(st);
 		_display.display();
   }
 
