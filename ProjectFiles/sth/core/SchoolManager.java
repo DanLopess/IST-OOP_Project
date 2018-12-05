@@ -1,6 +1,5 @@
 package sth.core;
 
-import pt.tecnico.po.ui.DialogException;
 import sth.core.exception.BadEntryException;
 import sth.core.exception.ImportFileException;
 import sth.core.exception.NoSuchPersonIdException;
@@ -58,7 +57,7 @@ public class SchoolManager {
 		_loggedUser = _school.parsePersonById(id);
 	}
 
-	public void doOpen(String datafile) throws ImportFileException, NoSuchPersonIdException, DialogException {
+	public void doOpen(String datafile) throws ImportFileException, NoSuchPersonIdException {
         try {
             Person newLoggin ;
             // Loads new school information
@@ -75,11 +74,16 @@ public class SchoolManager {
 	}
 	
 	public void doSave(String fileName) throws NoSuchPersonIdException {
-		if(fileName == null) {
-			
+
+		if (_school.parsePersonById(_loggedUser.getId()) != null){
+			if(fileName == null) {
+				
+			} else {
+				_fileName = fileName;
+				
+			}
 		} else {
-			_fileName = fileName;
-			
+			throw new NoSuchPersonIdException(_loggedUser.getId());
 		}
 	}
 
@@ -132,16 +136,16 @@ public class SchoolManager {
 	 * and using each user individual toString
 	 * returns all those users' toString
 	 */
-	public List<String> printUsers(Map<Integer,Person> users) {
+	public String printUsers(Map<Integer,Person> users) {
 		//Convert HashMap to TreeMap.It will be sorted in natural order. (by id)
 		Map<Integer,Person> usersTree = new TreeMap<Integer,Person>(users); 
-		List<String> toStringLines = new ArrayList<String>();
+		String toStringLines = new String();
 		
 		Iterator<Map.Entry<Integer, Person>> entries = usersTree.entrySet().iterator();
 
 		while (entries.hasNext()) {
 			Map.Entry<Integer, Person> entry = entries.next();
-			toStringLines.add(entry.getValue().toString());
+			toStringLines = toStringLines + entry.getValue().toString() + "\n";
 		}
 
 		return toStringLines;
@@ -160,14 +164,14 @@ public class SchoolManager {
 		return this.showPerson();
 	}
 
-	public List<String> getAllPersons() {  
+	public String getAllPersons() {  
 		return printUsers(_school.getAllUsers());
 	}
 
-	public List<String> searchPerson(String name) { // Sorted by name
+	public String searchPerson(String name) { // Sorted by name
 		Iterator<Map.Entry<Integer, Person>> entries = _school.getAllUsers().entrySet().iterator();
 		List<Person> persons = new ArrayList<Person>();
-		List<String> personsToString = new ArrayList<String>();
+		String personsToString = new String();
 		Iterator<Person> iterator = persons.iterator();
 
 		while (entries.hasNext()) {
@@ -185,7 +189,7 @@ public class SchoolManager {
 
 		while (iterator.hasNext()) {
 			Person p = iterator.next();
-			personsToString.add(p.toString());
+			personsToString = personsToString + p.toString() + "\n";
 		}
 
 		return personsToString;
@@ -212,7 +216,7 @@ public class SchoolManager {
 
 	}
 
-	public List<String> getProjectSubmissions(String discipline, String pName)  throws NoSuchProjectIdException, 
+	public String getProjectSubmissions(String discipline, String pName)  throws NoSuchProjectIdException, 
 	NoSuchDisciplineIdException 
 	{	
 		if(this.isLoggedUserProfessor()) {
@@ -222,18 +226,18 @@ public class SchoolManager {
 		return null;
 	}
 
-	public List<String> getDisciplineStudents(String discipline) throws NoSuchDisciplineIdException {
+	public String getDisciplineStudents(String discipline) throws NoSuchDisciplineIdException {
 		if(this.isLoggedUserProfessor()) {
 			Discipline d = ((Teacher)_loggedUser).getDiscipline(discipline);
 			//Convert HashMap to TreeMap.It will be sorted in natural order. (by id)
 			Map<Integer,Student> usersTree = new TreeMap<Integer,Student>(d.getAllStudents()); 
-			List<String> toStringLines = new ArrayList<String>();
+			String toStringLines = new String();
 			
 			Iterator<Map.Entry<Integer, Student>> entries = usersTree.entrySet().iterator();
 
 			while (entries.hasNext()) {
 				Map.Entry<Integer, Student> entry = entries.next();
-				toStringLines.add(entry.getValue().toString());
+				toStringLines = toStringLines + entry.getValue().toString() + "\n";
 			}
 
 			return toStringLines;

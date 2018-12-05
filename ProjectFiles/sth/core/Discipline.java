@@ -100,11 +100,11 @@ public class Discipline {
 		p.close();
 	}
 
-	List<String> getProjectSubmissions(String pName) throws NoSuchProjectIdException {
+	String getProjectSubmissions(String pName) throws NoSuchProjectIdException {
 		Project p = this.getProject(pName);
-		List<String> submissionsToString = new ArrayList<String>();
+		String submissionsToString = new String();
 
-		submissionsToString.add(_name + " - " + pName);
+		submissionsToString = submissionsToString + _name + " - " + pName + "\n";
 		//Convert HashMap(from projectSubmissions) to TreeMap.It will be sorted in natural order. (by id)
 		Map<Integer,Submission> usersTree = new TreeMap<Integer,Submission>(p.getSubmissions()); 
 
@@ -112,7 +112,7 @@ public class Discipline {
 
 		while (entries.hasNext()) {
 			Map.Entry<Integer, Submission> entry = entries.next();
-			submissionsToString.add(entry.getValue().toString());
+			submissionsToString = submissionsToString + entry.getValue().toString() + "\n";
 		}
 
 		return submissionsToString;
