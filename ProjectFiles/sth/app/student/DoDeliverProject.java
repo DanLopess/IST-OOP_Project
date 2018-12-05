@@ -19,7 +19,7 @@ public class DoDeliverProject extends sth.app.common.ProjectCommand {
    */
   public DoDeliverProject(SchoolManager receiver) {
     super(Label.DELIVER_PROJECT, receiver);
-    _submission = _form.addIntegerInput(Message.requestDeliveryMessage());
+    _submission = _form.addStringInput(Message.requestDeliveryMessage());
 
   }
 
