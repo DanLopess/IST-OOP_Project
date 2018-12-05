@@ -32,10 +32,7 @@ public class DoShowAllPersons extends Command<SchoolManager> {
 
 		while (iterator.hasNext()) {
 			String next = iterator.next();
-			Iterator<String> iterator2 = _persons.iterator();
-			while (iterator2.hasNext()) {
-				_display.addLine(iterator2.next());
-			}
+			_display.addLine(next);
 		}
 		_display.display();
 	}

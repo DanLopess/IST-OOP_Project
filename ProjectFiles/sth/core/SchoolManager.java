@@ -5,6 +5,10 @@ import sth.core.exception.ImportFileException;
 import sth.core.exception.NoSuchPersonIdException;
 import sth.core.exception.NoSuchProjectIdException;
 import sth.core.exception.NoSuchDisciplineIdException;
+import sth.core.exception.DuplicateSurveyIdException;
+import sth.core.exception.NonEmptySurveyIdException;
+import sth.core.exception.NoSurveyIdException;
+import sth.core.exception.SurveyIdFinishedException;
 import java.io.IOException;
 import java.io.FileNotFoundException;
 import sth.core.School;
@@ -282,13 +286,13 @@ public class SchoolManager {
 	}
 
 	public void cancelSurvey(String discipline, String pName) throws NoSuchDisciplineIdException, 
-	NoSuchProjectIdException 
+	NoSuchProjectIdException, NonEmptySurveyIdException, NoSurveyIdException, SurveyIdFinishedException
 	{
 		//if... representative, call student function: cancelSurvey...
 	}
 
 	public void openSurvey(String discipline, String pName) throws NoSuchDisciplineIdException, 
-	NoSuchProjectIdException 
+	NoSuchProjectIdException, NonEmptySurveyIdException, NoSurveyIdException, SurveyIdFinishedException  
 	{
 		
 	}

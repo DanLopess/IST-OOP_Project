@@ -18,6 +18,8 @@ public class DoShowPerson extends Command<SchoolManager> {
 
   @Override
   public final void execute() {
+    _form.parse();
+    _display.clear();
 		_display.addLine(_receiver.showPerson());
 		_display.display();
   }

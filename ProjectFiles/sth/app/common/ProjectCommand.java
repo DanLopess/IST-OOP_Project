@@ -19,8 +19,6 @@ import sth.core.exception.NoSuchDisciplineIdException;
  * The subclasses of this class should implement their specific behavior in the method myExecute.
  */
 public abstract class ProjectCommand extends Command<SchoolManager> {
-
-  //FIXME add input fields if needed
   protected final Input<String> _discipline;
   protected final Input<String> _project;
 
