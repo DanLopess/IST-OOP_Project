@@ -22,13 +22,13 @@ public class DoSearchPerson extends Command<SchoolManager> {
 
   @Override
   public final void execute() throws NoSuchPersonException{
-		_form.parse();
-		_display.clear();
-		
-		String persons;
-		persons = _receiver.searchPerson(_string.value());
-		
-		_display.add(persons);
-		_display.display();
-	}
+	_form.parse();
+	_display.clear();
+
+	String persons;
+	persons = _receiver.searchPerson(_string.value());
+
+	_display.add(persons);
+	_display.display();
+  }
 }

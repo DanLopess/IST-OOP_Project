@@ -23,7 +23,7 @@ public class DoShowSurveyResults extends sth.app.common.ProjectCommand {
   /** @see sth.app.common.ProjectCommand#myExecute() */
   @Override
   public final void myExecute() throws DialogException, NoSuchDisciplineIdException, NoSuchProjectIdException {
-    //FIXME implement command
+    _receiver.getSurveyResults(_discipline.value(), _project.value());
   }
 
 }

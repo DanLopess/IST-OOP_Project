@@ -59,7 +59,7 @@ public class Student extends Person {
 			if (d.getName().equals(name))
 				return d;
 		}
-		throw new NoSuchDisciplineIdException("Discipline not found: " + name);
+		throw new NoSuchDisciplineIdException(name);
 	}
 
 	/**
@@ -85,6 +85,7 @@ public class Student extends Person {
 		prjct.addSubmission(this.getId(), s);
 	}
 
+<<<<<<< HEAD
 	void submitAnswerToSurvey (String discipline, String pName, int hours, String comment) throws NoSuchDisciplineIdException,
 	NoSuchProjectIdException 
 	{
@@ -93,6 +94,15 @@ public class Student extends Person {
 		d.submitAnswerToSurvey()
 		// TODO if student has submited... / if student has not answered to survey / send user id so can check if has submitted
 		// create answer type
+=======
+	void submitAnswerToSurvey (String dName, String pName, int hours, String comentario) throws NoSuchDisciplineIdException,
+	NoSuchProjectIdException 
+	{
+		Discipline dis = this.getDiscipline(dName);
+		Project project = dis.getProject(pName);
+		Submission submission = new Submission(comentario, hours);
+		project.addSubmission(this.getId(), submission);
+>>>>>>> ac50d345f7eab14d593c25f1a164ac3e5a1984b5
 	}
 
 
