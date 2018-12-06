@@ -22,7 +22,8 @@ public class DoShowProjectSubmissions extends sth.app.common.ProjectCommand {
   /** @see sth.app.common.ProjectCommand#myExecute() */
   @Override
   public final void myExecute() throws DialogException, NoSuchDisciplineIdException, NoSuchProjectIdException {
-    //FIXME implement command
+    String result = _receiver.getProjectSubmissions(_discipline.value(), _project.value());
+    _display.addLine(result);
+    _display.display();
   }
-
 }
