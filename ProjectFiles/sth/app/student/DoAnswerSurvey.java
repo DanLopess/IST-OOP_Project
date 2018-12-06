@@ -26,7 +26,7 @@ public class DoAnswerSurvey extends sth.app.common.ProjectCommand {
   /** @see sth.app.common.ProjectCommand#myExecute() */
   @Override
   public final void myExecute() throws NoSuchProjectIdException, NoSuchDisciplineIdException, DialogException {
-    _receiver.fillSurvey(_discipline.value(), _horas.value(), _comentario.value());
+    _receiver.fillSurvey(_discipline.value(), _project.value(), _horas.value(), _comentario.value());
   }
 
 }
