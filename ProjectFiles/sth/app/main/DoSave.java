@@ -35,7 +35,7 @@ public class DoSave extends Command<SchoolManager> {
 			} else {
 				_receiver.doSave(null); 
 			}
-		} catch(NoSuchPersonIdException e) {
+		} catch(IOException e) {
 			e.printStackTrace();
 		}
 		

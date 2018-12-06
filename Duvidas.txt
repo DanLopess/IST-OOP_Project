@@ -1,19 +1,15 @@
 - como guardar?
 - aplicar padrao state aos inqueritos  
 - observer nas notifica��es
-- template method descri��o dos utilizadores
 - Do save e Do open est�o nos slides das aulas teoricas
-- como temos diferentes tipos de exceções... na app fazemos try...catch as exceções relativas ao
-schoolmnager e dps fazemos throw daquelas q podem ser usadas na app
-- submissoes do projeto é do tipo submissao
 - lembrar de verificar se a survey existe (se devolveu string ou null)
 - ver se numero de telemovel é em int ou string
 - alterar toString pois tem de devolver uma String obrigatoriamente
 - criar excecoes no core (iguais a app mas com nome diferente, so para tratar excecoes das surveys)
+- no save , usar replace (*, #) para meter da forma geral
 
 TODO:
-- Representative portal
-- DO save e DO open
+- DO save
 - implementar padroes de desenho
 - Notificacoes
 - Survey

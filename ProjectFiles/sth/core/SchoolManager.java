@@ -15,6 +15,7 @@ import sth.core.exception.FinishingSurveyIdException;
 import sth.core.exception.OpeningSurveyIdException;
 import java.io.IOException;
 import java.io.FileNotFoundException;
+import java.io.*;
 import sth.core.School;
 import sth.core.Person;
 import java.util.*;
@@ -61,34 +62,54 @@ public class SchoolManager {
 		_loggedUser = _school.parsePersonById(id);
 	}
 
-	public void doOpen(String datafile) throws ImportFileException, NoSuchPersonIdException {
+	public Object readObject(String inputFilename) throws IOException, BadEntryException, ClassNotFoundException {
+		ObjectInputStream obIn = null;
+		try { 
+			FileInputStream fpin = new FileInputStream(inputFilename);
+			obIn = new ObjectInputStream(fpin);
+			Object anObject = obIn.readObject();
+			return anObject;
+		} 
+		finally {
+			if (obIn != null)
+				obIn.close();
+		}
+	}
+
+	public void doOpen(String fileName) throws ImportFileException, NoSuchPersonIdException {
         try {
             Person newLoggin ;
             // Loads new school information
-            School newSchool = new School();
-            newSchool.importFile(datafile);
+            School newSchool = (School)readObject(fileName);
             // Tries to login the new user 
             newLoggin = newSchool.parsePersonById(_loggedUser.getId());
             // if successful, overrides school data.
             _school = newSchool;
             _loggedUser = newLoggin;
-        } catch (IOException | BadEntryException e) {
+        } catch (IOException | BadEntryException | ClassNotFoundException e) {
             throw new ImportFileException(e);
         }
 	}
 	
-	public void doSave(String fileName) throws NoSuchPersonIdException {
-
-		if (_school.parsePersonById(_loggedUser.getId()) != null){
-			if(fileName == null) {
-				
-			} else {
-				_fileName = fileName;
-				
-			}
-		} else {
-			throw new NoSuchPersonIdException(_loggedUser.getId());
+	public void saveObject(String outputFilename, Object anObject) throws IOException {
+		ObjectOutputStream obOut = null;
+		try {
+			FileOutputStream
+			fpout = new FileOutputStream(outputFilename);
+			obOut = new ObjectOutputStream(fpout);
+			obOut.writeObject(anObject);
+		} 
+		finally {
+			if (obOut != null)
+				obOut.close();
 		}
+	}
+
+	public void doSave(String fileName) throws IOException {
+		if(fileName == null) {
+			_fileName = fileName;
+		}
+		saveObject(_fileName, _school); // saves the school object 
 	}
 
 	/**
