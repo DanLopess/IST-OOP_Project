@@ -85,10 +85,14 @@ public class Student extends Person {
 		prjct.addSubmission(this.getId(), s);
 	}
 
-	void submitAnswerToSurvey (String discipline, String pName, int hours) throws NoSuchDisciplineIdException,
+	void submitAnswerToSurvey (String discipline, String pName, int hours, String comment) throws NoSuchDisciplineIdException,
 	NoSuchProjectIdException 
 	{
-		// TODO
+
+		Discipline d = this.getDiscipline(discipline);
+		d.submitAnswerToSurvey()
+		// TODO if student has submited... / if student has not answered to survey / send user id so can check if has submitted
+		// create answer type
 	}
 
 
@@ -104,43 +108,39 @@ public class Student extends Person {
 		return _isRepresentative;
 	}
 
-	public void createSurvey(String discipline, String pName) throws NoSuchDisciplineIdException, 
+	void createSurvey(String discipline, String pName) throws NoSuchDisciplineIdException, 
 	NoSuchProjectIdException 
 	{
 		//if... representative, call student function: createSurvey
 	}
 
-	public void cancelSurvey(String discipline, String pName) throws NoSuchDisciplineIdException, 
+	void cancelSurvey(String discipline, String pName) throws NoSuchDisciplineIdException, 
 	NoSuchProjectIdException 
 	{
 		//if... representative, call student function: cancelSurvey...
 	}
 
-	public void openSurvey(String discipline, String pName) throws NoSuchDisciplineIdException, 
+	void openSurvey(String discipline, String pName) throws NoSuchDisciplineIdException, 
 	NoSuchProjectIdException 
 	{
 		
 	}
 
-	public void closeSurvey(String discipline, String pName) throws NoSuchDisciplineIdException, 
+	void closeSurvey(String discipline, String pName) throws NoSuchDisciplineIdException, 
 	NoSuchProjectIdException 
 	{
 		
 	}
 
-	public void finishSurvey(String discipline, String pName) throws NoSuchDisciplineIdException, 
+	void finishSurvey(String discipline, String pName) throws NoSuchDisciplineIdException, 
 	NoSuchProjectIdException 
 	{
 		
 	}
 
-	public void showSurveys(String discipline) throws NoSuchDisciplineIdException	{
-		
-	}
-
-
-
-
+	String showSurveys(String discipline) throws NoSuchDisciplineIdException	{
+		return null;
+	}	
 
 @Override
 	public String toString () {

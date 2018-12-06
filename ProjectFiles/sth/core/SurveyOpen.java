@@ -10,6 +10,6 @@ public class SurveyOpen extends SurveyState {
     }
 
     String getName() {
-        return "open";
+        return "(aberto)";
     }
 }

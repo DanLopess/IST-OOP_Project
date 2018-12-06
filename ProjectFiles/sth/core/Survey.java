@@ -12,8 +12,8 @@ import java.util.Iterator;
 
 
 public class Survey {
-	private List<Integer> _hours;
-	private int _nrespostas;
+	private List<Answer> _answers;
+	private int _nAnswers;
     private SurveyState _state = new SurveyClosed(this);
 	
 	Survey() {}
@@ -24,6 +24,10 @@ public class Survey {
 	
 	SurveyState getState() {
 		return _state;
+	}
+
+	int getNAnswers() {
+		return _nAnswers;
 	}
 
 	void open() {
@@ -39,23 +43,28 @@ public class Survey {
 		// TODO in final version
 	}
 
-	void addAnswer(int hours) {
+	void addAnswer(Answer a) {
 		if(_state instanceof SurveyOpen)
-			_hours.add(hours);
+			_answers.add(a);
 		
 	}
 
 	int getAverage() {
-		Iterator<Integer> iterator = _hours.iterator();
+		Iterator<Answer> iterator = _answers.iterator();
 		int sum = 0;
 
 		while(iterator.hasNext()) {
-			int i = iterator.next();
+			int i = iterator.next().getHours();
 			sum+=i;
 		}
 		if (sum != 0)
-			return ((int)(sum/_hours.size()));
+			return ((int)(sum/_answers.size()));
 		else
 			return 0;
+	}
+
+@Override
+	public String toString() {
+		return ""; // (state) .. if open show open, if finished, show info, else show closed
 	}
 }
