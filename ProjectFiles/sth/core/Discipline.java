@@ -7,6 +7,7 @@ import sth.core.Teacher;
 import sth.core.Project;
 import sth.core.Student;
 import sth.core.exception.NoSuchProjectIdException;
+import sth.core.exception.NoSuchDisciplineIdException;
 import sth.core.exception.NoSuchPersonIdException;
 import java.util.*;
 
@@ -118,15 +119,61 @@ public class Discipline {
 		return submissionsToString;
 	}
 
-	List<String> surveyToString(String pName) throws NoSuchProjectIdException {
+	String surveyToString(String pName) throws NoSuchProjectIdException {
 		Project p = this.getProject(pName);
 		Survey s = p.getSurvey();
-		List<String> results = new ArrayList<String>();
-		results.add(_name + " - " + p.getName());
-		// TODO show different survey info for diff states
+		String results = new String();
+		results = results + _name + " - " + p.getName();
+		results = results + s.toString();
 		return results;
 	}
 
+	void submitAnswerToSurvey (String pName, int hours, String comment, int id) throws NoSuchProjectIdException, NoSurveyIdException
+	{
+		Project p = this.getProject(pName);
+		if (p.studentSubmited(id)) {
+
+		} else {	
+			throw NoSuchProjectIdException(pName);
+		}
+		// TODO if student has submited... / if student has not answered to survey
+		// create answer type
+	}
+	void createSurvey(String discipline, String pName) throws NoSuchDisciplineIdException, 
+	NoSuchProjectIdException 
+	{
+		//if... representative, call student function: createSurvey
+	}
+
+	void cancelSurvey(String discipline, String pName) throws NoSuchDisciplineIdException, 
+	NoSuchProjectIdException 
+	{
+		//if... representative, call student function: cancelSurvey...
+	}
+
+	void openSurvey(String discipline, String pName) throws NoSuchDisciplineIdException, 
+	NoSuchProjectIdException 
+	{
+		
+	}
+
+	void closeSurvey(String discipline, String pName) throws NoSuchDisciplineIdException, 
+	NoSuchProjectIdException 
+	{
+		
+	}
+
+	void finishSurvey(String discipline, String pName) throws NoSuchDisciplineIdException, 
+	NoSuchProjectIdException 
+	{
+		
+	}
+
+	String showSurveys(String discipline) throws NoSuchDisciplineIdException	{
+		return null;
+	}
+
+@Override
 	public String toString() {
 		return ("* " + _course.getName() + " - " + _name);
 	}

@@ -273,10 +273,16 @@ public class SchoolManager {
 	public String getSurveyResults(String discipline, String pName) throws NoSuchDisciplineIdException , 
 	NoSuchProjectIdException 
 	{
-		if(this.isLoggedUserProfessor()) {
-			Project p = (((Teacher)_loggedUser).getDiscipline(discipline)).getProject(pName);
-			Survey s = p.getSurvey();
-			return s.toString();
+		// both teacher and student can get survey results
+		if(this.isLoggedUserProfessor() ) { 
+			Discipline d = (((Teacher)_loggedUser).getDiscipline(discipline));
+			String survey = d.surveyToString(pName);
+			return survey;
+		}
+		if (this.isLoggedUserStudent()) {
+			Discipline d = (((Student)_loggedUser).getDiscipline(discipline));
+			String survey = d.surveyToString(pName);
+			return survey;
 		}
 		return null;
 	}
@@ -292,11 +298,19 @@ public class SchoolManager {
 			((Student)_loggedUser).submitProject(discipline, pName, text);
 	}
 
+<<<<<<< HEAD
+	public void fillSurvey (String discipline, String pName, int hours, String comment) throws NoSuchDisciplineIdException, 
+	NoSuchProjectIdException 
+	{
+		if (this.isLoggedUserStudent())
+			((Student)_loggedUser).submitAnswerToSurvey(discipline, pName, hours, comment);
+=======
 	public void fillSurvey (String discipline, String pName, int hours, String comentario) throws NoSuchDisciplineIdException,
 	NoSuchProjectIdException 
 	{
 		if (this.isLoggedUserStudent())
 			((Student)_loggedUser).submitAnswerToSurvey(discipline, pName, hours, comentario);
+>>>>>>> ac50d345f7eab14d593c25f1a164ac3e5a1984b5
 	}
 	 
 	/**
@@ -307,40 +321,47 @@ public class SchoolManager {
 	NoSuchProjectIdException, DuplicateSurveyIdException
 	{
 		if (this.isLoggedUserRepresentative())	{
-			Project p = (((Student)_loggedUser).getDiscipline(discipline)).getProject(pName);
-			if (p.getSurvey() == null) {
-				
-			}
+			((Student)_loggedUser).createSurvey(discipline, pName);
 		}
-		//if... representative, call student function: createSurvey
 	}
 
 	public void cancelSurvey(String discipline, String pName) throws NoSuchDisciplineIdException, 
 	NoSuchProjectIdException, NonEmptySurveyIdException, NoSurveyIdException, SurveyIdFinishedException
 	{
-		//if... representative, call student function: cancelSurvey...
+		if (this.isLoggedUserRepresentative())	{
+			((Student)_loggedUser).cancelSurvey(discipline, pName);
+		}
 	}
 
 	public void openSurvey(String discipline, String pName) throws NoSuchDisciplineIdException, 
 	NoSuchProjectIdException, NoSurveyIdException, OpeningSurveyIdException  
 	{
-		
+		if (this.isLoggedUserRepresentative())	{
+			((Student)_loggedUser).openSurvey(discipline, pName);
+		}
 	}
 
 	public void closeSurvey(String discipline, String pName) throws NoSuchDisciplineIdException, 
 	NoSuchProjectIdException, NoSurveyIdException, ClosingSurveyIdException
 	{
-		
+		if (this.isLoggedUserRepresentative())	{
+			((Student)_loggedUser).closeSurvey(discipline, pName);
+		}
 	}
 
 	public void finishSurvey(String discipline, String pName) throws NoSuchDisciplineIdException, 
 	NoSuchProjectIdException, FinishingSurveyIdException, NoSurveyIdException
 	{
-		
+		if (this.isLoggedUserRepresentative())	{
+			((Student)_loggedUser).finishSurvey(discipline, pName);
+		}
 	}
 
 	public String getDisciplineSurveys(String discipline) throws NoSuchDisciplineIdException	{
-		return "";
+		if (this.isLoggedUserRepresentative())	{
+			return (((Student)_loggedUser).showSurveys(discipline));
+		}
+		return null;
 	}
 
 }
