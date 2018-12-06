@@ -50,7 +50,9 @@ public class School implements java.io.Serializable {
 				return c;
 			}
 		}
-		return null;
+		Course newCourse = new Course(name);
+		_courses.add(newCourse);
+		return newCourse;
 	}
 
 

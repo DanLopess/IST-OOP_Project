@@ -33,6 +33,7 @@ public class Student extends Person {
 	public Student (int id, String name, int phoneNumber, boolean rep) throws BadEntryException {
 		super(id, name, phoneNumber);
 		_isRepresentative = rep;
+		_disciplines = new ArrayList<>();
 	}
 
 	/**
@@ -145,30 +146,22 @@ public class Student extends Person {
 
 
 
-@Override
+	@Override
 	public String toString () {
-		List<String> toString = new ArrayList<String>();
+		String toString;
 		if (_isRepresentative){
-			toString.add("DELEGADO|"+ super.getId( )+ "|" + super.getName());
+			toString = "DELEGADO|"+ super.toString();
 		} else {
-			toString.add("ALUNO|"+ super.getId() + "|" + super.getName());
+			toString = "ALUNO|" + super.toString();
 		}
 
+		// Sao as disciplinas q teem de ser ordenadas e nao as Strings!!!
 		Iterator<Discipline> iterator = _disciplines.iterator();
-		Discipline d;
 		while(iterator.hasNext()) {
-			d = iterator.next();
-			toString.add("* " + _course.getName() + " - " + d.getName());
+			Discipline d = iterator.next();
+			toString += "\n* " + _course.getName() + " - " + d.getName();
 		}
-		Collections.sort(toString);
-
-		Iterator<String> iterator2 = toString.iterator();
-		String s = new String();
-		while(iterator.hasNext()) {
-			iterator.next();
-			s = s + iterator.next() + "\n";
-		}
-		return s;
+		return toString;
 	}
 
 	void parseContext(String lineContext, School school) throws BadEntryException {
@@ -182,8 +175,8 @@ public class Student extends Person {
 			_course.addStudent(this);
 		}
 
-		Discipline dis = _course.parseDiscipline(components[1]);
-
+		Discipline dis = _course.parseDiscipline(components[1], _course);
 		dis.enrollStudent(this);
+		addDiscipline(dis);
 	}
 }

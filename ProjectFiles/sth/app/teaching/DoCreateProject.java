@@ -25,7 +25,7 @@ public class DoCreateProject extends sth.app.common.ProjectCommand {
   @Override
   public final void myExecute() throws DialogException, NoSuchDisciplineIdException, NoSuchProjectIdException {
 		_form.parse();
-		_receiver.DoCreateProject(_discipline.value(), _projectName.value());
+		_receiver.createProject(_discipline.value(), _projectName.value());
   }
 
 }

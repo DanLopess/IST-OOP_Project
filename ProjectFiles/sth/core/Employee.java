@@ -9,6 +9,6 @@ public class Employee extends Person {
 
 @Override
 	public String toString () {
-		return ("FUNCIONÁRIO|"+ super.getId() + "|" + super.getName());
+		return "FUNCIONÁRIO|"+super.toString();
 	}
 }

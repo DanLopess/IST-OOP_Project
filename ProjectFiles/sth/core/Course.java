@@ -1,8 +1,5 @@
 package sth.core;
 
-import sth.core.Student;
-import sth.core.Discipline;
-import sth.core.exception.BadEntryException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Iterator;
@@ -58,7 +55,7 @@ public class Course {
 	}
 
 
-	Discipline parseDiscipline (String name) {
+	Discipline parseDiscipline(String name, Course course) {
 		Iterator<Discipline> iterator = _disciplines.iterator();
 		Discipline d;
 		while(iterator.hasNext()) {
@@ -67,7 +64,10 @@ public class Course {
 				return d;
 			}
 		}
-		return null;
+		Discipline newDiscipline = new Discipline(name, 20, course);
+		course.addDiscipline(newDiscipline);
+		_disciplines.add(newDiscipline);
+		return newDiscipline;
 	}
 
 	Student parseRepresentative (String name) {
