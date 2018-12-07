@@ -7,7 +7,7 @@ public class NoSurveyIdException extends Exception {
   private String _discipline;
   private String _project;
   /** Serial number for serialization. */
-  private static final long serialVersionUID = 201810051538L;
+  private static final long serialVersionUID = 201809021324L;
   
   /**
    * @param discipline 

@@ -1,0 +1,19 @@
+*** tests/A-10-29-M-ok.out	2018-11-29 11:18:13.000000000 +0000
+--- tests/A-10-29-M-ok.outhyp	2018-12-07 16:33:01.418421300 +0000
+***************
+*** 32,38 ****
+  2 - Preencher inquérito
+  3 - Ver resultados de inquérito
+  0 - Sair
+! Escolha uma opção: Nome da disciplina: Nome do projecto: Ver resultados de inquérito: Operação inválida: O projecto 'P2' da disciplina 'D1' não tem inquérito associado.
+  Portal do Estudante
+  1 - Entregar projecto
+  2 - Preencher inquérito
+--- 32,38 ----
+  2 - Preencher inquérito
+  3 - Ver resultados de inquérito
+  0 - Sair
+! Escolha uma opção: Nome da disciplina: Nome do projecto: Ver resultados de inquérito: Operação inválida: O projecto 'P2' não existe na disciplina 'D1'.
+  Portal do Estudante
+  1 - Entregar projecto
+  2 - Preencher inquérito

@@ -14,14 +14,16 @@ import sth.core.exception.NoSurveyIdException;
 import java.text.Normalizer;
 import java.util.*;
 
-public class Discipline implements Comparable<Discipline>{
+public class Discipline implements Comparable<Discipline>, java.io.Serializable{
 	private String _name;
 	private int _capacity;
 	private Course _course;
 	private Map<Integer, Teacher> _teachers;
 	private Map<Integer, Student> _students;
 	private List<Project> _projects;
-
+  	/** Serial number for serialization. */
+  	private static final long serialVersionUID = 201810051538L;
+	  
 	public Discipline (String name, int capacity, Course c) {
 		_name = name;
 		_capacity = capacity;

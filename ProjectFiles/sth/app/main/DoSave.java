@@ -20,7 +20,7 @@ public class DoSave extends Command<SchoolManager> {
    */
   public DoSave(SchoolManager receiver) {
 		super(Label.SAVE, receiver);
-		if (!_receiver.hasFileName()) {
+		if (_receiver.needsFileName()) {
 			_outputFileName = _form.addStringInput(Message.newSaveAs());
 		}	
   }
@@ -30,10 +30,10 @@ public class DoSave extends Command<SchoolManager> {
   public final void execute() {
 		_form.parse();
 		try {
-			if (!_receiver.hasFileName()) {
-				_receiver.doSave(_outputFileName.value());
+			if (_receiver.needsFileName()) {
+				_receiver.save(_outputFileName.value());
 			} else {
-				_receiver.doSave(null); 
+				_receiver.save(null); 
 			}
 		} catch(IOException e) {
 			e.printStackTrace();

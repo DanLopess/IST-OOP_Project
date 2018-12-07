@@ -3,12 +3,14 @@ package sth.core;
 import sth.core.exception.BadEntryException;
 import java.util.List;
 import java.util.ArrayList;
+import java.io.*;
 
-public abstract class Person {
+public abstract class Person implements java.io.Serializable{
 	private int _id;
 	private String _name;
 	private int _phoneNumber;
-
+  	/** Serial number for serialization. */
+  	private static final long serialVersionUID = 201810051538L;
 	/*
 	* Person - class constructor
 	*/

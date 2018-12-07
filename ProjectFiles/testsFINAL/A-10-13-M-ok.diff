@@ -1,0 +1,28 @@
+*** tests/A-10-13-M-ok.out	2018-11-28 22:36:16.000000000 +0000
+--- tests/A-10-13-M-ok.outhyp	2018-12-07 16:32:57.206881300 +0000
+***************
+*** 35,45 ****
+  5 - Portal do Estudante
+  6 - Portal do Delegado
+  0 - Sair
+! Escolha uma opção: Menu principal
+  1 - Abrir
+  2 - Guardar
+  3 - Portal Pessoal
+  5 - Portal do Estudante
+  6 - Portal do Delegado
+  0 - Sair
+! Escolha uma opção: 
+\ No newline at end of file
+--- 35,45 ----
+  5 - Portal do Estudante
+  6 - Portal do Delegado
+  0 - Sair
+! Escolha uma opção: Ficheiro sem nome. Guardar ficheiro como: Menu principal
+  1 - Abrir
+  2 - Guardar
+  3 - Portal Pessoal
+  5 - Portal do Estudante
+  6 - Portal do Delegado
+  0 - Sair
+! Escolha uma opção: Fim de entrada de dados (R-EOF): pt.tecnico.po.io.RuntimeEOFException: Fim do fluxo de dados de entrada

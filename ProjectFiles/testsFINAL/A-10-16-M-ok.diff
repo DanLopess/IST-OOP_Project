@@ -1,0 +1,69 @@
+*** tests/A-10-16-M-ok.out	2018-11-29 10:43:51.000000000 +0000
+--- tests/A-10-16-M-ok.outhyp	2018-12-07 16:32:58.054488000 +0000
+***************
+*** 17,26 ****
+  4 - Ver alunos de disciplina leccionada
+  5 - Ver resultados de um inquérito
+  0 - Sair
+! Escolha uma opção: Nome da disciplina: Nome do projecto: D1 - P1
+! * 100011 - D1-P1 yyy
+! * 100012 - Entreguei!
+! * 100013 - D1-P1 ai2
+  Portal do Docente
+  1 - Criar projecto
+  2 - Fechar projecto
+--- 17,23 ----
+  4 - Ver alunos de disciplina leccionada
+  5 - Ver resultados de um inquérito
+  0 - Sair
+! Escolha uma opção: Nome da disciplina: Nome do projecto: Ver submissões de um projecto: Operação inválida: O projecto 'P1' não existe na disciplina 'D1'.
+  Portal do Docente
+  1 - Criar projecto
+  2 - Fechar projecto
+***************
+*** 28,50 ****
+  4 - Ver alunos de disciplina leccionada
+  5 - Ver resultados de um inquérito
+  0 - Sair
+! Escolha uma opção: Nome da disciplina: Nome do projecto: Portal do Docente
+  1 - Criar projecto
+  2 - Fechar projecto
+  3 - Ver submissões de um projecto
+  4 - Ver alunos de disciplina leccionada
+  5 - Ver resultados de um inquérito
+  0 - Sair
+! Escolha uma opção: Menu principal
+! 1 - Abrir
+! 2 - Guardar
+! 3 - Portal Pessoal
+! 4 - Portal do Docente
+! 0 - Sair
+! Escolha uma opção: Menu principal
+  1 - Abrir
+  2 - Guardar
+  3 - Portal Pessoal
+  4 - Portal do Docente
+  0 - Sair
+! Escolha uma opção: 
+\ No newline at end of file
+--- 25,44 ----
+  4 - Ver alunos de disciplina leccionada
+  5 - Ver resultados de um inquérito
+  0 - Sair
+! Escolha uma opção: Nome da disciplina: Nome do projecto: Nome da disciplina: Nome do projecto: Nome da disciplina: Nome do projecto: Fim de entrada de dados (R-EOF): pt.tecnico.po.io.RuntimeEOFException: Fim do fluxo de dados de entrada
+! Fechar projecto: Operação inválida: A disciplina '0' não existe ou não é válida para o utilizador em causa.
+! Portal do Docente
+  1 - Criar projecto
+  2 - Fechar projecto
+  3 - Ver submissões de um projecto
+  4 - Ver alunos de disciplina leccionada
+  5 - Ver resultados de um inquérito
+  0 - Sair
+! Escolha uma opção: Fim de entrada de dados (R-EOF): pt.tecnico.po.io.RuntimeEOFException: Fim do fluxo de dados de entrada
+! Menu principal
+  1 - Abrir
+  2 - Guardar
+  3 - Portal Pessoal
+  4 - Portal do Docente
+  0 - Sair
+! Escolha uma opção: Fim de entrada de dados (R-EOF): pt.tecnico.po.io.RuntimeEOFException: Fim do fluxo de dados de entrada

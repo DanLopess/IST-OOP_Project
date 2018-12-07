@@ -37,7 +37,7 @@ public class DoShowDisciplineStudents extends Command<SchoolManager> {
 	  _display.addLine(s);
 	  _display.display();
   	} catch (NoSuchDisciplineIdException e) {
-	  e.printStackTrace();
+	  	e.printStackTrace();
   	}
   }
 

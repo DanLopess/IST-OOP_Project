@@ -92,7 +92,7 @@ public class School implements java.io.Serializable {
 	 * @param person an instance of the class person
 	 */
 	void addPerson(Person person) {
-		_people.putIfAbsent(person.getId(), person);
+		_people.put(person.getId(), person);
 	}
 
 	/**

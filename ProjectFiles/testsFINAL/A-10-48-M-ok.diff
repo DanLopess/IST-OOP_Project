@@ -1,0 +1,106 @@
+*** tests/A-10-48-M-ok.out	2018-12-02 16:46:49.000000000 +0000
+--- tests/A-10-48-M-ok.outhyp	2018-12-07 16:33:06.663861100 +0000
+***************
+*** 17,38 ****
+  4 - Ver alunos de disciplina leccionada
+  5 - Ver resultados de um inquérito
+  0 - Sair
+! Escolha uma opção: Nome da disciplina: Nome do projecto: Portal do Docente
+! 1 - Criar projecto
+! 2 - Fechar projecto
+! 3 - Ver submissões de um projecto
+! 4 - Ver alunos de disciplina leccionada
+! 5 - Ver resultados de um inquérito
+! 0 - Sair
+! Escolha uma opção: Nome da disciplina: Nome do projecto: D1 - P1 (aberto)
+! Portal do Docente
+! 1 - Criar projecto
+! 2 - Fechar projecto
+! 3 - Ver submissões de um projecto
+! 4 - Ver alunos de disciplina leccionada
+! 5 - Ver resultados de um inquérito
+! 0 - Sair
+! Escolha uma opção: Nome da disciplina: Nome do projecto: D1 - P2 (aberto)
+  Portal do Docente
+  1 - Criar projecto
+  2 - Fechar projecto
+--- 17,23 ----
+  4 - Ver alunos de disciplina leccionada
+  5 - Ver resultados de um inquérito
+  0 - Sair
+! Escolha uma opção: Nome da disciplina: Nome do projecto: Nome da disciplina: Nome do projecto: Nome da disciplina: Nome do projecto: Nome da disciplina: Nome do projecto: Fechar projecto: Operação inválida: O projecto '5' não existe na disciplina 'P1'.
+  Portal do Docente
+  1 - Criar projecto
+  2 - Fechar projecto
+***************
+*** 40,46 ****
+  4 - Ver alunos de disciplina leccionada
+  5 - Ver resultados de um inquérito
+  0 - Sair
+! Escolha uma opção: Nome da disciplina: Nome do projecto: D1 - P4 (por abrir)
+  Portal do Docente
+  1 - Criar projecto
+  2 - Fechar projecto
+--- 25,31 ----
+  4 - Ver alunos de disciplina leccionada
+  5 - Ver resultados de um inquérito
+  0 - Sair
+! Escolha uma opção: Nome da disciplina: Nome do projecto: Ver resultados de um inquérito: Operação inválida: O projecto 'P4' não existe na disciplina 'D1'.
+  Portal do Docente
+  1 - Criar projecto
+  2 - Fechar projecto
+***************
+*** 48,61 ****
+  4 - Ver alunos de disciplina leccionada
+  5 - Ver resultados de um inquérito
+  0 - Sair
+! Escolha uma opção: Nome da disciplina: Nome do projecto: Portal do Docente
+! 1 - Criar projecto
+! 2 - Fechar projecto
+! 3 - Ver submissões de um projecto
+! 4 - Ver alunos de disciplina leccionada
+! 5 - Ver resultados de um inquérito
+! 0 - Sair
+! Escolha uma opção: Nome da disciplina: Nome do projecto: D1 - P4 (aberto)
+  Portal do Docente
+  1 - Criar projecto
+  2 - Fechar projecto
+--- 33,39 ----
+  4 - Ver alunos de disciplina leccionada
+  5 - Ver resultados de um inquérito
+  0 - Sair
+! Escolha uma opção: Nome da disciplina: Nome do projecto: Nome da disciplina: Nome do projecto: Nome da disciplina: Nome do projecto: Nome da disciplina: Nome do projecto: Fechar projecto: Operação inválida: A disciplina 'P4' não existe ou não é válida para o utilizador em causa.
+  Portal do Docente
+  1 - Criar projecto
+  2 - Fechar projecto
+***************
+*** 63,78 ****
+  4 - Ver alunos de disciplina leccionada
+  5 - Ver resultados de um inquérito
+  0 - Sair
+! Escolha uma opção: Menu principal
+! 1 - Abrir
+! 2 - Guardar
+! 3 - Portal Pessoal
+! 4 - Portal do Docente
+! 0 - Sair
+! Escolha uma opção: Menu principal
+  1 - Abrir
+  2 - Guardar
+  3 - Portal Pessoal
+  4 - Portal do Docente
+  0 - Sair
+! Escolha uma opção: 
+\ No newline at end of file
+--- 41,51 ----
+  4 - Ver alunos de disciplina leccionada
+  5 - Ver resultados de um inquérito
+  0 - Sair
+! Escolha uma opção: Fim de entrada de dados (R-EOF): pt.tecnico.po.io.RuntimeEOFException: Fim do fluxo de dados de entrada
+! Menu principal
+  1 - Abrir
+  2 - Guardar
+  3 - Portal Pessoal
+  4 - Portal do Docente
+  0 - Sair
+! Escolha uma opção: Fim de entrada de dados (R-EOF): pt.tecnico.po.io.RuntimeEOFException: Fim do fluxo de dados de entrada

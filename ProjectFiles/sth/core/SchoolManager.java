@@ -28,8 +28,10 @@ public class SchoolManager {
 	private Person _loggedUser;
 	private String _fileName;
 
+
 	public SchoolManager() {
 		_school = new School();
+		_fileName = null;
 	}
 
 	/**
@@ -39,14 +41,13 @@ public class SchoolManager {
 	public void importFile(String datafile) throws ImportFileException {
 		try {
 			_school.importFile(datafile);
-			_fileName = datafile;
 		} catch (IOException | BadEntryException e) {
 			throw new ImportFileException(e);
 		}
 	}
 
-	public boolean hasFileName() {
-		if (_fileName != null) 
+	public boolean needsFileName() {
+		if (_fileName == null) 
 			return true;
 		else
 			return false;
@@ -75,7 +76,7 @@ public class SchoolManager {
 		}
 	}
 
-	public void doOpen(String fileName) throws ImportFileException, NoSuchPersonIdException {
+	public void open(String fileName) throws ImportFileException, NoSuchPersonIdException {
         try {
             Person newLoggin ;
             // Loads new school information
@@ -85,6 +86,7 @@ public class SchoolManager {
             // if successful, overrides school data.
             _school = newSchool;
             _loggedUser = newLoggin;
+			_fileName = new String(fileName);
         } catch (IOException | BadEntryException | ClassNotFoundException e) {
             throw new ImportFileException(e);
         }
@@ -93,7 +95,7 @@ public class SchoolManager {
 	public void saveObject(String outputFilename, Object anObject) throws IOException {
 		ObjectOutputStream obOut = null;
 		try {
-			FileOutputStream
+			FileOutputStream fpout = null;
 			fpout = new FileOutputStream(outputFilename);
 			obOut = new ObjectOutputStream(fpout);
 			obOut.writeObject(anObject);
@@ -104,11 +106,11 @@ public class SchoolManager {
 		}
 	}
 
-	public void doSave(String fileName) throws IOException {
-		if(fileName == null) {
-			_fileName = fileName;
+	public void save(String fileName) throws IOException {
+		if(this.needsFileName()) {
+			_fileName = new String(fileName);
 		}
-		saveObject(_fileName, _school); // saves the school object 
+		saveObject(_fileName, (Object)_school); // saves the school object 
 	}
 
 	/**
@@ -225,8 +227,7 @@ public class SchoolManager {
 
 	public void createProject(String discipline, String pName) throws NoSuchDisciplineIdException {
 		if(this.isLoggedUserProfessor()) {
-			Discipline d = ((Teacher)_loggedUser).getDiscipline(discipline);
-			d.createProject(pName);
+			((Teacher)_loggedUser).createProject(discipline,pName);
 		}
 	}
 

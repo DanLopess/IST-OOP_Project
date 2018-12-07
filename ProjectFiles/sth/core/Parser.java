@@ -10,9 +10,12 @@ import sth.core.School;
 import sth.core.exception.BadEntryException;
 import sth.core.Person;
 
-public class Parser {
+public class Parser implements java.io.Serializable{
 	private Person _person;
   private School _school;
+
+  /** Serial number for serialization. */
+  private static final long serialVersionUID = 201810051538L;
 
   Parser(School s) {
     _school = s;

@@ -1,19 +1,12 @@
-- como guardar?
-- aplicar padrao state aos inqueritos  
 - observer nas notifica��es
-- Do save e Do open est�o nos slides das aulas teoricas
 - lembrar de verificar se a survey existe (se devolveu string ou null)
 - ver se numero de telemovel é em int ou string
-- alterar toString pois tem de devolver uma String obrigatoriamente
-- criar excecoes no core (iguais a app mas com nome diferente, so para tratar excecoes das surveys)
-- no save , usar replace (*, #) para meter da forma geral
 
 TODO:
 - DO save
-- implementar padroes de desenho
 - Notificacoes
 - Survey
-
+- procurar pessoa n funciona
 
 
 

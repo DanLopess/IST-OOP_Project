@@ -1,0 +1,20 @@
+*** tests/A-10-41-M-ok.out	2018-11-30 00:03:39.000000000 +0000
+--- tests/A-10-41-M-ok.outhyp	2018-12-07 16:33:04.644964900 +0000
+***************
+*** 36,43 ****
+  5 - Finalizar inquérito
+  6 - Mostrar inquéritos de uma disciplina
+  0 - Sair
+! Escolha uma opção: Nome da disciplina: Nome do projecto: Cancelar inquérito: Operação inválida: O inquérito do projecto 'P1' da disciplina 'D1' já está finalizado.
+! Portal do Delegado
+  1 - Criar inquérito
+  2 - Cancelar inquérito
+  3 - Abrir inquérito
+--- 36,42 ----
+  5 - Finalizar inquérito
+  6 - Mostrar inquéritos de uma disciplina
+  0 - Sair
+! Escolha uma opção: Nome da disciplina: Nome do projecto: Portal do Delegado
+  1 - Criar inquérito
+  2 - Cancelar inquérito
+  3 - Abrir inquérito

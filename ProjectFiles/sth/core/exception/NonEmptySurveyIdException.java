@@ -9,7 +9,7 @@ public class NonEmptySurveyIdException extends Exception {
      
 
   /** Serial number for serialization. */
-  private static final long serialVersionUID = 201810051538L;
+  private static final long serialVersionUID = 201809021324L;
   
   /**
    * @param discipline 

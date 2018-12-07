@@ -11,11 +11,12 @@ import java.util.List;
 import java.util.Iterator;
 
 
-public class Survey {
+public class Survey implements java.io.Serializable {
 	private List<Answer> _answers;
 	private int _nAnswers;
     private SurveyState _state = new SurveyClosed(this);
-	
+	/** Serial number for serialization. */
+  	private static final long serialVersionUID = 201810051538L;
 	Survey() {}
 
 	void setState(SurveyState state) { 

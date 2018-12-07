@@ -8,13 +8,15 @@ import sth.core.exception.DuplicateSurveyIdException;
 import sth.core.exception.NoSurveyIdException;
 
 
-public class Project {
+public class Project implements java.io.Serializable {
 	private String _name;
 	private String _description;
 	private boolean _closed;
 	private Survey _survey;
 	private Map<Integer, Submission> _submissions;
-
+  	/** Serial number for serialization. */
+  	private static final long serialVersionUID = 201810051538L;
+	  
 	public Project(String name) {
 		_name = name;
 		_closed = false;

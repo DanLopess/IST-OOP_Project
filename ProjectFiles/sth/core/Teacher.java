@@ -46,7 +46,7 @@ public class Teacher extends Person {
 	 * @param dName name of the discipline
 	 * @param pName name of the project
 	 */
-	void createProject(String dName, String pName) {
+	void createProject(String dName, String pName) throws NoSuchDisciplineIdException {
 		Iterator<Discipline> iterator = _disciplines.iterator();
 		Discipline d;
 
@@ -54,8 +54,10 @@ public class Teacher extends Person {
 			d = iterator.next();
 			if (d.getName().equals(dName)) {
 				d.createProject(pName);
+				return;
 			}
 		}
+		throw new NoSuchDisciplineIdException(dName);
 	}
 
 	/**

@@ -27,11 +27,12 @@ public class DoOpen extends Command<SchoolManager> {
 	public final void execute() {
     _form.parse();
     try {
-      _receiver.doOpen(_inputFilename.value());
+      _receiver.open(_inputFilename.value());
     } 
     catch (ImportFileException e) {
       _display.clear();
       _display.add(Message.fileNotFound());
+      _display.display();
     }
     catch (NoSuchPersonIdException e) {
       e.printStackTrace();

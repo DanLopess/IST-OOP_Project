@@ -3,12 +3,13 @@ package sth.core;
 import java.text.Normalizer;
 import java.util.*;
 
-public class Course implements Comparable<Course> {
+public class Course implements Comparable<Course>, java.io.Serializable {
 	private String _name;
 	private List<Discipline> _disciplines;
 	private Map<Integer, Student> _students;
 	private List<Student> _representatives;
-
+	/** Serial number for serialization. */
+	private static final long serialVersionUID = 201810051538L;
 
 	public Course (String name) {
 		_name = name;
