@@ -7,6 +7,8 @@ import pt.tecnico.po.ui.Display;
 import sth.core.SchoolManager;
 import sth.core.Person;
 import sth.core.exception.NoSuchDisciplineIdException;
+import sth.app.exception.NoSuchDisciplineException;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +39,7 @@ public class DoShowDisciplineStudents extends Command<SchoolManager> {
 		_display.add(s);
 		_display.display();
   	} catch (NoSuchDisciplineIdException e) {
-	  	e.printStackTrace();
+	  	throw new NoSuchDisciplineException(_disciplineName.value());
   	}
   }
 

@@ -1,19 +1,27 @@
 *** tests/A-10-26-M-ok.out	2018-12-02 16:46:43.000000000 +0000
---- tests/A-10-26-M-ok.outhyp	2018-12-07 16:33:00.857565900 +0000
+--- tests/A-10-26-M-ok.outhyp	2018-12-07 18:28:27.251292900 +0000
 ***************
-*** 15,21 ****
+*** 15,30 ****
   2 - Preencher inquérito
   3 - Ver resultados de inquérito
   0 - Sair
 ! Escolha uma opção: Nome da disciplina: Nome do projecto: D1 - P1 (aberto)
-  Portal do Estudante
-  1 - Entregar projecto
-  2 - Preencher inquérito
---- 15,21 ----
+! Portal do Estudante
+! 1 - Entregar projecto
+! 2 - Preencher inquérito
+! 3 - Ver resultados de inquérito
+! 0 - Sair
+! Escolha uma opção: Menu principal
+! 1 - Abrir
+! 2 - Guardar
+! 3 - Portal Pessoal
+! 5 - Portal do Estudante
+! 0 - Sair
+! Escolha uma opção: 
+\ No newline at end of file
+--- 15,18 ----
   2 - Preencher inquérito
   3 - Ver resultados de inquérito
   0 - Sair
-! Escolha uma opção: Nome da disciplina: Nome do projecto: Ver resultados de inquérito: Operação inválida: O projecto 'P1' não existe na disciplina 'D1'.
-  Portal do Estudante
-  1 - Entregar projecto
-  2 - Preencher inquérito
+! Escolha uma opção: Nome da disciplina: Nome do projecto: 
+\ No newline at end of file

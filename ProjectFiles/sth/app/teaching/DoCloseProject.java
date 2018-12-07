@@ -21,7 +21,6 @@ public class DoCloseProject extends sth.app.common.ProjectCommand {
 
   @Override
   public final void myExecute() throws DialogException, NoSuchDisciplineIdException, NoSuchProjectIdException {
-		_form.parse();
 		_receiver.closeProject(_discipline.value(), _project.value());
   }
 

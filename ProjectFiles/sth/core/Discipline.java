@@ -7,6 +7,7 @@ import sth.core.Teacher;
 import sth.core.Project;
 import sth.core.Student;
 import sth.core.exception.NoSuchProjectIdException;
+import sth.core.exception.DuplicateProjectIdException;
 import sth.core.exception.NoSuchDisciplineIdException;
 import sth.core.exception.NoSuchPersonIdException;
 import sth.core.exception.NoSurveyIdException;
@@ -96,9 +97,24 @@ public class Discipline implements Comparable<Discipline>, java.io.Serializable{
 		}
 	}
 
-	void createProject(String name) {
-		Project p = new Project(name);
-		_projects.add(p);
+	void createProject(String name) throws DuplicateProjectIdException {
+		Iterator<Project> iterator = _projects.iterator();
+		Project p;
+		Project pAux = null;
+
+		while(iterator.hasNext()) {
+			p = iterator.next();
+			if (p.getName().equals(name) && !p.isClosed()) {
+				pAux = p;
+				break;
+			}
+		}
+		if (pAux != null) {
+			throw new DuplicateProjectIdException(name);
+		} else {
+			Project pAdd = new Project(name);
+			_projects.add(pAdd);
+		}
 	}
 
 	void closeProject(String name) throws NoSuchProjectIdException {

@@ -1,12 +1,9 @@
 - observer nas notifica��es
 - lembrar de verificar se a survey existe (se devolveu string ou null)
-- ver se numero de telemovel é em int ou string
 
 TODO:
-- DO save
 - Notificacoes
 - Survey
-- procurar pessoa n funciona
 
 
 

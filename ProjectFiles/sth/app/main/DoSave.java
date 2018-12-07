@@ -20,17 +20,18 @@ public class DoSave extends Command<SchoolManager> {
    */
   public DoSave(SchoolManager receiver) {
 		super(Label.SAVE, receiver);
-		if (_receiver.needsFileName()) {
+		if (_receiver.needsFileName() == true) {
 			_outputFileName = _form.addStringInput(Message.newSaveAs());
 		}	
+		
   }
 
   /** @see pt.tecnico.po.ui.Command#execute() */
   @Override
   public final void execute() {
-		_form.parse();
 		try {
 			if (_receiver.needsFileName()) {
+				_form.parse();
 				_receiver.save(_outputFileName.value());
 			} else {
 				_receiver.save(null); 

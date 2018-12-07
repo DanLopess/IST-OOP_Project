@@ -36,6 +36,10 @@ public class Project implements java.io.Serializable {
 		_closed = true;
 	}
 
+	boolean isClosed() {
+		return _closed;
+	}
+
 	void addSubmission (int id, Submission sub) throws NoSuchProjectIdException {
 		if(!_closed){
 			_submissions.put(id, sub);			

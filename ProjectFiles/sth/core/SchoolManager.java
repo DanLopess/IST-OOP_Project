@@ -13,6 +13,7 @@ import sth.core.exception.NoSurveyIdException;
 import sth.core.exception.ClosingSurveyIdException;
 import sth.core.exception.FinishingSurveyIdException;
 import sth.core.exception.OpeningSurveyIdException;
+import sth.core.exception.DuplicateProjectIdException;
 import java.io.IOException;
 import java.io.FileNotFoundException;
 import java.io.*;
@@ -51,6 +52,10 @@ public class SchoolManager {
 			return true;
 		else
 			return false;
+	}
+
+	public String getFileName() {
+		return _fileName;
 	}
 
 	/**
@@ -153,6 +158,10 @@ public class SchoolManager {
 		return _loggedUser;
 	}
 
+	public int getLoggedUserId() {
+		return _loggedUser.getId();
+	}
+
 	public Map<Integer, Person> getAllUsers() {
 		return (_school.getAllUsers());
 	}
@@ -197,8 +206,7 @@ public class SchoolManager {
 	public String searchPerson(String name) { // Sorted by name
 		Iterator<Map.Entry<Integer, Person>> entries = _school.getAllUsers().entrySet().iterator();
 		List<Person> persons = new ArrayList<Person>();
-		String personsToString = new String();
-		Iterator<Person> iterator = persons.iterator();
+		String personsToString = new String("");
 
 		while (entries.hasNext()) {
 			Map.Entry<Integer, Person> entry = entries.next();
@@ -212,7 +220,7 @@ public class SchoolManager {
         		return p1.getName().compareTo(p2.getName());
    			 }
 		});
-
+		Iterator<Person> iterator = persons.iterator();
 		while (iterator.hasNext()) {
 			Person p = iterator.next();
 			personsToString = personsToString + p.toString() + "\n";
@@ -225,7 +233,7 @@ public class SchoolManager {
 	 * === Teacher's portal ===
 	 */
 
-	public void createProject(String discipline, String pName) throws NoSuchDisciplineIdException {
+	public void createProject(String discipline, String pName) throws NoSuchDisciplineIdException, DuplicateProjectIdException {
 		if(this.isLoggedUserProfessor()) {
 			((Teacher)_loggedUser).createProject(discipline,pName);
 		}

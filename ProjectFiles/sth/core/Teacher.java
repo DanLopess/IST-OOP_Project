@@ -2,7 +2,8 @@ package sth.core;
 
 import sth.core.exception.BadEntryException;
 import sth.core.exception.NoSuchDisciplineIdException;
-
+import sth.core.exception.DuplicateProjectIdException;
+import sth.core.exception.NoSuchProjectIdException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Iterator;
@@ -34,7 +35,7 @@ public class Teacher extends Person {
 				return d;
 			}
 		}
-		throw new NoSuchDisciplineIdException("No such discipline: " + name);
+		throw new NoSuchDisciplineIdException("");
 	}
 
 	List<Discipline> getAllDisciplines() {
@@ -46,7 +47,7 @@ public class Teacher extends Person {
 	 * @param dName name of the discipline
 	 * @param pName name of the project
 	 */
-	void createProject(String dName, String pName) throws NoSuchDisciplineIdException {
+	void createProject(String dName, String pName) throws NoSuchDisciplineIdException, DuplicateProjectIdException {
 		Iterator<Discipline> iterator = _disciplines.iterator();
 		Discipline d;
 
