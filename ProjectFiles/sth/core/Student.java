@@ -35,6 +35,7 @@ public class Student extends Person {
 	public Student (int id, String name, int phoneNumber, boolean rep) throws BadEntryException {
 		super(id, name, phoneNumber);
 		_isRepresentative = rep;
+		_disciplines = new ArrayList<>();
 	}
 
 	/**
@@ -87,11 +88,21 @@ public class Student extends Person {
 		prjct.addSubmission(this.getId(), s);
 	}
 
+<<<<<<< HEAD
 	void submitAnswerToSurvey (String discipline, String pName, int hours, String comment) throws NoSurveyIdException,
 	NoSuchProjectIdException, NoSuchDisciplineIdException
 	{
 		Discipline d = this.getDiscipline(discipline);
 		d.submitAnswerToSurvey(pName,hours,comment,super.getId());
+=======
+	void submitAnswerToSurvey (String dName, String pName, int hours, String comentario) throws NoSuchDisciplineIdException,
+	NoSuchProjectIdException 
+	{
+		Discipline dis = this.getDiscipline(dName);
+		Project project = dis.getProject(pName);
+		Submission submission = new Submission(comentario, hours);
+		project.addSubmission(this.getId(), submission);
+>>>>>>> 938b5c08fdb09b9776199ef482bb357340e7df28
 	}
 
 
@@ -141,30 +152,24 @@ public class Student extends Person {
 		return null;
 	}	
 
-@Override
+	@Override
 	public String toString () {
-		List<String> toString = new ArrayList<String>();
+		String toString;
 		if (_isRepresentative){
-			toString.add("DELEGADO|"+ super.getId( )+ "|" + super.getName());
+			toString = "DELEGADO|"+ super.toString();
 		} else {
-			toString.add("ALUNO|"+ super.getId() + "|" + super.getName());
+			toString = "ALUNO|" + super.toString();
 		}
 
-		Iterator<Discipline> iterator = _disciplines.iterator();
-		Discipline d;
+		// Sao as disciplinas q teem de ser ordenadas e nao as Strings!!!\
+		List<Discipline> disciplines = new ArrayList<>(_disciplines);
+		Collections.sort(disciplines);
+		Iterator<Discipline> iterator = disciplines.iterator();
 		while(iterator.hasNext()) {
-			d = iterator.next();
-			toString.add("* " + _course.getName() + " - " + d.getName());
+			Discipline d = iterator.next();
+			toString += "\n* " + _course.getName() + " - " + d.getName();
 		}
-		Collections.sort(toString);
-
-		Iterator<String> iterator2 = toString.iterator();
-		String s = new String();
-		while(iterator.hasNext()) {
-			iterator.next();
-			s = s + iterator.next() + "\n";
-		}
-		return s;
+		return toString;
 	}
 
 	void parseContext(String lineContext, School school) throws BadEntryException {
@@ -178,8 +183,8 @@ public class Student extends Person {
 			_course.addStudent(this);
 		}
 
-		Discipline dis = _course.parseDiscipline(components[1]);
-
+		Discipline dis = _course.parseDiscipline(components[1], _course);
 		dis.enrollStudent(this);
+		addDiscipline(dis);
 	}
 }

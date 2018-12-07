@@ -10,10 +10,18 @@ import sth.core.exception.NoSuchProjectIdException;
 import sth.core.exception.NoSuchDisciplineIdException;
 import sth.core.exception.NoSuchPersonIdException;
 import sth.core.exception.NoSurveyIdException;
+<<<<<<< HEAD
 import java.util.*;
 
 
 public class Discipline {
+=======
+
+import java.text.Normalizer;
+import java.util.*;
+
+public class Discipline implements Comparable<Discipline>{
+>>>>>>> 938b5c08fdb09b9776199ef482bb357340e7df28
 	private String _name;
 	private int _capacity;
 	private Course _course;
@@ -140,7 +148,7 @@ public class Discipline {
 				throw new NoSurveyIdException("","");
 			}
 		} else {	
-			throw NoSuchProjectIdException(pName);
+			throw new NoSuchProjectIdException(pName);
 		}
 		// TODO if student has submited... / if student has not answered to survey
 		// create answer type
@@ -179,8 +187,20 @@ public class Discipline {
 		return null;
 	}
 
-@Override
+	@Override
 	public String toString() {
-		return ("* " + _course.getName() + " - " + _name);
+		return "* " + _course.getName() + " - " + _name;
+	}
+
+	@Override
+	public int compareTo(Discipline d2) {
+		int res = _course.compareTo(d2._course);
+
+		if(res != 0){
+			return res;
+		}
+		String o1 = Normalizer.normalize(getName(), Normalizer.Form.NFD);
+		String o2 = Normalizer.normalize(d2.getName(), Normalizer.Form.NFD);
+		return o1.compareTo(o2);
 	}
 }

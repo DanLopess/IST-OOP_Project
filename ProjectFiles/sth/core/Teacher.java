@@ -2,10 +2,7 @@ package sth.core;
 
 import sth.core.exception.BadEntryException;
 import sth.core.exception.NoSuchDisciplineIdException;
-import sth.core.Course;
-import sth.core.Discipline;
-import sth.core.Project;
-import sth.core.School;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Iterator;
@@ -48,7 +45,6 @@ public class Teacher extends Person {
 	 * creates a project to a certain discipline
 	 * @param dName name of the discipline
 	 * @param pName name of the project
-	 * @param description description of the project
 	 */
 	void createProject(String dName, String pName) {
 		Iterator<Discipline> iterator = _disciplines.iterator();
@@ -73,25 +69,16 @@ public class Teacher extends Person {
 
 @Override
 	public String toString () {
-		List<String> toString = new ArrayList<String>();
-		
-		toString.add("DOCENTE|"+ super.getId() + "|" + super.getName());
+		String toString = "DOCENTE|"+super.toString();
 
-		Iterator<Discipline> iterator = _disciplines.iterator();
-		Discipline d;
+		List<Discipline> disciplines = new ArrayList<>(_disciplines);
+		Collections.sort(disciplines);
+		Iterator<Discipline> iterator = disciplines.iterator();
 		while(iterator.hasNext()) {
-			d = iterator.next();
-			toString.add(d.toString());
+			Discipline d = iterator.next();
+			toString += "\n" + d.toString();
 		}
-
-		Collections.sort(toString);
-		Iterator<String> iterator2 = toString.iterator();
-		String s = new String();
-		while(iterator.hasNext()) {
-			iterator.next();
-			s = s + iterator.next() + "\n";
-		}
-		return s;
+		return toString;
 	}
 
 	void parseContext(String lineContext, School school) throws BadEntryException {
@@ -101,8 +88,7 @@ public class Teacher extends Person {
 			throw new BadEntryException("Invalid line context " + lineContext);
 
 		Course course = school.parseCourse(components[0]);
-		Discipline discipline = course.parseDiscipline(components[1]);
-
+		Discipline discipline = course.parseDiscipline(components[1], course);
 		addDiscipline(discipline);
 		discipline.addTeacher(this);
 	}

@@ -35,7 +35,6 @@ public class SchoolManager {
 	/**
 	 * @param datafile
 	 * @throws ImportFileException
-	 * @throws InvalidCourseSelectionException
 	 */
 	public void importFile(String datafile) throws ImportFileException {
 		try {
@@ -298,13 +297,18 @@ public class SchoolManager {
 			((Student)_loggedUser).submitProject(discipline, pName, text);
 	}
 
+<<<<<<< HEAD
 	public void fillSurvey (String discipline, String pName, int hours, String comment) throws NoSuchDisciplineIdException, 
 	NoSuchProjectIdException, NoSurveyIdException
+=======
+	public void fillSurvey (String discipline, String pName, int hours, String comment) throws NoSuchDisciplineIdException,
+	NoSuchProjectIdException 
+>>>>>>> 938b5c08fdb09b9776199ef482bb357340e7df28
 	{
 		if (this.isLoggedUserStudent())
 			((Student)_loggedUser).submitAnswerToSurvey(discipline, pName, hours, comment);
 	}
-	 
+
 	/**
 	 * === Representative's portal ===
 	 */
