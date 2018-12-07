@@ -240,7 +240,7 @@ public class SchoolManager {
 	}
 
 	public void closeProject(String discipline, String pName) throws NoSuchProjectIdException, 
-	NoSuchDisciplineIdException 
+	NoSuchDisciplineIdException , OpeningSurveyIdException
 	{
 		if(this.isLoggedUserProfessor()) {
 			Discipline d = ((Teacher)_loggedUser).getDiscipline(discipline);
@@ -284,12 +284,12 @@ public class SchoolManager {
 		// both teacher and student can get survey results
 		if(this.isLoggedUserProfessor() ) { 
 			Discipline d = (((Teacher)_loggedUser).getDiscipline(discipline));
-			String survey = d.surveyToString(pName);
+			String survey = d.surveyToString(pName, true);
 			return survey;
 		}
 		if (this.isLoggedUserStudent() || this.isLoggedUserRepresentative()) {
 			Discipline d = (((Student)_loggedUser).getDiscipline(discipline));
-			String survey = d.surveyToString(pName);
+			String survey = d.surveyToString(pName, false);
 			return survey;
 		}
 		return null;
@@ -326,7 +326,7 @@ public class SchoolManager {
 	}
 
 	public void cancelSurvey(String discipline, String pName) throws NoSuchDisciplineIdException, 
-	NoSuchProjectIdException, NonEmptySurveyIdException, NoSurveyIdException, SurveyIdFinishedException
+	NoSuchProjectIdException, NonEmptySurveyIdException, NoSurveyIdException, SurveyIdFinishedException, OpeningSurveyIdException
 	{
 		if (this.isLoggedUserRepresentative())	{
 			((Student)_loggedUser).cancelSurvey(discipline, pName);
@@ -357,7 +357,7 @@ public class SchoolManager {
 		}
 	}
 
-	public String getDisciplineSurveys(String discipline) throws NoSuchDisciplineIdException	{
+	public String getDisciplineSurveys(String discipline) throws NoSuchDisciplineIdException, NoSurveyIdException,NoSuchProjectIdException	{
 		if (this.isLoggedUserRepresentative())	{
 			return (((Student)_loggedUser).showSurveys(discipline));
 		}

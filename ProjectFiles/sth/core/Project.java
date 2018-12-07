@@ -7,6 +7,11 @@ import sth.core.exception.NoSuchDisciplineIdException;
 import sth.core.exception.DuplicateSurveyIdException;
 import sth.core.exception.NoSurveyIdException;
 import sth.core.exception.SurveyIdFinishedException;
+import sth.core.exception.OpeningSurveyIdException;
+import sth.core.exception.ClosingSurveyIdException;
+import sth.core.exception.OpeningSurveyIdException;
+import sth.core.exception.NonEmptySurveyIdException;
+import sth.core.exception.FinishingSurveyIdException;
 
 
 public class Project implements java.io.Serializable {
@@ -33,8 +38,10 @@ public class Project implements java.io.Serializable {
 		_survey = null;
 	}
 
-	void close() {
+	void close() throws OpeningSurveyIdException{
 		_closed = true;
+		if (_survey != null)
+			_survey.open();
 	}
 
 	boolean isClosed() {
@@ -79,23 +86,31 @@ public class Project implements java.io.Serializable {
 		
 	}
 
-	void cancelSurvey() throws SurveyIdFinishedException, NoSurveyIdException {
+	void cancelSurvey() throws SurveyIdFinishedException, NoSurveyIdException, NonEmptySurveyIdException, OpeningSurveyIdException {
 		if (_survey != null) {
+			if (_survey.getState() instanceof SurveyOpen) {
+				_survey.cancel(); //check if has answers
+				_survey = null;
+				return;
+			}
 			_survey.cancel();
 		} else {
 			throw new NoSurveyIdException("","");
 		}
 	}
 
-	void openSurvey() throws NoSurveyIdException {
+	void openSurvey() throws NoSurveyIdException, OpeningSurveyIdException {
 		if (_survey != null) {
-			_survey.open();
+			if (_survey.getState() instanceof SurveyOpen)
+				_survey = null; 
+			else 
+				_survey.open();
 		} else {
 			throw new NoSurveyIdException("","");
 		}
 	}
 
-	void closeSurvey() {
+	void closeSurvey() throws NoSurveyIdException, ClosingSurveyIdException {
 		if (_survey != null) {
 			_survey.close();
 		} else {
@@ -103,16 +118,12 @@ public class Project implements java.io.Serializable {
 		}
 	}
 
-	void finishSurvey() {
+	void finishSurvey() throws NoSurveyIdException, FinishingSurveyIdException {
 		if (_survey != null) {
 			_survey.finish();
 		} else {
 			throw new NoSurveyIdException("","");
 		}
-	}
-
-	String showSurveys() {
-		return null; // TODO
 	}
 
 	Survey getSurvey() {

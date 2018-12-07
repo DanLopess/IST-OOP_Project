@@ -6,6 +6,7 @@ import sth.core.SchoolManager;
 
 import sth.core.exception.NoSuchDisciplineIdException;
 import sth.core.exception.NoSuchProjectIdException;
+import sth.core.exception.NoSurveyIdException;
 import sth.app.exception.NoSurveyException;
 
 /**
@@ -23,7 +24,13 @@ public class DoShowSurveyResults extends sth.app.common.ProjectCommand {
   /** @see pt.tecnico.po.ui.Command#execute() */
   @Override
   public final void myExecute() throws NoSuchProjectIdException, NoSuchDisciplineIdException, NoSurveyException {
-    _receiver.getSurveyResults(_discipline.value(), _project.value());
+    try {
+      _display.clear();
+      _display.add(_receiver.getSurveyResults(_discipline.value(), _project.value()));
+      _display.display();
+    } catch (NoSurveyIdException e) {
+      throw new NoSurveyException(_discipline.value(), _project.value());
+    }
   }
 
 }

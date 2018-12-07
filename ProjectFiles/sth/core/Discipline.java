@@ -6,11 +6,15 @@ import sth.core.Course;
 import sth.core.Teacher;
 import sth.core.Project;
 import sth.core.Student;
+import sth.core.SurveyState;
+import sth.core.SurveyFinished;
 import sth.core.exception.NoSuchProjectIdException;
 import sth.core.exception.DuplicateProjectIdException;
 import sth.core.exception.NoSuchDisciplineIdException;
 import sth.core.exception.NoSuchPersonIdException;
 import sth.core.exception.NoSurveyIdException;
+import sth.core.exception.OpeningSurveyIdException;
+
 
 import java.text.Normalizer;
 import java.util.*;
@@ -118,7 +122,7 @@ public class Discipline implements Comparable<Discipline>, java.io.Serializable{
 		}
 	}
 
-	void closeProject(String name) throws NoSuchProjectIdException {
+	void closeProject(String name) throws NoSuchProjectIdException, OpeningSurveyIdException {
 		Project p = this.getProject(name);
 		p.close();
 	}
@@ -141,68 +145,50 @@ public class Discipline implements Comparable<Discipline>, java.io.Serializable{
 		return submissionsToString;
 	}
 
-	String surveyToString(String pName) throws NoSuchProjectIdException {
+	String surveyToString(String pName, boolean detailed) throws NoSuchProjectIdException, NoSurveyIdException {
 		Project p = this.getProject(pName);
-		Survey s = p.getSurvey();
-		String results = new String();
-		results = results + _name + " - " + p.getName();
-		results = results + s.toString();
-		return results;
-	}
-
-	void submitAnswerToSurvey (String pName, int hours, String comment, int id) throws NoSuchProjectIdException, NoSurveyIdException
-	{
-		Project p = this.getProject(pName);
-		if (p.studentSubmited(id)) {
-			if (p.getSurvey() != null) {
-				p.answerSurvey(hours, comment);
-			} else {
-				throw new NoSurveyIdException("","");
+		Survey s = p.getSurvey(); 
+		String toString = new String("");
+		if (s != null){
+			String surveyState = s.toString();
+			toString = toString + _name + " - " + pName + " " + surveyState + "\n";
+			if (s.getState() instanceof SurveyFinished) {
+				toString = toString + s.printAnswers(detailed);
 			}
-		} else {	
-			throw new NoSuchProjectIdException(pName);
+			return toString;
 		}
-	}
-	void createSurvey(String discipline, String pName) throws NoSuchDisciplineIdException, 
-	NoSuchProjectIdException 
-	{
-		//if... representative, call student function: createSurvey
+		else
+			throw new NoSurveyIdException("", "");
 	}
 
-	void cancelSurvey(String discipline, String pName) throws NoSuchDisciplineIdException, 
-	NoSuchProjectIdException 
-	{
-		//if... representative, call student function: cancelSurvey...
-	}
+	String showSurveys() throws NoSuchDisciplineIdException, NoSurveyIdException, NoSuchProjectIdException {
+		Iterator<Project> iterator = _projects.iterator();
+		List<String> projectNames = new ArrayList<String>();
+		Project p;
+		String result = new String("");
 
-	void openSurvey(String discipline, String pName) throws NoSuchDisciplineIdException, 
-	NoSuchProjectIdException 
-	{
+		while(iterator.hasNext()) {
+			p = iterator.next();
+			projectNames.add(p.getName());
+		}
 		
+		Collections.sort(projectNames); // sort projects name
+
+		Iterator<String> iterator2 = projectNames.iterator();
+		while(iterator.hasNext()) {
+			Survey s = this.getProject(iterator2.next()).getSurvey(); 
+			if (s != null){
+				result = result + surveyToString(iterator2.next(), false);
+			}
+		}
+		return result;
 	}
 
-	void closeSurvey(String discipline, String pName) throws NoSuchDisciplineIdException, 
-	NoSuchProjectIdException 
-	{
-		
-	}
-
-	void finishSurvey(String discipline, String pName) throws NoSuchDisciplineIdException, 
-	NoSuchProjectIdException 
-	{
-		
-	}
-
-	String showSurveys(String discipline) throws NoSuchDisciplineIdException	{
-		return null;
-	}
-
-	@Override
+@Override
 	public String toString() {
 		return "* " + _course.getName() + " - " + _name;
 	}
 
-	@Override
 	public int compareTo(Discipline d2) {
 		int res = _course.compareTo(d2._course);
 

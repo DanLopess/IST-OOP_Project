@@ -5,6 +5,8 @@ import pt.tecnico.po.ui.DialogException;
 import pt.tecnico.po.ui.Input;
 import sth.core.SchoolManager;
 import sth.core.exception.NoSuchDisciplineIdException;
+import sth.core.exception.NoSurveyIdException;
+import sth.core.exception.NoSuchProjectIdException;
 
 /**
  * 4.6.6. Show discipline surveys.
@@ -30,6 +32,10 @@ public class DoShowDisciplineSurveys extends Command<SchoolManager> {
       _display.display();
     } catch (NoSuchDisciplineIdException e) {
       e.getStackTrace();
+    } catch (NoSurveyIdException e) {
+      // does nothing
+    } catch (NoSuchProjectIdException e) {
+      // does nothing
     }
   }
 }

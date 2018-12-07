@@ -1,9 +1,7 @@
 - observer nas notifica��es
-- lembrar de verificar se a survey existe (se devolveu string ou null)
 
 TODO:
 - Notificacoes
-- Survey
 
 
 

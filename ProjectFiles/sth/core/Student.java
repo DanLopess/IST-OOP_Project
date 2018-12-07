@@ -4,6 +4,12 @@ import sth.core.exception.BadEntryException;
 import sth.core.exception.NoSuchDisciplineIdException;
 import sth.core.exception.NoSuchProjectIdException;
 import sth.core.exception.NoSurveyIdException;
+import sth.core.exception.NonEmptySurveyIdException;
+import sth.core.exception.SurveyIdFinishedException;
+import sth.core.exception.DuplicateSurveyIdException;
+import sth.core.exception.OpeningSurveyIdException;
+import sth.core.exception.ClosingSurveyIdException;
+import sth.core.exception.FinishingSurveyIdException;
 import sth.core.Course;
 import sth.core.Discipline;
 import sth.core.School;
@@ -92,18 +98,32 @@ public class Student extends Person {
 	void submitAnswerToSurvey (String discipline, String pName, int hours, String comment) throws NoSuchDisciplineIdException, NoSuchProjectIdException, 
 	NoSurveyIdException
 	{
-		Discipline d = this.getDiscipline()
+		Discipline d = this.getDiscipline(discipline);
 		Project p = d.getProject(pName);
 		Survey s = p.getSurvey();
 
-		if (!_surveysAnswered.contains(s)) {
-			d.submitAnswerToSurvey(pName, hours, comment, super.getId());
-			_surveysAnswered.add(s);
+		if (s != null) {
+			p.answerSurvey(hours, comment);
+			if (!_surveysAnswered.contains(s)) {
+				if (p.studentSubmited(super.getId())) {
+					if (p.getSurvey() != null) {
+						p.answerSurvey(hours, comment);
+					} else {
+						throw new NoSurveyIdException("","");
+					}
+				} else {	
+					throw new NoSuchProjectIdException(pName);
+				}
+				_surveysAnswered.add(s);
+			} else {
+				//DO nothing because has already answered survey
+			}
 		} else {
-			//DO nothing because has already answered survey
+			throw new NoSurveyIdException("","");
 		}
-	}
 
+		
+	}
 
 	/**
 	 * === Representative related methods ===
@@ -117,37 +137,49 @@ public class Student extends Person {
 	}
 
 	void createSurvey(String discipline, String pName) throws NoSuchDisciplineIdException, 
-	NoSuchProjectIdException 
+	NoSuchProjectIdException, DuplicateSurveyIdException
 	{
-		//if... representative, call student function: createSurvey
+		Discipline d = _course.getDiscipline(discipline); // can perform actions only if discipline belongs to representative's course
+		Project p = d.getProject(pName);
+		p.createSurvey();
+		
 	}
 
 	void cancelSurvey(String discipline, String pName) throws NoSuchDisciplineIdException, 
-	NoSuchProjectIdException 
+	NoSuchProjectIdException, NonEmptySurveyIdException, NoSurveyIdException, SurveyIdFinishedException, OpeningSurveyIdException
 	{
-		//if... representative, call student function: cancelSurvey...
+		Discipline d = _course.getDiscipline(discipline);
+		Project p = d.getProject(pName);
+		p.cancelSurvey();
 	}
 
 	void openSurvey(String discipline, String pName) throws NoSuchDisciplineIdException, 
-	NoSuchProjectIdException 
+	NoSuchProjectIdException , NoSurveyIdException, OpeningSurveyIdException
 	{
-		
+				Discipline d = this.getDiscipline(discipline);
+		Project p = d.getProject(pName);
+		p.openSurvey();
 	}
 
 	void closeSurvey(String discipline, String pName) throws NoSuchDisciplineIdException, 
-	NoSuchProjectIdException 
+	NoSuchProjectIdException , NoSurveyIdException, ClosingSurveyIdException
 	{
-		
+				Discipline d = this.getDiscipline(discipline);
+		Project p = d.getProject(pName);
+		p.closeSurvey();
 	}
 
 	void finishSurvey(String discipline, String pName) throws NoSuchDisciplineIdException, 
-	NoSuchProjectIdException 
+	NoSuchProjectIdException , NoSurveyIdException, FinishingSurveyIdException
 	{
-		
+		Discipline d = this.getDiscipline(discipline);
+		Project p = d.getProject(pName);
+		p.finishSurvey();
 	}
 
-	String showSurveys(String discipline) throws NoSuchDisciplineIdException	{
-		return null;
+	String showSurveys(String discipline) throws NoSuchDisciplineIdException, NoSurveyIdException, NoSuchProjectIdException {
+		Discipline d = this.getDiscipline(discipline);
+		return d.showSurveys();
 	}	
 
 	@Override

@@ -8,6 +8,10 @@ import sth.core.Person;
 import sth.core.Answer;
 import sth.core.exception.SurveyIdFinishedException;
 import sth.core.exception.NoSurveyIdException;
+import sth.core.exception.ClosingSurveyIdException;
+import sth.core.exception.OpeningSurveyIdException;
+import sth.core.exception.NonEmptySurveyIdException;
+import sth.core.exception.FinishingSurveyIdException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Iterator;
@@ -15,11 +19,15 @@ import java.util.Iterator;
 
 public class Survey implements java.io.Serializable {
 	private List<Answer> _answers;
-	private int _nAnswers;
     private SurveyState _state = new SurveyClosed(this);
+	
 	/** Serial number for serialization. */
   	private static final long serialVersionUID = 201810051538L;
-	Survey() {}
+	
+	Survey() {
+		_answers = new ArrayList<Answer>();
+		_state = new SurveyOpen(this);
+	}
 
 	void setState(SurveyState state) { 
 		_state = state; 
@@ -30,55 +38,92 @@ public class Survey implements java.io.Serializable {
 	}
 
 	int getNAnswers() {
-		return _nAnswers;
+		return _answers.size();
 	}
 
-	void open() {
-		if (!(_state instanceof SurveyFinished))
+	void open() throws OpeningSurveyIdException {
+		if (_state instanceof SurveyClosed)
 			_state = new SurveyOpen(this);
+		else {
+			throw new OpeningSurveyIdException("","");
+		}
 	}
 
-	void close() {
-		if (!(_state instanceof SurveyFinished))
-			_state = new SurveyOpen(this);
+	void close() throws ClosingSurveyIdException {
+		if (_state instanceof SurveyOpen)
+			_state = new SurveyClosed(this);
+		else if (_state instanceof SurveyClosed) {
+			// Do nothing
+		}
+		else {
+			throw new ClosingSurveyIdException("","");
+		}
 	}
 
-	void finish() {
-		// TODO in final version
+	void finish() throws FinishingSurveyIdException {
+		if(_state instanceof SurveyClosed) {
+			_state = new SurveyFinished(this);
+		} else {
+			throw new FinishingSurveyIdException("","");
+		}
 	}
 
-	void cancel() throws SurveyIdFinishedException {
-		if (_survey.getState() instanceof SurveyOpen)
-			_survey = null; 
-		else if (_survey.getState() instanceof SurveyClosed)
-			_survey.open();
-		else if (_survey.getState() instanceof SurveyFinished)
+	void cancel() throws SurveyIdFinishedException, NonEmptySurveyIdException, OpeningSurveyIdException {
+		if (this.getState() instanceof SurveyClosed)
+			this.open();
+		else if (_state instanceof SurveyFinished)
 			throw new SurveyIdFinishedException("","");
+		else if (_state instanceof SurveyOpen && _answers.size()>0) {
+			throw new NonEmptySurveyIdException("","");
+		}
 	}
 
 	void addAnswer(Answer a) throws NoSurveyIdException{
-		if(_state instanceof SurveyOpen)
+		if(_state instanceof SurveyOpen){
 			_answers.add(a);
+		}
 		else
 			throw new NoSurveyIdException("","");
 	}
 
-	int getAverage() {
+	String getTimes(boolean detailed) {
 		Iterator<Answer> iterator = _answers.iterator();
+		int min=0;
+		int max = 0;
 		int sum = 0;
+
+		if(iterator.hasNext())
+			min = iterator.next().getHours(); // initialize min
 
 		while(iterator.hasNext()) {
 			int i = iterator.next().getHours();
+			if (i > max)
+				max = i;
+			if (i < min)
+				min = i;
 			sum+=i;
 		}
-		if (sum != 0)
-			return ((int)(sum/_answers.size()));
+		if (sum != 0){
+			int average = ((int)(sum/_answers.size()));
+			if (detailed)
+				return min + ", "+ average + ", " + max;
+			else
+				return "" + average;
+		}
 		else
-			return 0;
+			return "0, 0, 0";
+	}
+
+	String printAnswers(boolean detailed) {
+		if (detailed)
+			return " * Número de respostas: " + _answers.size() + "\n " + " * Tempo médio (horas) (mínimo, médio, máximo): " + this.getTimes(true);
+		else {
+			return " * Número de respostas: " + _answers.size() + "\n " + " * Tempo médio (horas) (mínimo, médio, máximo): " + this.getTimes(false);
+		}
 	}
 
 @Override
 	public String toString() {
-		return ""; // (state) .. if open show open, if finished, show info, else show closed
+		return _state.getName();
 	}
 }

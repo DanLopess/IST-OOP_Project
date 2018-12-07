@@ -2,6 +2,7 @@ package sth.core;
 
 import java.text.Normalizer;
 import java.util.*;
+import sth.core.exception.NoSuchDisciplineIdException;
 
 public class Course implements Comparable<Course>, java.io.Serializable {
 	private String _name;
@@ -50,6 +51,17 @@ public class Course implements Comparable<Course>, java.io.Serializable {
 			if(s.getId() == st.getId())
 				iterator.remove();
 		}
+	}
+
+	Discipline getDiscipline(String discipline) throws NoSuchDisciplineIdException {
+		Iterator<Discipline> iterator = _disciplines.iterator();
+
+		while(iterator.hasNext()) {
+			Discipline d = iterator.next();
+			if (d.getName().equals(discipline))
+				return d;
+		}
+		throw new NoSuchDisciplineIdException(discipline);
 	}
 
 

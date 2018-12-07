@@ -11,7 +11,7 @@ import sth.core.exception.NoSurveyIdException;
 import sth.core.exception.SurveyIdFinishedException;
 import sth.core.exception.NoSuchDisciplineIdException;
 import sth.core.exception.NoSuchProjectIdException;
-
+import sth.core.exception.OpeningSurveyIdException;
 
 /**
  * 4.5.2. Cancel survey.
@@ -35,6 +35,8 @@ public class DoCancelSurvey extends sth.app.common.ProjectCommand {
       throw new NoSurveyException(_discipline.value(), _project.value());
     } catch (SurveyIdFinishedException sfe) {
       throw new SurveyFinishedException(_discipline.value(), _project.value());
+    } catch (OpeningSurveyIdException ose) {
+      // does nothing
     }
   }
 
