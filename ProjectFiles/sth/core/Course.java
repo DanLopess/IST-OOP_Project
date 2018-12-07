@@ -11,7 +11,7 @@ public class Course implements Comparable<Course>, java.io.Serializable {
 	/** Serial number for serialization. */
 	private static final long serialVersionUID = 201810051538L;
 
-	public Course (String name) {
+	Course (String name) {
 		_name = name;
 		_disciplines = new ArrayList<Discipline>();
 		_students = new HashMap<Integer, Student>(); // key is students' id for easy mapping
@@ -22,7 +22,7 @@ public class Course implements Comparable<Course>, java.io.Serializable {
 		return _name;
 	}
 
-	void addDiscipline (Discipline d) {
+	private void addDiscipline (Discipline d) {
 		if(!(_disciplines.contains(d))) {
 			_disciplines.add(d);
 		}

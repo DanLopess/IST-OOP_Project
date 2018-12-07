@@ -32,7 +32,7 @@ public class Student extends Person {
 	 * @param rep boolean to indicate if student is a representative or not
 	 *
 	 */
-	public Student (int id, String name, int phoneNumber, boolean rep) throws BadEntryException {
+	Student (int id, String name, int phoneNumber, boolean rep) throws BadEntryException {
 		super(id, name, phoneNumber);
 		_isRepresentative = rep;
 		_disciplines = new ArrayList<Discipline>();

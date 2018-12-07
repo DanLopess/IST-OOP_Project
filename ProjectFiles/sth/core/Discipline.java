@@ -26,7 +26,7 @@ public class Discipline implements Comparable<Discipline>, java.io.Serializable{
   	/** Serial number for serialization. */
   	private static final long serialVersionUID = 201810051538L;
 	  
-	public Discipline (String name, int capacity, Course c) {
+	Discipline (String name, int capacity, Course c) {
 		_name = name;
 		_capacity = capacity;
 		_course = c;

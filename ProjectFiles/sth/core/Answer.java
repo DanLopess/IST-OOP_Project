@@ -6,7 +6,7 @@ public class Answer implements java.io.Serializable{
   	/** Serial number for serialization. */
   	private static final long serialVersionUID = 201810051538L;
 	  
-	public Answer(String message, int hours) {
+	Answer(String message, int hours) {
 		_message = message;
 		_hours = hours;
 	}
