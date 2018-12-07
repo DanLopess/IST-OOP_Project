@@ -6,7 +6,7 @@ public class Submission implements java.io.Serializable {
   	/** Serial number for serialization. */
   	private static final long serialVersionUID = 201810051538L;
 	  
-	public Submission(String message, int id) {
+	Submission(String message, int id) {
 		_message = message;
 		_id = id;
 	}

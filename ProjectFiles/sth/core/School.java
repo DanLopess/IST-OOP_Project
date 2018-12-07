@@ -99,7 +99,7 @@ public class School implements java.io.Serializable {
    	* This method returns a list of persons with all school's users.
 	*
    */
-	public Map<Integer, Person> getAllUsers() {
+	Map<Integer, Person> getAllUsers() {
 		return _people;
 	}
 }

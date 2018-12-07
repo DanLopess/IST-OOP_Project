@@ -27,7 +27,7 @@ public abstract class Person implements java.io.Serializable{
 	/*
 	* setPhoneNumber - changes Person's phone number
 	*/
-	public void setPhoneNumber(int phoneNumber) {
+	void setPhoneNumber(int phoneNumber) {
 		_phoneNumber = phoneNumber;
 	}
 

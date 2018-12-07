@@ -67,7 +67,7 @@ public class SchoolManager {
 		_loggedUser = _school.parsePersonById(id);
 	}
 
-	public Object readObject(String inputFilename) throws IOException, BadEntryException, ClassNotFoundException {
+	private Object readObject(String inputFilename) throws IOException, BadEntryException, ClassNotFoundException {
 		ObjectInputStream obIn = null;
 		try { 
 			FileInputStream fpin = new FileInputStream(inputFilename);
@@ -97,7 +97,7 @@ public class SchoolManager {
         }
 	}
 	
-	public void saveObject(String outputFilename, Object anObject) throws IOException {
+	private void saveObject(String outputFilename, Object anObject) throws IOException {
 		ObjectOutputStream obOut = null;
 		try {
 			FileOutputStream fpout = null;
@@ -171,7 +171,7 @@ public class SchoolManager {
 	 * and using each user individual toString
 	 * returns all those users' toString
 	 */
-	public String printUsers(Map<Integer,Person> users) {
+	private String printUsers(Map<Integer,Person> users) {
 		//Convert HashMap to TreeMap.It will be sorted in natural order. (by id)
 		Map<Integer,Person> usersTree = new TreeMap<Integer,Person>(users); 
 		String toStringLines = new String();

@@ -64,7 +64,7 @@ public class Teacher extends Person {
 	/**
 	 * @param d is the discipline being added to teacher's _disciplines
 	 */
-	void addDiscipline(Discipline d) {
+	private void addDiscipline(Discipline d) {
 		_disciplines.add(d);
 		d.addTeacher(this);
 	}
