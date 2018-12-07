@@ -16,7 +16,6 @@ public class DoShowProjectSubmissions extends sth.app.common.ProjectCommand {
    */
   public DoShowProjectSubmissions(SchoolManager receiver) {
     super(Label.SHOW_PROJECT_SUBMISSIONS, receiver);
-    //FIXME initialize input fields if needed
   }
 
   /** @see sth.app.common.ProjectCommand#myExecute() */

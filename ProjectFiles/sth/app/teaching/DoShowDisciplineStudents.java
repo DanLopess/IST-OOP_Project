@@ -31,11 +31,11 @@ public class DoShowDisciplineStudents extends Command<SchoolManager> {
   @Override
   public final void execute() throws DialogException {
 	_form.parse();
-
+	_display.clear();
   	try {
-	  String s = _receiver.getDisciplineStudents(_disciplineName.value());
-	  _display.addLine(s);
-	  _display.display();
+		String s = _receiver.getDisciplineStudents(_disciplineName.value());
+		_display.add(s);
+		_display.display();
   	} catch (NoSuchDisciplineIdException e) {
 	  	e.printStackTrace();
   	}

@@ -17,7 +17,6 @@ public class DoShowSurveyResults extends sth.app.common.ProjectCommand {
    */
   public DoShowSurveyResults(SchoolManager receiver) {
     super(Label.SHOW_SURVEY_RESULTS, receiver);
-    //FIXME initialize input fields if needed
   }
 
   /** @see sth.app.common.ProjectCommand#myExecute() */
