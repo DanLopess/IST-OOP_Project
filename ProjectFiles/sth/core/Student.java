@@ -3,6 +3,8 @@ package sth.core;
 import sth.core.exception.BadEntryException;
 import sth.core.exception.NoSuchDisciplineIdException;
 import sth.core.exception.NoSuchProjectIdException;
+import sth.core.exception.NoSurveyIdException;
+
 import sth.core.Course;
 import sth.core.Discipline;
 import sth.core.School;
@@ -85,24 +87,11 @@ public class Student extends Person {
 		prjct.addSubmission(this.getId(), s);
 	}
 
-<<<<<<< HEAD
-	void submitAnswerToSurvey (String discipline, String pName, int hours, String comment) throws NoSuchDisciplineIdException,
-	NoSuchProjectIdException 
+	void submitAnswerToSurvey (String discipline, String pName, int hours, String comment) throws NoSurveyIdException,
+	NoSuchProjectIdException, NoSuchDisciplineIdException
 	{
-
 		Discipline d = this.getDiscipline(discipline);
-		d.submitAnswerToSurvey()
-		// TODO if student has submited... / if student has not answered to survey / send user id so can check if has submitted
-		// create answer type
-=======
-	void submitAnswerToSurvey (String dName, String pName, int hours, String comentario) throws NoSuchDisciplineIdException,
-	NoSuchProjectIdException 
-	{
-		Discipline dis = this.getDiscipline(dName);
-		Project project = dis.getProject(pName);
-		Submission submission = new Submission(comentario, hours);
-		project.addSubmission(this.getId(), submission);
->>>>>>> ac50d345f7eab14d593c25f1a164ac3e5a1984b5
+		d.submitAnswerToSurvey(pName,hours,comment,super.getId());
 	}
 
 

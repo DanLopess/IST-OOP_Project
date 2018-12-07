@@ -9,7 +9,9 @@ import sth.core.Student;
 import sth.core.exception.NoSuchProjectIdException;
 import sth.core.exception.NoSuchDisciplineIdException;
 import sth.core.exception.NoSuchPersonIdException;
+import sth.core.exception.NoSurveyIdException;
 import java.util.*;
+
 
 public class Discipline {
 	private String _name;
@@ -132,7 +134,11 @@ public class Discipline {
 	{
 		Project p = this.getProject(pName);
 		if (p.studentSubmited(id)) {
-
+			if (p.getSurvey() != null) {
+				p.answerSurvey(hours, comment);
+			} else {
+				throw new NoSurveyIdException("","");
+			}
 		} else {	
 			throw NoSuchProjectIdException(pName);
 		}

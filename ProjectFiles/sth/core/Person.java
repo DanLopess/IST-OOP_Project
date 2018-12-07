@@ -53,7 +53,9 @@ public abstract class Person {
 	/* 
 	* toString - 'Compiles' person's info into a String 
 	*/
-	public abstract String toString();
+	public String toString(){
+		return _id+"|"+_phoneNumber+"|"+_name;
+	}
 
 	/**
 	 * Parses the context information for a person from the import file.
