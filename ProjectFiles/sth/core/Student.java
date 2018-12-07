@@ -151,7 +151,6 @@ public class Student extends Person {
 			toString = "ALUNO|" + super.toString();
 		}
 
-		// Sao as disciplinas q teem de ser ordenadas e nao as Strings!!!\
 		List<Discipline> disciplines = new ArrayList<>(_disciplines);
 		Collections.sort(disciplines);
 		Iterator<Discipline> iterator = disciplines.iterator();
@@ -163,7 +162,7 @@ public class Student extends Person {
 	}
 
 	void parseContext(String lineContext, School school) throws BadEntryException {
-		String components[] =  lineContext.split("\\|"); // TODO USE THIS TO SORT STRINGS IN APP
+		String components[] =  lineContext.split("\\|"); 
 
 		if (components.length != 2)
 			throw new BadEntryException("Invalid line context " + lineContext);
