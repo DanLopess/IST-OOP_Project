@@ -5,7 +5,12 @@ import pt.tecnico.po.ui.Input;
 import sth.core.SchoolManager;
 
 import sth.core.exception.NoSuchProjectIdException;
+import sth.core.exception.NoSurveyIdException;
 import sth.core.exception.NoSuchDisciplineIdException;
+import sth.app.exception.NoSurveyException;
+import sth.app.exception.NoSuchDisciplineException;
+import sth.app.exception.NoSuchProjectException;
+
 /**
  * 4.5.2. Answer survey.
  */
@@ -25,8 +30,16 @@ public class DoAnswerSurvey extends sth.app.common.ProjectCommand {
 
   /** @see sth.app.common.ProjectCommand#myExecute() */
   @Override
-  public final void myExecute() throws NoSuchProjectIdException, NoSuchDisciplineIdException, DialogException {
-    _receiver.fillSurvey(_discipline.value(), _project.value(), _hours.value(), _comment.value());
+  public final void myExecute() throws DialogException {
+    try {
+      _receiver.fillSurvey(_discipline.value(), _project.value(), _hours.value(), _comment.value());
+    } catch (NoSurveyIdException nse) {
+      throw new NoSurveyException(_discipline.value(), _project.value());
+    } catch (NoSuchDisciplineIdException nsde) {
+      throw new NoSuchDisciplineException(_discipline.value());
+    } catch (NoSuchProjectIdException nspe) {
+      throw new NoSuchProjectException(_discipline.value(), _project.value());
+    }
   }
 
 }

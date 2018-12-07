@@ -298,7 +298,7 @@ public class SchoolManager {
 	}
 
 	public void fillSurvey (String discipline, String pName, int hours, String comment) throws NoSuchDisciplineIdException,
-	NoSuchProjectIdException 
+	NoSuchProjectIdException, NoSurveyIdException
 	{
 		if (this.isLoggedUserStudent())
 			((Student)_loggedUser).submitAnswerToSurvey(discipline, pName, hours, comment);
