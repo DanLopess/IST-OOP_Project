@@ -88,21 +88,11 @@ public class Student extends Person {
 		prjct.addSubmission(this.getId(), s);
 	}
 
-<<<<<<< HEAD
 	void submitAnswerToSurvey (String discipline, String pName, int hours, String comment) throws NoSurveyIdException,
 	NoSuchProjectIdException, NoSuchDisciplineIdException
 	{
 		Discipline d = this.getDiscipline(discipline);
 		d.submitAnswerToSurvey(pName,hours,comment,super.getId());
-=======
-	void submitAnswerToSurvey (String dName, String pName, int hours, String comentario) throws NoSuchDisciplineIdException,
-	NoSuchProjectIdException 
-	{
-		Discipline dis = this.getDiscipline(dName);
-		Project project = dis.getProject(pName);
-		Submission submission = new Submission(comentario, hours);
-		project.addSubmission(this.getId(), submission);
->>>>>>> 938b5c08fdb09b9776199ef482bb357340e7df28
 	}
 
 

@@ -10,18 +10,11 @@ import sth.core.exception.NoSuchProjectIdException;
 import sth.core.exception.NoSuchDisciplineIdException;
 import sth.core.exception.NoSuchPersonIdException;
 import sth.core.exception.NoSurveyIdException;
-<<<<<<< HEAD
-import java.util.*;
-
-
-public class Discipline {
-=======
 
 import java.text.Normalizer;
 import java.util.*;
 
 public class Discipline implements Comparable<Discipline>{
->>>>>>> 938b5c08fdb09b9776199ef482bb357340e7df28
 	private String _name;
 	private int _capacity;
 	private Course _course;
