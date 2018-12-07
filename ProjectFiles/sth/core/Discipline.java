@@ -22,6 +22,7 @@ public class Discipline implements Comparable<Discipline>, java.io.Serializable{
 	private Map<Integer, Teacher> _teachers;
 	private Map<Integer, Student> _students;
 	private List<Project> _projects;
+
   	/** Serial number for serialization. */
   	private static final long serialVersionUID = 201810051538L;
 	  
@@ -161,8 +162,6 @@ public class Discipline implements Comparable<Discipline>, java.io.Serializable{
 		} else {	
 			throw new NoSuchProjectIdException(pName);
 		}
-		// TODO if student has submited... / if student has not answered to survey
-		// create answer type
 	}
 	void createSurvey(String discipline, String pName) throws NoSuchDisciplineIdException, 
 	NoSuchProjectIdException 

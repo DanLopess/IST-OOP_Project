@@ -6,6 +6,8 @@ import sth.core.SurveyOpen;
 import sth.core.SurveyFinished;
 import sth.core.Person;
 import sth.core.Answer;
+import sth.core.exception.SurveyIdFinishedException;
+import sth.core.exception.NoSurveyIdException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Iterator;
@@ -37,17 +39,28 @@ public class Survey implements java.io.Serializable {
 	}
 
 	void close() {
-		// TODO in final version
+		if (!(_state instanceof SurveyFinished))
+			_state = new SurveyOpen(this);
 	}
 
 	void finish() {
 		// TODO in final version
 	}
 
-	void addAnswer(Answer a) {
+	void cancel() throws SurveyIdFinishedException {
+		if (_survey.getState() instanceof SurveyOpen)
+			_survey = null; 
+		else if (_survey.getState() instanceof SurveyClosed)
+			_survey.open();
+		else if (_survey.getState() instanceof SurveyFinished)
+			throw new SurveyIdFinishedException("","");
+	}
+
+	void addAnswer(Answer a) throws NoSurveyIdException{
 		if(_state instanceof SurveyOpen)
 			_answers.add(a);
-		
+		else
+			throw new NoSurveyIdException("","");
 	}
 
 	int getAverage() {

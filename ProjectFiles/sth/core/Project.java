@@ -6,6 +6,7 @@ import sth.core.exception.NoSuchProjectIdException;
 import sth.core.exception.NoSuchDisciplineIdException;
 import sth.core.exception.DuplicateSurveyIdException;
 import sth.core.exception.NoSurveyIdException;
+import sth.core.exception.SurveyIdFinishedException;
 
 
 public class Project implements java.io.Serializable {
@@ -59,39 +60,59 @@ public class Project implements java.io.Serializable {
 
 	void answerSurvey(int hours, String comment) throws NoSurveyIdException {
 		if (_survey != null) {
-			if (_survey.getState() instanceof SurveyOpen)
-				_survey.addAnswer(new Answer(comment, hours));
+			_survey.addAnswer(new Answer(comment, hours));
 		} else {
 			throw new NoSurveyIdException("","");
 		}
 	}
 
-	void createSurvey() throws DuplicateSurveyIdException{
-		if (_survey == null) {
-			_survey = new Survey();
+	void createSurvey() throws DuplicateSurveyIdException, NoSuchProjectIdException {
+		if (!_closed){
+			if (_survey == null) {
+				_survey = new Survey();
+			} else {
+				throw new DuplicateSurveyIdException("","");
+			}
 		} else {
-			throw new DuplicateSurveyIdException("","");
+			throw new NoSuchProjectIdException("");
+		}
+		
+	}
+
+	void cancelSurvey() throws SurveyIdFinishedException, NoSurveyIdException {
+		if (_survey != null) {
+			_survey.cancel();
+		} else {
+			throw new NoSurveyIdException("","");
 		}
 	}
 
-	void cancelSurvey() {
-		//if... representative, call student function: cancelSurvey...
-	}
-
-	void openSurvey() {
-		
+	void openSurvey() throws NoSurveyIdException {
+		if (_survey != null) {
+			_survey.open();
+		} else {
+			throw new NoSurveyIdException("","");
+		}
 	}
 
 	void closeSurvey() {
-		
+		if (_survey != null) {
+			_survey.close();
+		} else {
+			throw new NoSurveyIdException("","");
+		}
 	}
 
 	void finishSurvey() {
-		
+		if (_survey != null) {
+			_survey.finish();
+		} else {
+			throw new NoSurveyIdException("","");
+		}
 	}
 
 	String showSurveys() {
-		return null;
+		return null; // TODO
 	}
 
 	Survey getSurvey() {

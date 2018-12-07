@@ -4,7 +4,6 @@ import sth.core.exception.BadEntryException;
 import sth.core.exception.NoSuchDisciplineIdException;
 import sth.core.exception.NoSuchProjectIdException;
 import sth.core.exception.NoSurveyIdException;
-
 import sth.core.Course;
 import sth.core.Discipline;
 import sth.core.School;
@@ -23,6 +22,7 @@ public class Student extends Person {
 	private boolean _isRepresentative;
 	private List<Discipline> _disciplines;
 	private Course _course;
+	private List<Survey> _surveysAnswered;
 
 	/**
 	 * Student's class constructor
@@ -35,7 +35,8 @@ public class Student extends Person {
 	public Student (int id, String name, int phoneNumber, boolean rep) throws BadEntryException {
 		super(id, name, phoneNumber);
 		_isRepresentative = rep;
-		_disciplines = new ArrayList<>();
+		_disciplines = new ArrayList<Discipline>();
+		_surveysAnswered = new ArrayList<Survey>();
 	}
 
 	/**
@@ -87,14 +88,21 @@ public class Student extends Person {
 		Submission s = new Submission(message, this.getId());
 		prjct.addSubmission(this.getId(), s);
 	}
-
-	void submitAnswerToSurvey (String discipline, String pName, int hours, String comment) throws NoSurveyIdException,
-	NoSuchProjectIdException, NoSuchDisciplineIdException
+	
+	void submitAnswerToSurvey (String discipline, String pName, int hours, String comment) throws NoSuchDisciplineIdException, NoSuchProjectIdException, 
+	NoSurveyIdException
 	{
-		Discipline d = this.getDiscipline(discipline);
-		d.submitAnswerToSurvey(pName,hours,comment,super.getId());
-	}
+		Discipline d = this.getDiscipline()
+		Project p = d.getProject(pName);
+		Survey s = p.getSurvey();
 
+		if (!_surveysAnswered.contains(s)) {
+			d.submitAnswerToSurvey(pName, hours, comment, super.getId());
+			_surveysAnswered.add(s);
+		} else {
+			//DO nothing because has already answered survey
+		}
+	}
 
 
 	/**

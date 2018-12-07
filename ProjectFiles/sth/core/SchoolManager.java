@@ -279,7 +279,7 @@ public class SchoolManager {
 	}
 
 	public String getSurveyResults(String discipline, String pName) throws NoSuchDisciplineIdException , 
-	NoSuchProjectIdException 
+	NoSuchProjectIdException, NoSurveyIdException
 	{
 		// both teacher and student can get survey results
 		if(this.isLoggedUserProfessor() ) { 
@@ -287,7 +287,7 @@ public class SchoolManager {
 			String survey = d.surveyToString(pName);
 			return survey;
 		}
-		if (this.isLoggedUserStudent()) {
+		if (this.isLoggedUserStudent() || this.isLoggedUserRepresentative()) {
 			Discipline d = (((Student)_loggedUser).getDiscipline(discipline));
 			String survey = d.surveyToString(pName);
 			return survey;
