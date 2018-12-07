@@ -71,10 +71,12 @@ public class Teacher extends Person {
 	public String toString () {
 		String toString = "DOCENTE|"+super.toString();
 
-		Iterator<Discipline> iterator = _disciplines.iterator();
+		List<Discipline> disciplines = new ArrayList<>(_disciplines);
+		Collections.sort(disciplines);
+		Iterator<Discipline> iterator = disciplines.iterator();
 		while(iterator.hasNext()) {
 			Discipline d = iterator.next();
-			toString += "\n"+d.toString();
+			toString += "\n" + d.toString();
 		}
 		return toString;
 	}

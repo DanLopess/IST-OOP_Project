@@ -86,16 +86,6 @@ public class Student extends Person {
 		prjct.addSubmission(this.getId(), s);
 	}
 
-<<<<<<< HEAD
-	void submitAnswerToSurvey (String discipline, String pName, int hours, String comment) throws NoSuchDisciplineIdException,
-	NoSuchProjectIdException 
-	{
-
-		Discipline d = this.getDiscipline(discipline);
-		d.submitAnswerToSurvey()
-		// TODO if student has submited... / if student has not answered to survey / send user id so can check if has submitted
-		// create answer type
-=======
 	void submitAnswerToSurvey (String dName, String pName, int hours, String comentario) throws NoSuchDisciplineIdException,
 	NoSuchProjectIdException 
 	{
@@ -103,7 +93,6 @@ public class Student extends Person {
 		Project project = dis.getProject(pName);
 		Submission submission = new Submission(comentario, hours);
 		project.addSubmission(this.getId(), submission);
->>>>>>> ac50d345f7eab14d593c25f1a164ac3e5a1984b5
 	}
 
 
@@ -162,8 +151,10 @@ public class Student extends Person {
 			toString = "ALUNO|" + super.toString();
 		}
 
-		// Sao as disciplinas q teem de ser ordenadas e nao as Strings!!!
-		Iterator<Discipline> iterator = _disciplines.iterator();
+		// Sao as disciplinas q teem de ser ordenadas e nao as Strings!!!\
+		List<Discipline> disciplines = new ArrayList<>(_disciplines);
+		Collections.sort(disciplines);
+		Iterator<Discipline> iterator = disciplines.iterator();
 		while(iterator.hasNext()) {
 			Discipline d = iterator.next();
 			toString += "\n* " + _course.getName() + " - " + d.getName();

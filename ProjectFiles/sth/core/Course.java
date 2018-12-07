@@ -1,12 +1,9 @@
 package sth.core;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Iterator;
-import java.util.HashMap;
-import java.util.Map;
+import java.text.Normalizer;
+import java.util.*;
 
-public class Course {
+public class Course implements Comparable<Course> {
 	private String _name;
 	private List<Discipline> _disciplines;
 	private Map<Integer, Student> _students;
@@ -91,5 +88,12 @@ public class Course {
 			}
 		}
 		return null;
+	}
+
+	@Override
+	public int compareTo(Course o) {
+		String o1 = Normalizer.normalize(getName(), Normalizer.Form.NFD);
+		String o2 = Normalizer.normalize(o.getName(), Normalizer.Form.NFD);
+		return o1.compareTo(o2);
 	}
 }
