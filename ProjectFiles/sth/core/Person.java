@@ -3,12 +3,14 @@ package sth.core;
 import sth.core.exception.BadEntryException;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Observer;
 import java.io.*;
 
-public abstract class Person implements java.io.Serializable{
+public abstract class Person implements java.io.Serializable, Observer {
 	private int _id;
 	private String _name;
 	private int _phoneNumber;
+	private List<Notification> _notifications;
   	/** Serial number for serialization. */
   	private static final long serialVersionUID = 201810051538L;
 	/*
@@ -52,6 +54,19 @@ public abstract class Person implements java.io.Serializable{
 		return _phoneNumber;
 	}
 
+	public String getNotifications() {
+		// iterator...
+	}
+
+	public boolean hasNotifications() {
+		if (_notifications.size() > 0) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
 	/* 
 	* toString - 'Compiles' person's info into a String 
 	*/
@@ -66,5 +81,11 @@ public abstract class Person implements java.io.Serializable{
 	 **/
 	void parseContext(String context, School school) throws BadEntryException {
 		throw new BadEntryException("Should not have extra context: " + context);
+	}
+@Override
+	void update(Observable o, Object arg) {
+		// store last notification or store all notifications and removed when showed
+		// na discipline fazer super.update(this, notificacao) ...
+
 	}
 }

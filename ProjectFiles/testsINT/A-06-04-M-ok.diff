@@ -1,0 +1,41 @@
+*** tests/A-06-04-M-ok.out	2018-11-16 11:45:59.000000000 +0000
+--- tests/A-06-04-M-ok.outhyp	2018-12-13 15:25:03.464789800 +0000
+***************
+*** 4,10 ****
+  3 - Portal Pessoal
+  4 - Portal do Docente
+  0 - Sair
+! Escolha uma opção: Ficheiro a abrir: Abrir: Operação inválida: A pessoa com identificador 101011 não existe.
+  Menu principal
+  1 - Abrir
+  2 - Guardar
+--- 4,10 ----
+  3 - Portal Pessoal
+  4 - Portal do Docente
+  0 - Sair
+! Escolha uma opção: Ficheiro a abrir: O ficheiro não existe.
+  Menu principal
+  1 - Abrir
+  2 - Guardar
+***************
+*** 17,34 ****
+  3 - Mostrar pessoas
+  4 - Procurar pessoa
+  0 - Sair
+- Escolha uma opção: FUNCIONÁRIO|100001|123789456|Maria José
+- DOCENTE|101011|789456123|José Carlos
+- Portal Pessoal
+- 1 - Mostrar pessoa
+- 2 - Alterar número de telefone
+- 3 - Mostrar pessoas
+- 4 - Procurar pessoa
+- 0 - Sair
+- Escolha uma opção: Menu principal
+- 1 - Abrir
+- 2 - Guardar
+- 3 - Portal Pessoal
+- 4 - Portal do Docente
+- 0 - Sair
+  Escolha uma opção: 
+\ No newline at end of file
+--- 17,20 ----

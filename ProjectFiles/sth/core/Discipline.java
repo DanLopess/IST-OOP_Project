@@ -19,7 +19,7 @@ import sth.core.exception.OpeningSurveyIdException;
 import java.text.Normalizer;
 import java.util.*;
 
-public class Discipline implements Comparable<Discipline>, java.io.Serializable{
+public class Discipline implements Comparable<Discipline>, java.io.Serializable { // observable é classe
 	private String _name;
 	private int _capacity;
 	private Course _course;

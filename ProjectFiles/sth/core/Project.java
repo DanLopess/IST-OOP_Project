@@ -93,7 +93,10 @@ public class Project implements java.io.Serializable {
 				_survey = null;
 				return;
 			}
+			if (_survey.getState() instanceof SurveyFinished)
+				throw new SurveyIdFinishedException("", "");
 			_survey.cancel();
+			_survey = null;
 		} else {
 			throw new NoSurveyIdException("","");
 		}
@@ -101,10 +104,7 @@ public class Project implements java.io.Serializable {
 
 	void openSurvey() throws NoSurveyIdException, OpeningSurveyIdException {
 		if (_survey != null) {
-			if (_survey.getState() instanceof SurveyOpen)
-				_survey = null; 
-			else 
-				_survey.open();
+			_survey.open();
 		} else {
 			throw new NoSurveyIdException("","");
 		}

@@ -67,6 +67,14 @@ public class SchoolManager {
 		_loggedUser = _school.parsePersonById(id);
 	}
 
+	public boolean hasNotifications() {
+		return false; // TODO
+	}
+
+	public String getNotifications() {
+		return "" ; // TODO
+	}
+
 	private Object readObject(String inputFilename) throws IOException, BadEntryException, ClassNotFoundException {
 		ObjectInputStream obIn = null;
 		try { 

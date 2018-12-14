@@ -19,14 +19,14 @@ import java.util.Iterator;
 
 public class Survey implements java.io.Serializable {
 	private List<Answer> _answers;
-    private SurveyState _state = new SurveyClosed(this);
+    private SurveyState _state;
 	
 	/** Serial number for serialization. */
   	private static final long serialVersionUID = 201810051538L;
 	
 	Survey() {
 		_answers = new ArrayList<Answer>();
-		_state = new SurveyOpen(this);
+		_state = new SurveyCreated(this);
 	}
 
 	void setState(SurveyState state) { 
@@ -42,7 +42,7 @@ public class Survey implements java.io.Serializable {
 	}
 
 	void open() throws OpeningSurveyIdException {
-		if (_state instanceof SurveyClosed)
+		if (_state instanceof SurveyClosed || _state instanceof SurveyCreated)
 			_state = new SurveyOpen(this);
 		else {
 			throw new OpeningSurveyIdException("","");

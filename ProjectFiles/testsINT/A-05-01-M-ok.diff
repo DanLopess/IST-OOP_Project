@@ -1,0 +1,22 @@
+*** tests/A-05-01-M-ok.out	2018-11-13 09:26:56.000000000 +0000
+--- tests/A-05-01-M-ok.outhyp	2018-12-13 15:25:00.255792000 +0000
+***************
+*** 9,24 ****
+  3 - Mostrar pessoas
+  4 - Procurar pessoa
+  0 - Sair
+- Escolha uma opção: FUNCIONÁRIO|100001|123789456|Maria José
+- Portal Pessoal
+- 1 - Mostrar pessoa
+- 2 - Alterar número de telefone
+- 3 - Mostrar pessoas
+- 4 - Procurar pessoa
+- 0 - Sair
+- Escolha uma opção: Menu principal
+- 1 - Abrir
+- 2 - Guardar
+- 3 - Portal Pessoal
+- 0 - Sair
+  Escolha uma opção: 
+\ No newline at end of file
+--- 9,12 ----

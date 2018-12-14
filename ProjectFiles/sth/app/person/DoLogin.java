@@ -33,5 +33,4 @@ public class DoLogin extends Command<SchoolManager> {
       throw new NoSuchPersonException(_login.value());
     }
   }
-
 }

@@ -31,6 +31,11 @@ public class DoOpen extends Command<SchoolManager> {
     try {
       id = _receiver.getLoggedUserId();
       _receiver.open(_inputFilename.value());
+      if (_receiver.hasNotifications()) {
+        _display.clear();
+        _display.add(_receiver.getNotifications());
+        _display.display();
+      }
     } 
     catch (ImportFileException e) {
       _display.clear();

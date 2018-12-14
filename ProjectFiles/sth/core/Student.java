@@ -156,7 +156,7 @@ public class Student extends Person {
 	void openSurvey(String discipline, String pName) throws NoSuchDisciplineIdException, 
 	NoSuchProjectIdException , NoSurveyIdException, OpeningSurveyIdException
 	{
-				Discipline d = this.getDiscipline(discipline);
+		Discipline d = this.getDiscipline(discipline);
 		Project p = d.getProject(pName);
 		p.openSurvey();
 	}
@@ -164,7 +164,7 @@ public class Student extends Person {
 	void closeSurvey(String discipline, String pName) throws NoSuchDisciplineIdException, 
 	NoSuchProjectIdException , NoSurveyIdException, ClosingSurveyIdException
 	{
-				Discipline d = this.getDiscipline(discipline);
+		Discipline d = this.getDiscipline(discipline);
 		Project p = d.getProject(pName);
 		p.closeSurvey();
 	}
