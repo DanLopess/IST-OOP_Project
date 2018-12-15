@@ -14,12 +14,11 @@ import sth.core.exception.NoSuchDisciplineIdException;
 import sth.core.exception.NoSuchPersonIdException;
 import sth.core.exception.NoSurveyIdException;
 import sth.core.exception.OpeningSurveyIdException;
-
-
+import sth.core.exception.FinishingSurveyIdException;
 import java.text.Normalizer;
 import java.util.*;
 
-public class Discipline implements Comparable<Discipline>, java.io.Serializable { // observable é classe
+public class Discipline extends Observable implements Comparable<Discipline>, java.io.Serializable { 
 	private String _name;
 	private int _capacity;
 	private Course _course;
@@ -94,11 +93,13 @@ public class Discipline implements Comparable<Discipline>, java.io.Serializable 
 
 	void addTeacher(Teacher t) {
 		_teachers.putIfAbsent(t.getId(), t);
+		super.addObserver(t);
 	}
 
 	void enrollStudent(Student s) {
 		if (_students.size() < _capacity) {
 			_students.putIfAbsent(s.getId(), s);
+			super.addObserver(s);
 		}
 	}
 
@@ -124,7 +125,14 @@ public class Discipline implements Comparable<Discipline>, java.io.Serializable 
 
 	void closeProject(String name) throws NoSuchProjectIdException, OpeningSurveyIdException {
 		Project p = this.getProject(name);
-		p.close();
+		if (!p.isClosed()){
+			p.close();
+			System.out.println("Now adding notification.\n");
+			super.setChanged();
+			Notification n = new Notification("Pode preencher inquérito do projecto " + name + " da disciplina" + _name);
+			super.notifyObservers(n);
+			super.clearChanged();
+		}
 	}
 
 	String getProjectSubmissions(String pName) throws NoSuchProjectIdException {
@@ -143,6 +151,15 @@ public class Discipline implements Comparable<Discipline>, java.io.Serializable 
 		}
 
 		return submissionsToString;
+	}
+
+	void finishSurvey(String pName) throws NoSurveyIdException, FinishingSurveyIdException, NoSuchProjectIdException {
+		Project p = this.getProject(pName);
+		p.finishSurvey(); // if was able to finish survey and no exception was thrown, then can notifiy
+		super.setChanged();
+		Notification n = new Notification("Resultados do inquérito do projecto " + pName + " da disciplina" + _name);
+		super.notifyObservers(n);
+		super.clearChanged();
 	}
 
 	String surveyToString(String pName, boolean detailed) throws NoSuchProjectIdException, NoSurveyIdException {

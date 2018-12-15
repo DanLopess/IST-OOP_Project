@@ -68,11 +68,12 @@ public class SchoolManager {
 	}
 
 	public boolean hasNotifications() {
-		return false; // TODO
+		return _loggedUser.hasNotifications();
 	}
 
 	public String getNotifications() {
-		return "" ; // TODO
+		System.out.println("GETTING NOTIFICATIONS\n");
+		return _loggedUser.getNotifications();
 	}
 
 	private Object readObject(String inputFilename) throws IOException, BadEntryException, ClassNotFoundException {

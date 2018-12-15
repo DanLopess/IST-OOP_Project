@@ -173,8 +173,7 @@ public class Student extends Person {
 	NoSuchProjectIdException , NoSurveyIdException, FinishingSurveyIdException
 	{
 		Discipline d = this.getDiscipline(discipline);
-		Project p = d.getProject(pName);
-		p.finishSurvey();
+		d.finishSurvey(pName);
 	}
 
 	String showSurveys(String discipline) throws NoSuchDisciplineIdException, NoSurveyIdException, NoSuchProjectIdException {

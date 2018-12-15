@@ -1,9 +1,12 @@
 package sth.core;
 
 import sth.core.exception.BadEntryException;
+import sth.core.Notification;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Observer;
+import java.util.Observable;
+import java.util.Iterator;
 import java.io.*;
 
 public abstract class Person implements java.io.Serializable, Observer {
@@ -21,6 +24,7 @@ public abstract class Person implements java.io.Serializable, Observer {
 			_id = id;
 			_name = name;
 			_phoneNumber = phoneNumber;
+			_notifications = new ArrayList<Notification>();;
 		} else{
 			throw new BadEntryException("Invalid id " + id);
 		}
@@ -54,17 +58,33 @@ public abstract class Person implements java.io.Serializable, Observer {
 		return _phoneNumber;
 	}
 
-	public String getNotifications() {
-		// iterator...
+	String getNotifications() {
+		Iterator<Notification> iterator = _notifications.iterator();
+		String notifications = "";
+		while(iterator.hasNext()) {
+			Notification n = iterator.next();
+			notifications = notifications + n.getMessage() + "\n";
+		}
+		clearNotifications();
+		return notifications;
 	}
 
-	public boolean hasNotifications() {
+	boolean hasNotifications() {
 		if (_notifications.size() > 0) {
 			return true;
 		}
 		else {
 			return false;
 		}
+	}
+
+	void clearNotifications() {
+		_notifications.clear();
+	}
+
+	void addNotification(Notification n) {
+		System.out.println("Added notification: \n" + n.getMessage() + "\n");
+		_notifications.add(n);
 	}
 
 	/* 
@@ -82,10 +102,9 @@ public abstract class Person implements java.io.Serializable, Observer {
 	void parseContext(String context, School school) throws BadEntryException {
 		throw new BadEntryException("Should not have extra context: " + context);
 	}
-@Override
-	void update(Observable o, Object arg) {
-		// store last notification or store all notifications and removed when showed
-		// na discipline fazer super.update(this, notificacao) ...
 
+@Override
+	public void update(Observable o, Object arg) {
+		this.addNotification((Notification)arg);
 	}
 }

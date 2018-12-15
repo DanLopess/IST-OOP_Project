@@ -39,9 +39,11 @@ public class Project implements java.io.Serializable {
 	}
 
 	void close() throws OpeningSurveyIdException{
-		_closed = true;
-		if (_survey != null)
-			_survey.open();
+		if (!isClosed()){
+			_closed = true;
+			if (_survey != null)
+				_survey.open();
+		}
 	}
 
 	boolean isClosed() {

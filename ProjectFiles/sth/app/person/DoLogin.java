@@ -29,6 +29,11 @@ public class DoLogin extends Command<SchoolManager> {
     _form.parse();
     try {
       _receiver.login(_login.value());
+      if (_receiver.hasNotifications()) {
+        _display.clear();
+        _display.add(_receiver.getNotifications());
+        _display.display();
+      }
     } catch (NoSuchPersonIdException e) {
       throw new NoSuchPersonException(_login.value());
     }

@@ -116,9 +116,9 @@ public class Survey implements java.io.Serializable {
 
 	String printAnswers(boolean detailed) {
 		if (detailed)
-			return " * Número de respostas: " + _answers.size() + "\n " + " * Tempo médio (horas) (mínimo, médio, máximo): " + this.getTimes(true);
+			return " * Número de respostas: " + _answers.size() + "\n " + "* Tempo médio (horas) (mínimo, médio, máximo): " + this.getTimes(true);
 		else {
-			return " * Número de respostas: " + _answers.size() + "\n " + " * Tempo médio (horas) (mínimo, médio, máximo): " + this.getTimes(false);
+			return " * Número de respostas: " + _answers.size() + "\n " + "* Tempo médio (horas) (mínimo, médio, máximo): " + this.getTimes(false);
 		}
 	}
 
