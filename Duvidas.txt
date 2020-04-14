@@ -1,7 +1,0 @@
-- observer nas notifica��es
-
-TODO:
-- Notificacoes
-
-
-
